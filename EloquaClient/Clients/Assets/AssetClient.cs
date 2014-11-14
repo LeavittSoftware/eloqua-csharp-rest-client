@@ -12,6 +12,7 @@ using Eloqua.Api.Rest.ClientLibrary.Models.Assets.External;
 using Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages;
 using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Microsites;
 using Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists;
+using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Forms;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Clients.Assets
 {
@@ -202,6 +203,16 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Assets
         }
         private GenericClient<ExternalAsset> _externalAsset;
 
+        #endregion
+
+        #region Forms
+
+        public GenericClient<Form> Form
+        {
+            get { return _form ?? (_form = new GenericClient<Form>(BaseClient)); }
+        }
+        private GenericClient<Form> _form;
+        
         #endregion
 
     }

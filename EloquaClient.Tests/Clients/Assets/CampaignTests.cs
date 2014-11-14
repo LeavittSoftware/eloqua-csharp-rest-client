@@ -1,22 +1,22 @@
 ﻿using Eloqua.Api.Rest.ClientLibrary.Models;
 using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Campaigns;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ContactField = Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views.ContactField;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
-    [TestFixture]
+    [TestClass]
     public class CampaignTests
     {
         private Client _client;
 
-        [TestFixtureSetUp]
+        [TestInitialize]
         public void Init()
         {
-            _client = new Client("", "", "", Constants.BaseUrl);
+            _client = new Client("site", "user", "pass", Constants.BaseUrl);
         }
 
-        [Test]
+        [TestMethod]
         public void SearchContactFields()
         {
             SearchResponse<Campaign> fields;
@@ -28,7 +28,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
                 page++;
 
             } while (fields.elements.Count == 300);
-            Assert.Greater(fields.total, 0);
+            Assert.AreNotEqual(fields.total, 0);
         }
 
     }

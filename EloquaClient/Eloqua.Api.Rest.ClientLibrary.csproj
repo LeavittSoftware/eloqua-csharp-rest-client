@@ -106,6 +106,8 @@
     <Compile Include="Models\Assets\Emails\Groups\EmailGroup.cs" />
     <Compile Include="Models\Assets\Emails\Structured\Email.cs" />
     <Compile Include="Models\Assets\External\ExternalAsset.cs" />
+    <Compile Include="Models\Assets\Forms\Form.cs" />
+    <Compile Include="Models\Assets\Forms\FormElement.cs" />
     <Compile Include="Models\Assets\Hyperlinks\Hyperlink.cs" />
     <Compile Include="Models\Assets\LandingPages\Structured\StructuredLandingPage.cs" />
     <Compile Include="Models\Assets\Microsites\Microsite.cs" />
@@ -164,6 +166,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

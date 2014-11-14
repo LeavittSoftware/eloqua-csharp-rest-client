@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using Eloqua.Api.Rest.ClientLibrary.Models;
 using RestSharp.Deserializers;
+using System;
 
 namespace Eloqua.Api.Rest.ClientLibrary
 {
@@ -23,13 +24,20 @@ namespace Eloqua.Api.Rest.ClientLibrary
 
         internal T Execute<T>(IRestRequest request) where T : new()
         {
-            IRestResponse<T> response = Client.Execute<T>(request);
-
-            if (response.ResponseStatus != ResponseStatus.Completed)
+            try
             {
-                throw Validation.ResponseValidator.GetExceptionFromResponse(response);
+                IRestResponse<T> response = Client.Execute<T>(request);
+
+                if (response.ResponseStatus != ResponseStatus.Completed)
+                {
+                    throw Validation.ResponseValidator.GetExceptionFromResponse(response);
+                }
+                return response.Data;
             }
-            return response.Data;
+            catch(Exception e)
+            {
+                throw e;
+            }
         }
 
         public T Get<T>(T data) where T : RestObject, new()
