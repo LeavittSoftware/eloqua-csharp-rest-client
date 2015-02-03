@@ -1,4 +1,5 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Clients.Assets;
+﻿using System;
+using Eloqua.Api.Rest.ClientLibrary.Clients.Assets;
 using Eloqua.Api.Rest.ClientLibrary.Clients.Data;
 using Eloqua.Api.Rest.ClientLibrary.Clients.Systems;
 using Eloqua.Api.Rest.ClientLibrary.Models.Account;
@@ -10,14 +11,15 @@ namespace Eloqua.Api.Rest.ClientLibrary
     {
         protected BaseClient BaseClient;
 
-        public Client(string site, string user, string password, string baseUrl)
+        public Client(string site, string user, string password, Uri baseUrl)
         {
             BaseClient = new BaseClient(site, user, password, baseUrl);
         }
 
         public static AccountInfo GetAccountInfo(string site, string user, string password)
         {
-            var client = new BaseClient(site, user, password, "https://login.eloqua.com");
+            var baseUrl = new Uri("https://login.eloqua.com");
+            var client = new BaseClient(site, user, password, baseUrl);
             return client.Execute<AccountInfo>(new RestRequest("id", Method.GET));
         }
 

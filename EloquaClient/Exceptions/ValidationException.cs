@@ -13,7 +13,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Exceptions
         public string ResponseContent;
         public List<ObjectValidationError> ValidationError;
 
-        public ValidationException(IRestResponse response)
+        public ValidationException(IRestResponse response) : base(response.ErrorMessage)
         {
             StatusCode = response.StatusCode;
             ErrorMessage = response.StatusCode.ToString();
@@ -22,6 +22,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Exceptions
         }
 
         public ValidationException(IRestResponse response, List<ObjectValidationError> validationError)
+            : base(response.ErrorMessage)
         {
             StatusCode = response.StatusCode;
             ErrorMessage = response.ErrorMessage;

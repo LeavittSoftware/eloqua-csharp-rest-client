@@ -1,15 +1,16 @@
-﻿using RestSharp;
+﻿using System;
+using Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using RestSharp;
 using Eloqua.Api.Rest.ClientLibrary.Models;
 using RestSharp.Deserializers;
-using System;
 
 namespace Eloqua.Api.Rest.ClientLibrary
 {
     public class BaseClient
     {
-        protected BaseClient() {}
+        protected BaseClient() { }
 
-        public BaseClient(string site, string user, string password, string baseUrl)
+        public BaseClient(string site, string user, string password, Uri baseUrl)
         {
             Client = new RestClient
             {
@@ -24,19 +25,17 @@ namespace Eloqua.Api.Rest.ClientLibrary
 
         internal T Execute<T>(IRestRequest request) where T : new()
         {
-            try
-            {
-                IRestResponse<T> response = Client.Execute<T>(request);
+            var response = Client.Execute<T>(request);
 
-                if (response.ResponseStatus != ResponseStatus.Completed)
-                {
-                    throw Validation.ResponseValidator.GetExceptionFromResponse(response);
-                }
-                return response.Data;
-            }
-            catch(Exception e)
+            switch (response.ResponseStatus)
             {
-                throw e;
+                case ResponseStatus.Completed:
+                    return response.Data;
+                case ResponseStatus.Aborted:
+                case ResponseStatus.TimedOut:
+                    throw new ConnectionErrorException(response);
+                default:
+                    throw Validation.ResponseValidator.GetExceptionFromResponse(response);
             }
         }
 
