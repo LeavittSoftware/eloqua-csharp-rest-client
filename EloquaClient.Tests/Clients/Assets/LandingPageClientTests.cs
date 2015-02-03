@@ -1,23 +1,21 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
-    [TestFixture]
     public class LandingPageClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public LandingPageClientTests()
         {
-            _client = new Client("site", "username", "password", Constants.BaseUrl3);
+            client = new Client("site", "username", "password", Constants.BaseUrl3);
         }
 
-        [Test]
+        [Fact]
         public void SearchLandingPageTest()
         {
-            var landingPages = _client.Assets.LandingPage.Get("id=9", 1, 100);
-            Assert.Greater(landingPages.elements.Count, 0);
+            var landingPages = client.Assets.LandingPage.Get("id=9", 1, 100);
+            Assert.True(landingPages.elements.Count > 0);
         }
     }
 }

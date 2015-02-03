@@ -1,49 +1,47 @@
-﻿using NUnit.Framework;
-using Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+﻿using Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
-    [TestFixture]
     public class ContactClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public ContactClientTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetContactTest()
         {
             const int originalId = 1;
-            var contact = _client.Data.Contact.Get(originalId);
+            var contact = client.Data.Contact.Get(originalId);
 
-            Assert.AreEqual(originalId, contact.id);
+            Assert.Equal(originalId, contact.id);
         }
 
-        [Test]
+        [Fact]
         public void SearchContactTest()
         {
-            var result = _client.Data.Contact.Get("*", 1, 1);
-            Assert.AreEqual(1, result.elements.Count);
+            var result = client.Data.Contact.Get("*", 1, 1);
+            Assert.Equal(1, result.elements.Count);
         }
 
-        [Test]
+        [Fact]
         public void CreateContactTest()
         {
-            Contact contact = new Contact
-                                  {
-                                      id = -500002,
-                                      firstName = "sample",
-                                      lastName = "test",
-                                      emailAddress = "sample@test.com"
-                                  };
+            var contact = new Contact
+            {
+                id = -500002,
+                firstName = "sample",
+                lastName = "test",
+                emailAddress = "sample@test.com"
+            };
 
-            Contact returnedContact = _client.Data.Contact.Post(contact);
+            var returnedContact = client.Data.Contact.Post(contact);
 
-            Assert.AreEqual(contact.emailAddress, returnedContact.emailAddress);
+            Assert.Equal(contact.emailAddress, returnedContact.emailAddress);
         }
     }
 }

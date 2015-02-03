@@ -1,32 +1,30 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
-    [TestFixture]
     public class CustomObjectClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public CustomObjectClientTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetCustomObjectTest()
         {
             const int originalId = 1;
-            var customObject = _client.Data.CustomObject.Get(originalId);
+            var customObject = client.Data.CustomObject.Get(originalId);
 
-            Assert.AreEqual(originalId, customObject.id);
+            Assert.Equal(originalId, customObject.id);
         }
 
-        [Test]
+        [Fact]
         public void SearchCustomObjectTest()
         {
-            var result = _client.Data.CustomObject.Get("*", 1, 1);
-            Assert.AreEqual(1, result.elements.Count);
+            var result = client.Data.CustomObject.Get("*", 1, 1);
+            Assert.Equal(1, result.elements.Count);
         }
     }
 }

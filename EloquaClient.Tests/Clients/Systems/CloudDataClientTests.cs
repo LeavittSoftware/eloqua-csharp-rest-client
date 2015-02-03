@@ -1,33 +1,30 @@
 ﻿using Eloqua.Api.Rest.ClientLibrary.Models.Systems.Cloud;
-using NUnit.Framework;
+using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Systems
 {
-    [TestFixture]
     public class CloudDataClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public CloudDataClientTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetCloudDataTest()
         {
-            var clouddata = new CloudDataInstance()
-                                {
-                                    Name = "sample",
-                                    ProviderURL = "www.test.com",
-                                    IconURL = "test",
-                                    Description = "test"
-                                };
+            var clouddata = new CloudDataInstance
+            {
+                Name = "sample",
+                ProviderURL = "www.test.com",
+                IconURL = "test",
+                Description = "test"
+            };
 
-            var result = _client.Systems.CloudData.Post(clouddata);
-            var t = result;
-
+            var result = client.Systems.CloudData.Post(clouddata);
+            Assert.NotNull(result);
         }
     }
 }

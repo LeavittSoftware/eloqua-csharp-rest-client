@@ -2,90 +2,88 @@
 using System.Collections.Generic;
 using Eloqua.Api.Rest.ClientLibrary.Models;
 using Eloqua.Api.Rest.ClientLibrary.Models.Assets.CustomObjects;
-using NUnit.Framework;
+using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
-    [TestFixture]
     public class CustomObjectTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public CustomObjectTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetCustomObjectTest()
         {
-            int id = 32;
-            var customObject = _client.Assets.CustomObject.Get(id);
-            Assert.AreEqual(id, customObject.id);
+            const int id = 32;
+            var customObject = client.Assets.CustomObject.Get(id);
+            Assert.Equal(id, customObject.id);
         }
 
-        [Test]
+        [Fact]
         public void GetCustomObjectsTest()
         {
-            var customObjects = _client.Assets.CustomObject.Get("*", 1, 50);
-            Assert.Greater(customObjects.total, 0);
+            var customObjects = client.Assets.CustomObject.Get("*", 1, 50);
+            Assert.True(customObjects.total > 0);
         }
 
-        [Test]
+        [Fact]
         public void CreateCustomObject()
         {
             var customObject = new CustomObject
-                                   {
-                                       name = string.Format("test-{0}", Guid.NewGuid()),
-                                       fields = new List<CustomObjectField>
-                                                    {
-                                                        new CustomObjectField
-                                                            {
-                                                                name = "text field",
-                                                                dataType =
-                                                                    Enum.GetName(typeof (FieldDataType),
-                                                                                 FieldDataType.text),
-                                                                displayType =
-                                                                    Enum.GetName(typeof (FieldDisplayType),
-                                                                                 FieldDisplayType.text),
-                                                                type = "CustomObjectField"
-                                                            },
-                                                        new CustomObjectField
-                                                            {
-                                                                name = "numeric field",
-                                                                dataType =
-                                                                    Enum.GetName(typeof (FieldDataType),
-                                                                                 FieldDataType.number),
-                                                                displayType =
-                                                                    Enum.GetName(typeof (FieldDisplayType),
-                                                                                 FieldDisplayType.text),
-                                                                type = "CustomObjectField"
-                                                            },
+            {
+                name = string.Format("test-{0}", Guid.NewGuid()),
+                fields = new List<CustomObjectField>
+                {
+                    new CustomObjectField
+                    {
+                        name = "text field",
+                        dataType =
+                            Enum.GetName(typeof (FieldDataType),
+                                FieldDataType.text),
+                        displayType =
+                            Enum.GetName(typeof (FieldDisplayType),
+                                FieldDisplayType.text),
+                        type = "CustomObjectField"
+                    },
+                    new CustomObjectField
+                    {
+                        name = "numeric field",
+                        dataType =
+                            Enum.GetName(typeof (FieldDataType),
+                                FieldDataType.number),
+                        displayType =
+                            Enum.GetName(typeof (FieldDisplayType),
+                                FieldDisplayType.text),
+                        type = "CustomObjectField"
+                    },
 
-                                                        new CustomObjectField
-                                                            {
-                                                                name = "date field",
-                                                                dataType =
-                                                                    Enum.GetName(typeof (FieldDataType),
-                                                                                 FieldDataType.date),
-                                                                displayType =
-                                                                    Enum.GetName(typeof (FieldDisplayType),
-                                                                                 FieldDisplayType.text),
-                                                                type = "CustomObjectField"
-                                                            }
-                                                    }
-                                   };
+                    new CustomObjectField
+                    {
+                        name = "date field",
+                        dataType =
+                            Enum.GetName(typeof (FieldDataType),
+                                FieldDataType.date),
+                        displayType =
+                            Enum.GetName(typeof (FieldDisplayType),
+                                FieldDisplayType.text),
+                        type = "CustomObjectField"
+                    }
+                }
+            };
 
-            var response = _client.Assets.CustomObject.Post(customObject);
-            Assert.Greater(response.id, 0);
+            var response = client.Assets.CustomObject.Post(customObject);
+            Assert.True(response.id > 0);
         }
 
-        [Test]
+        [Fact]
         public void DeleteCustomObject()
         {
-            int id = 33;
-             _client.Assets.CustomObject.Delete(id);
+            const int id = 33;
+            client.Assets.CustomObject.Delete(id);
         }
     }
 }

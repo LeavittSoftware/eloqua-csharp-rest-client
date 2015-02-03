@@ -1,43 +1,44 @@
 ﻿using Eloqua.Api.Rest.ClientLibrary.Models.Data.ExternalActivities;
-using NUnit.Framework;
+using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
-    [TestFixture]
     public class ExternalActivityClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public ExternalActivityClientTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetActivityTest()
         {
-            var response = _client.Data.ExternalActivity.Get(1);
-            Assert.IsNotNull(response);
+            var response = client.Data.ExternalActivity.Get(1);
+            Assert.NotNull(response);
         }
 
-        [Test]
+        [Fact]
         public void CreateAndReadActivityTest()
         {
-            Activity activity = new Activity();
-            ExternalActivities externalActivities = new ExternalActivities();
-            externalActivities.activityDate = "1362543780";
-            externalActivities.activityType = "Webinar";
-            externalActivities.assetName = "TEST_GENERIC_Asset";
-            externalActivities.assetType = "Test_Generic_Asset_Type";
-            externalActivities.contactId = "100";
-            externalActivities.campaignId = "4";
-            externalActivities.type = "ExternalActivities";
+            var activity = new Activity();
 
-            ExternalActivities postExternalActivities;
-            postExternalActivities = _client.Data.ExternalActivity.Post(externalActivities);
-            ExternalActivities returnExternalActivities;
-            returnExternalActivities = _client.Data.ExternalActivity.Get(int.Parse(postExternalActivities.contactId));
+            var externalActivities = new ExternalActivities
+            {
+                activityDate = "1362543780",
+                activityType = "Webinar",
+                assetName = "TEST_GENERIC_Asset",
+                assetType = "Test_Generic_Asset_Type",
+                contactId = "100",
+                campaignId = "4",
+                type = "ExternalActivities"
+            };
+
+            var postExternalActivities = client.Data.ExternalActivity.Post(externalActivities);
+            var returnExternalActivities = client.Data.ExternalActivity.Get(int.Parse(postExternalActivities.contactId));
+
+            Assert.NotNull(returnExternalActivities);
         }
     }
 }

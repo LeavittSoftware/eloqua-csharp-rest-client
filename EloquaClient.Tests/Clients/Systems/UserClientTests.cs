@@ -1,30 +1,29 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Systems
 {
-    [TestFixture]
     public class UserClientTests
     {
-        private Client _client;
+        private Client client;
 
-        [TestFixtureSetUp]
+        [Fact]
         public void Init()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void SearchUsersTest()
         {
-            var response = _client.Systems.User.Get("*", 1, 10);
-            Assert.Greater(response.total, 0);
+            var response = client.Systems.User.Get("*", 1, 10);
+            Assert.True(response.total > 0);
         }
 
-        [Test]
+        [Fact]
         public void GetUserTest()
         {
-            var response = _client.Systems.User.Get(2, Depth.complete);
-            Assert.IsNotNull(response);
+            var response = client.Systems.User.Get(2, Depth.complete);
+            Assert.NotNull(response);
         }
     }
 }

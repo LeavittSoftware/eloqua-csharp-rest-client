@@ -1,37 +1,35 @@
 ﻿using System.Collections.Generic;
 using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Microsites;
-using NUnit.Framework;
+using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
-    [TestFixture]
     public class MicrositeClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public MicrositeClientTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetMicrositeTest()
         {
             const int originalId = 8;
-            var microsite = _client.Assets.Microsite.Get(originalId);
+            var microsite = client.Assets.Microsite.Get(originalId);
 
-            Assert.AreEqual(originalId, microsite.id);
+            Assert.Equal(originalId, microsite.id);
         }
 
-        [Test]
+        [Fact]
         public void GetMicrositeListTest()
         {
-            var result = _client.Assets.Microsite.Get("*", 1, 1);
-            Assert.AreEqual(1, result.elements.Count);
+            var result = client.Assets.Microsite.Get("*", 1, 1);
+            Assert.Equal(1, result.elements.Count);
         }
 
-        [Test]
+        [Fact]
         public void PostMicrositeTest()
         {
             Microsite microsite = null;
@@ -41,21 +39,20 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
                 var expectedMicrosite = new Microsite
                 {
                     name = "sample",
-                    domains = new List<string>{"sample.com"},
+                    domains = new List<string> {"sample.com"},
                     isSecure = false
                 };
 
-                microsite = _client.Assets.Microsite.Post(expectedMicrosite);
-                Assert.AreEqual(expectedMicrosite.name, microsite.name);
+                microsite = client.Assets.Microsite.Post(expectedMicrosite);
+                Assert.Equal(expectedMicrosite.name, microsite.name);
             }
             finally
             {
                 if (microsite != null && microsite.id > 0)
                 {
-                    _client.Assets.Microsite.Delete(microsite.id);
+                    client.Assets.Microsite.Delete(microsite.id);
                 }
             }
         }
-
     }
 }

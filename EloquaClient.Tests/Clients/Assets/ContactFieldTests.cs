@@ -1,33 +1,30 @@
-﻿using NUnit.Framework;
-using ContactField = Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views.ContactField;
+﻿using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views;
+using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
-    [TestFixture]
     public class ContactFieldTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public ContactFieldTests()
         {
-            _client = new Client("sites", "user", "password", Constants.BaseUrl);
+            client = new Client("sites", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void SearchContactFields()
         {
-            var fields = _client.Assets.ContactFields.Get("*", 1, 100);
-            Assert.Greater(fields.total, 0);
+            var fields = client.Assets.ContactFields.Get("*", 1, 100);
+            Assert.True(fields.total > 0);
         }
 
-        [Test]
+        [Fact]
         public void CreateContactField()
         {
             var field = new ContactField { name = "V_Notes", dataType = "largeText", updateType = "always", displayType = "text" };
-            field = _client.Assets.ContactFields.Post(field);
-            Assert.That(field.id, Is.Not.Null);
-
+            field = client.Assets.ContactFields.Post(field);
+            Assert.NotNull(field.id);
         }
     }
 }

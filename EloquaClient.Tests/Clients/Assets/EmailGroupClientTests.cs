@@ -1,32 +1,30 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
-    [TestFixture]
     public class EmailGroupClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public EmailGroupClientTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetEmailGroupTest()
         {
             const int emailGroupId = 8;
-            var emailGroup = _client.Assets.EmailGroup.Get(emailGroupId);
+            var emailGroup = client.Assets.EmailGroup.Get(emailGroupId);
 
-            Assert.AreEqual(emailGroupId, emailGroup.id);
+            Assert.Equal(emailGroupId, emailGroup.id);
         }
 
-        [Test]
+        [Fact]
         public void GetEmailGroupListTest()
         {
-            var result = _client.Assets.EmailGroup.Get("*", 1, 100);
-            Assert.AreEqual(1, result.elements.Count);
+            var result = client.Assets.EmailGroup.Get("*", 1, 100);
+            Assert.Equal(1, result.elements.Count);
         }
     }
 }

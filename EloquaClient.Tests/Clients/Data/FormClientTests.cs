@@ -1,22 +1,21 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
     public class FormClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public FormClientTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetFormDataTest()
         {
-            var data = _client.Data.FormData.Get(1);
-            Assert.Greater(data.fieldValues.Count, 0);
+            var data = client.Data.FormData.Get(1);
+            Assert.True(data.fieldValues.Count > 0);
         }
     }
 }

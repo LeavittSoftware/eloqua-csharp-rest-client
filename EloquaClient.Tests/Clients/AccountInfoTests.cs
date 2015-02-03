@@ -1,15 +1,14 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients
 {
-    [TestFixture]
     public class AccountInfoTests
     {
-        [Test]
+        [Fact]
         public void SearchContentSectionTest()
         {
             var accountInfo = Client.GetAccountInfo("site", "user", "password");
-            Assert.That(accountInfo, Is.Not.Null);
+            Assert.NotNull(accountInfo);
         }
     }
 }

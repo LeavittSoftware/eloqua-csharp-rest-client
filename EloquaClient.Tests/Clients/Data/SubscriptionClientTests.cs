@@ -1,24 +1,22 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
-    [TestFixture]
     public class SubscriptionClientTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public SubscriptionClientTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetEmailSubscriptionTest()
         {
             int? contactId = 44664;
-            var result = _client.Data.ContactEmailSubscription.Get(contactId, "*", 1, 100);
-            Assert.Greater(result.Count, 0);
+            var result = client.Data.ContactEmailSubscription.Get(contactId, "*", 1, 100);
+            Assert.True(result.Count > 0);
         }
     }
 }

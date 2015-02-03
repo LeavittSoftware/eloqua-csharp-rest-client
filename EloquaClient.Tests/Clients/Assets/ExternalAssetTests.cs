@@ -1,23 +1,21 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
-    [TestFixture]
     public class ExternalAssetTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestFixtureSetUp]
-        public void Init()
+        public ExternalAssetTests()
         {
-            _client = new Client("site", "user", "password", Constants.BaseUrl);
+            client = new Client("site", "user", "password", Constants.BaseUrl);
         }
 
-        [Test]
+        [Fact]
         public void GetExternalAssetsTest()
         {
-            var response = _client.Assets.ExternalAsset.Get("*", 1, 10);
-            Assert.Greater(response.total, 0);
+            var response = client.Assets.ExternalAsset.Get("*", 1, 10);
+            Assert.True(response.total > 0);
         }
     }
 }
