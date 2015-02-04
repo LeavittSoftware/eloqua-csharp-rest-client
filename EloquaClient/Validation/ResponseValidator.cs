@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using RestSharp;
+using RestSharp.Deserializers;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Validation
 {
@@ -11,11 +12,12 @@ namespace Eloqua.Api.Rest.ClientLibrary.Validation
     {
         internal static Exception GetExceptionFromResponse(IRestResponse response)
         {
-            var serializer = new RestSharp.Deserializers.JsonDeserializer();
+            var jsonDeserializer = new JsonDeserializer();
+
             switch (response.StatusCode)
             {
                 case HttpStatusCode.Conflict:
-                    return new ValidationException(response, serializer.Deserialize<List<ObjectValidationError>>(response));
+                    return new ValidationException(response, jsonDeserializer.Deserialize<List<ObjectValidationError>>(response));
 
                 default:
                     return new ValidationException(response);

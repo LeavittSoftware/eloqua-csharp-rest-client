@@ -42,7 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="RestSharp">
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />

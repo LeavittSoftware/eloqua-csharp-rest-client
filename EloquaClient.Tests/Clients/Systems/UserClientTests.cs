@@ -4,10 +4,9 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Systems
 {
     public class UserClientTests
     {
-        private Client client;
+        private readonly Client client;
 
-        [Fact]
-        public void Init()
+        public UserClientTests()
         {
             client = new Client("site", "user", "password", Constants.BaseUrl);
         }

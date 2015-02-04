@@ -6,9 +6,9 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class ContentSectionTests
     {
-        private Client client;
+        private readonly Client client;
 
-        public void Init()
+        public ContentSectionTests()
         {
             client = new Client("site", "user", "password", Constants.BaseUrl);
         }

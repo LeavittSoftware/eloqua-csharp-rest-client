@@ -9,11 +9,33 @@ namespace Eloqua.Api.Rest.ClientLibrary
 {
     public class Client : BaseClient
     {
+        private readonly Lazy<AssetClient> assetClientLazy;
+        private readonly Lazy<DataClient> dataLazy;
+        private readonly Lazy<SystemClient> systemClientLazy;
+
         protected BaseClient BaseClient;
+
+        public AssetClient Assets
+        {
+            get { return assetClientLazy.Value; }
+        }
+
+        public DataClient Data
+        {
+            get { return dataLazy.Value; }
+        }
+
+        public SystemClient Systems
+        {
+            get { return systemClientLazy.Value; }
+        }
 
         public Client(string site, string user, string password, Uri baseUrl)
         {
             BaseClient = new BaseClient(site, user, password, baseUrl);
+            assetClientLazy = new Lazy<AssetClient>(() => new AssetClient(BaseClient));
+            dataLazy = new Lazy<DataClient>(() => new DataClient(BaseClient));
+            systemClientLazy = new Lazy<SystemClient>(() => new SystemClient(BaseClient));
         }
 
         public static AccountInfo GetAccountInfo(string site, string user, string password)
@@ -22,23 +44,5 @@ namespace Eloqua.Api.Rest.ClientLibrary
             var client = new BaseClient(site, user, password, baseUrl);
             return client.Execute<AccountInfo>(new RestRequest("id", Method.GET));
         }
-
-        public AssetClient Assets
-        {
-            get { return _assetClient ?? (_assetClient = new AssetClient(BaseClient)); }
-        }
-        private AssetClient _assetClient;
-
-        public DataClient Data
-        {
-            get { return _dataClient ?? (_dataClient = new DataClient(BaseClient)); }
-        }
-        private DataClient _dataClient;
-
-        public SystemClient Systems
-        {
-            get { return _systemClient ?? (_systemClient = new SystemClient(BaseClient)); }
-        }
-        private SystemClient _systemClient;
     }
 }

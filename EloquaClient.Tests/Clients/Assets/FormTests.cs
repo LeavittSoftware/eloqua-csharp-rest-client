@@ -1,42 +1,39 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Forms;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Xunit;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
-    [TestClass]
     public class FormTests
     {
-        private Client _client;
+        private readonly Client client;
 
-        [TestInitialize]
-        public void Init()
+        public FormTests()
         {
-            _client = new Client("site", "user", "pass", Constants.BaseUrl);
+            client = new Client("site", "user", "pass", Constants.BaseUrl);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFormListTest()
         {
-            var result = _client.Assets.Form.Get("*", 1, 100);
-            Assert.AreNotEqual(0, result.elements.Count);
+            var result = client.Assets.Form.Get("*", 1, 100);
+            Assert.NotEqual(0, result.elements.Count);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetFormByIdTest()
         {
-            var form = _client.Assets.Form.Get(550, Depth.complete);
+            var form = client.Assets.Form.Get(550, Depth.complete);
 
-            foreach (FormElement element in form.elements)
+            var validFormElements = form.elements
+                .Where(element => element.optionListId.HasValue)
+                .Select(element => client.Assets.OptionList.Get(element.optionListId.Value, Depth.complete));
+
+            foreach (var optionList in validFormElements)
             {
-                if (element.optionListId.HasValue)
-                {
-                    var optionList = _client.Assets.OptionList.Get(element.optionListId.Value, Depth.complete);
-                }
+                Assert.NotNull(optionList);
             }
 
-            Assert.IsNotNull(form);
+            Assert.NotNull(form);
         }
-
     }
 }
