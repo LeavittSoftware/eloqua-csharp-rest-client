@@ -2,10 +2,10 @@
 {
     public enum FieldDataType
     {
-        number = 1,
-        text = 2,
-        largeText = 3,
-        date = 5,
-        numeric = 6
+        Number = 1,
+        Text = 2,
+        LargeText = 3,
+        Date = 5,
+        Numeric = 6
     }
 }

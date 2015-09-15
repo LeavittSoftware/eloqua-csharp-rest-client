@@ -3,12 +3,12 @@
     [Resource("/data/activity", "ExternalActivities")]
     public class ExternalActivities
     {
-        public string type { get; set; }
-        public string campaignId { get; set; }
-        public string assetName { get; set; }
-        public string assetType { get; set; }
-        public string activityType { get; set; }
-        public string activityDate { get; set; }
-        public string contactId { get; set; }
+        public string Type { get; set; }
+        public string CampaignId { get; set; }
+        public string AssetName { get; set; }
+        public string AssetType { get; set; }
+        public string ActivityType { get; set; }
+        public string ActivityDate { get; set; }
+        public string ContactId { get; set; }
     }
 }

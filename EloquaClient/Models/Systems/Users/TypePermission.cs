@@ -2,7 +2,7 @@
 {
     public class TypePermission
     {
-        public string objectType { get; set; }
-        public TypePermissions permissions { get; set; }
+        public string ObjectType { get; set; }
+        public TypePermissions Permissions { get; set; }
     }
 }

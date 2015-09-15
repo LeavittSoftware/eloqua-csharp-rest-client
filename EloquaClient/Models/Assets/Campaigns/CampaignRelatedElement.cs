@@ -7,9 +7,9 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Campaigns
 {
     public class CampaignRelatedElement
     {
-        public string type { get; set; }
-        public string id { get; set; }
-        public string name { get; set; }
-        public string landingPageId { get; set; }
+        public string Type { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string LandingPageId { get; set; }
     }
 }

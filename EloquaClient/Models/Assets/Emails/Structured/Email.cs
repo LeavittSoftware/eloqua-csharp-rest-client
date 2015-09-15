@@ -7,28 +7,28 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Structured
     [Resource("/assets/email", "Email")]
     public class Email : RestObject, ISearchable
     {
-        public string bouncebackEmail { get; set; }
-        public int? emailFooterId { get; set; }
-        public int? emailGroupId { get; set; }
-        public int? emailHeaderId { get; set; }
-        public int? encodingId { get; set; }
-        public StructuredHtmlContent htmlContent { get; set; }
-        public bool isPlainTextEditable { get; set; }
-        public string plainText { get; set; }
-        public string replyToName { get; set; }
-        public string replyToEmail { get; set; }
-        public string senderEmail { get; set; }
-        public string senderName { get; set; }
-        public bool sendPlainTextOnly { get; set; }
-        public string subject { get; set; }
-        public List<Hyperlink> hyperlinks { get; set; }
+        public string BouncebackEmail { get; set; }
+        public int? EmailFooterId { get; set; }
+        public int? EmailGroupId { get; set; }
+        public int? EmailHeaderId { get; set; }
+        public int? EncodingId { get; set; }
+        public StructuredHtmlContent HtmlContent { get; set; }
+        public bool IsPlainTextEditable { get; set; }
+        public string PlainText { get; set; }
+        public string ReplyToName { get; set; }
+        public string ReplyToEmail { get; set; }
+        public string SenderEmail { get; set; }
+        public string SenderName { get; set; }
+        public bool SendPlainTextOnly { get; set; }
+        public string Subject { get; set; }
+        public List<Hyperlink> Hyperlinks { get; set; }
         public new string type = "Email";
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

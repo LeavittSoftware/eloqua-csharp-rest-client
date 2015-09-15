@@ -2,6 +2,6 @@
 {
     public class ProductPermission
     {
-        public string productCode { get; set; }
+        public string ProductCode { get; set; }
     }
 }

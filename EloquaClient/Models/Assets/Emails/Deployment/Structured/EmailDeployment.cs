@@ -6,22 +6,22 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment.Structur
     [Resource("/assets/email/deployment", "EmailInlineDeployment")]
     public class EmailInlineDeployment : RestObject, ISearchable
     {
-        public int? clickthroughCount { get; set; }
-        public List<Contact> contacts { get; set; }
-        public int? openCount { get; set; }
-        public int? sendFromUserId { get; set; }
-        public List<EmailDeploymentStatistics> statistics { get; set; }
-        public Assets.Emails.Structured.Email email { get; set; }
-        public DateTime endAt { get; set; }
-        public int? failedSendCount { get; set; }
-        public string sentSubject { get; set; }
-        public string successfulSendCount { get; set; }
+        public int? ClickthroughCount { get; set; }
+        public List<Contact> Contacts { get; set; }
+        public int? OpenCount { get; set; }
+        public int? SendFromUserId { get; set; }
+        public List<EmailDeploymentStatistics> Statistics { get; set; }
+        public Assets.Emails.Structured.Email Email { get; set; }
+        public DateTime EndAt { get; set; }
+        public int? FailedSendCount { get; set; }
+        public string SentSubject { get; set; }
+        public string SuccessfulSendCount { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

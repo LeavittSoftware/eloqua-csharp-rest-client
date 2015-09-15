@@ -4,45 +4,34 @@ using Eloqua.Api.Rest.ClientLibrary.Clients.Data;
 using Eloqua.Api.Rest.ClientLibrary.Clients.Systems;
 using Eloqua.Api.Rest.ClientLibrary.Models.Account;
 using RestSharp;
+using RestSharp.Deserializers;
 
 namespace Eloqua.Api.Rest.ClientLibrary
 {
-    public class Client : BaseClient
+    public sealed class Client 
     {
-        private readonly Lazy<AssetClient> assetClientLazy;
-        private readonly Lazy<DataClient> dataLazy;
-        private readonly Lazy<SystemClient> systemClientLazy;
+        private readonly Lazy<AssetClient> _assetClientLazy;
+        private readonly Lazy<DataClient> _dataLazy;
+        private readonly Lazy<SystemClient> _systemClientLazy;
 
-        protected BaseClient BaseClient;
+        public AssetClient Assets => _assetClientLazy.Value;
 
-        public AssetClient Assets
+        public DataClient Data => _dataLazy.Value;
+
+        public SystemClient Systems => _systemClientLazy.Value;
+
+        public Client(EloquaRestClient eloquaRestClient)
         {
-            get { return assetClientLazy.Value; }
+            _assetClientLazy = new Lazy<AssetClient>(() => new AssetClient(eloquaRestClient));
+            _dataLazy = new Lazy<DataClient>(() => new DataClient(eloquaRestClient));
+            _systemClientLazy = new Lazy<SystemClient>(() => new SystemClient(eloquaRestClient));
         }
 
-        public DataClient Data
-        {
-            get { return dataLazy.Value; }
-        }
-
-        public SystemClient Systems
-        {
-            get { return systemClientLazy.Value; }
-        }
-
-        public Client(string site, string user, string password, Uri baseUrl)
-        {
-            BaseClient = new BaseClient(site, user, password, baseUrl);
-            assetClientLazy = new Lazy<AssetClient>(() => new AssetClient(BaseClient));
-            dataLazy = new Lazy<DataClient>(() => new DataClient(BaseClient));
-            systemClientLazy = new Lazy<SystemClient>(() => new SystemClient(BaseClient));
-        }
-
-        public static AccountInfo GetAccountInfo(string site, string user, string password)
-        {
-            var baseUrl = new Uri("https://login.eloqua.com");
-            var client = new BaseClient(site, user, password, baseUrl);
-            return client.Execute<AccountInfo>(new RestRequest("id", Method.GET));
-        }
+        //public static AccountInfo GetAccountInfo(string site, string user, string password)
+        //{
+        //    var baseUrl = new Uri("https://login.eloqua.com");
+        //    var client = new BaseClient(site, user, password, baseUrl);
+        //    return ExecuteWithErrorHandling<AccountInfo>(new RestRequest("id", Method.GET));
+        //}
     }
 }

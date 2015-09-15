@@ -4,9 +4,9 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models
 {
     public class SearchResponse<T>
     {
-        public List<T> elements { get; set; }
-        public int total { get; set; }
-        public int pageSize { get; set; }
-        public int page { get; set; }
+        public List<T> Elements { get; set; }
+        public int Total { get; set; }
+        public int PageSize { get; set; }
+        public int Page { get; set; }
     }
 }

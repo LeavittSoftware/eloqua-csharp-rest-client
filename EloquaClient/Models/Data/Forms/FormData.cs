@@ -5,15 +5,15 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.Forms
     [Resource("/data/form", "FormData")]
     public class FormData : RestObject, ISearchable
     {
-        public List<FieldValue> fieldValues { get; set; }
-        public int? submittedAt { get; set; }
-        public int? submittedByContactId { get; set; }
+        public List<FieldValue> FieldValues { get; set; }
+        public int? SubmittedAt { get; set; }
+        public int? SubmittedByContactId { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

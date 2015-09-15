@@ -2,7 +2,7 @@
 {
     public class NumericValueCondition : ValueCondition
     {
-        public string @operator { get; set; }
-        public int? value { get; set; }
+        public string Operator { get; set; }
+        public int? Value { get; set; }
     }
 }

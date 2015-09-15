@@ -5,16 +5,16 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Microsites
     [Resource("/assets/microsite", "Microsite")]
     public class Microsite : RestObject, ISearchable
     {
-        public int? defaultLandingPageId { get; set; }
-        public List<string> domains { get; set; }
-        public string enableWebTrackingOptIn { get; set; }
-        public bool? isSecure { get; set; }
+        public int? DefaultLandingPageId { get; set; }
+        public List<string> Domains { get; set; }
+        public string EnableWebTrackingOptIn { get; set; }
+        public bool? IsSecure { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

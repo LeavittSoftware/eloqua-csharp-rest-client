@@ -5,21 +5,21 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class ExternalActivityClient
     {
-        public ExternalActivityClient(BaseClient baseClient)
+        public ExternalActivityClient(EloquaRestClient eloquaRestClient)
         {
-            _baseClient = baseClient;
+            _eloquaRestClient = eloquaRestClient;
         }
-        readonly BaseClient _baseClient;
+        readonly EloquaRestClient _eloquaRestClient;
 
         public ExternalActivities Get(int? id)
         {
             var request = new RestRequest(Method.GET)
             {
                 RequestFormat = DataFormat.Json,
-                Resource = string.Format("/data/activity/{0}", id)
+                Resource = $"/data/activity/{id}"
             };
 
-            return _baseClient.Execute<ExternalActivities>(request);
+            return _eloquaRestClient.ExecuteWithErrorHandling<ExternalActivities>(request);
         }
 
         public ExternalActivities Post(ExternalActivities activities)
@@ -31,7 +31,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
             };
 
             request.AddBody(activities);
-            return _baseClient.Execute<ExternalActivities>(request);
+            return _eloquaRestClient.ExecuteWithErrorHandling<ExternalActivities>(request);
         }
     }
 }

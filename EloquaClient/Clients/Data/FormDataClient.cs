@@ -5,11 +5,11 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class FormDataClient
     {
-        readonly BaseClient _baseClient;
+        readonly EloquaRestClient _eloquaRestClient;
 
-        public FormDataClient(BaseClient baseClient)
+        public FormDataClient(EloquaRestClient eloquaRestClient)
         {
-            _baseClient = baseClient;
+            _eloquaRestClient = eloquaRestClient;
         }
 
         public FormData FormPost(int? formId, FormData data)
@@ -17,7 +17,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
             var request = Request.Get(Request.Type.Post, data);
             request.Resource += "/" + formId;
 
-            return _baseClient.Execute<FormData>(request);
+            return _eloquaRestClient.ExecuteWithErrorHandling<FormData>(request);
         }
     }
 }

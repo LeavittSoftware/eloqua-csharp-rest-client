@@ -4,54 +4,54 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients
 {
     public class GenericClient<T> where T : RestObject, ISearchable, new()
     {
-        public GenericClient(BaseClient baseClient)
+        public GenericClient(EloquaRestClient eloquaRestClient)
         {
-            _baseClient = baseClient;
+            _eloquaRestClient = eloquaRestClient;
         }
-        readonly BaseClient _baseClient;
+        readonly EloquaRestClient _eloquaRestClient;
 
-        public T Get(int id, Depth depth = Depth.minimal)
+        public T Get(int id, Depth depth = Depth.Minimal)
         {
-            var data = new T { id = id, depth = depth.ToString() };
-            return _baseClient.Get<T>(data);
+            var data = new T { Id = id, Depth = depth.ToString() };
+            return _eloquaRestClient.Get(data);
         }
 
         public T Post(T data)
         {
-            return _baseClient.Post<T>(data);
+            return _eloquaRestClient.Post(data);
         }
 
         public T Put(T data)
         {
-            return _baseClient.Put(data);
+            return _eloquaRestClient.Put(data);
         }
 
         public void Delete(int? id)
         {
-            var data = new T { id = id };
-            _baseClient.Delete<T>(data);
+            var data = new T { Id = id };
+            _eloquaRestClient.Delete(data);
         }
 
-        public SearchResponse<T> Get(string search, int pageNumber, int pageSize, Depth depth = Depth.complete)
+        public SearchResponse<T> Get(string search, int pageNumber, int pageSize, Depth depth = Depth.Complete)
         {
-            return _baseClient.Search<T>(new T
+            return _eloquaRestClient.Search(new T
                 {
-                    searchTerm = search,
-                    page = pageNumber,
-                    pageSize = pageSize,
-                    depth = depth.ToString()
+                    SearchTerm = search,
+                    Page = pageNumber,
+                    PageSize = pageSize,
+                    Depth = depth.ToString()
                 });
         }
 
-        public SearchResponse<T> Get(int? id, string search, int pageNumber, int pageSize, Depth depth = Depth.complete)
+        public SearchResponse<T> Get(int? id, string search, int pageNumber, int pageSize, Depth depth = Depth.Complete)
         {
-            return _baseClient.Search<T>(new T
+            return _eloquaRestClient.Search(new T
                     {
-                        id = id,
-                        searchTerm = search,
-                        page = pageNumber,
-                        pageSize = pageSize,
-                        depth = depth.ToString()
+                        Id = id,
+                        SearchTerm = search,
+                        Page = pageNumber,
+                        PageSize = pageSize,
+                        Depth = depth.ToString()
                     });
         }
     }

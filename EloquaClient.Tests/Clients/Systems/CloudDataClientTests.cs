@@ -5,11 +5,11 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Systems
 {
     public class CloudDataClientTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public CloudDataClientTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new EloquaRestClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
@@ -18,12 +18,12 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Systems
             var clouddata = new CloudDataInstance
             {
                 Name = "sample",
-                ProviderURL = "www.test.com",
-                IconURL = "test",
+                ProviderUrl = "www.test.com",
+                IconUrl = "test",
                 Description = "test"
             };
 
-            var result = client.Systems.CloudData.Post(clouddata);
+            var result = _client.Systems.CloudData.Post(clouddata);
             Assert.NotNull(result);
         }
     }

@@ -5,17 +5,17 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
     [Resource("/assets/email/deployment", "EmailDeployment")]
     public class EmailDeployment : RestObject, ISearchable
     {
-        public Email email { get; set; }
-        public DateTime endAt { get; set; }
-        public int? failedSendCount { get; set; }
-        public string sentSubject { get; set; }
-        public string successfulSendCount { get; set; }
+        public Email Email { get; set; }
+        public DateTime EndAt { get; set; }
+        public int? FailedSendCount { get; set; }
+        public string SentSubject { get; set; }
+        public string SuccessfulSendCount { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

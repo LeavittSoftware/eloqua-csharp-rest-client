@@ -5,28 +5,28 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class FormTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public FormTests()
         {
-            client = new Client("site", "user", "pass", Constants.BaseUrl);
+             _client = new Client(new EloquaRestClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void GetFormListTest()
         {
-            var result = client.Assets.Form.Get("*", 1, 100);
-            Assert.NotEqual(0, result.elements.Count);
+            var result = _client.Assets.Form.Get("*", 1, 100);
+            Assert.NotEqual(0, result.Elements.Count);
         }
 
         [Fact]
         public void GetFormByIdTest()
         {
-            var form = client.Assets.Form.Get(550, Depth.complete);
+            var form = _client.Assets.Form.Get(550, Depth.Complete);
 
-            var validFormElements = form.elements
-                .Where(element => element.optionListId.HasValue)
-                .Select(element => client.Assets.OptionList.Get(element.optionListId.Value, Depth.complete));
+            var validFormElements = form.Elements
+                .Where(element => element.OptionListId.HasValue)
+                .Select(element => _client.Assets.OptionList.Get(element.OptionListId.Value, Depth.Complete));
 
             foreach (var optionList in validFormElements)
             {

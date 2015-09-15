@@ -2,9 +2,9 @@
 {
     public enum ActivityAssetType
     {
-        email = 0,
-        form = 1,
-        web = 2,
-        campaign = 4
+        Email = 0,
+        Form = 1,
+        Web = 2,
+        Campaign = 4
     }
 }

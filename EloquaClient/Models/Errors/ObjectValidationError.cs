@@ -2,9 +2,9 @@
 {
     public class ObjectValidationError : ValidationError
     {
-        public ObjectKey container { get; set; }
-        public string property { get; set; }
-        public string requirement { get; set; }
-        public string value { get; set; }
+        public ObjectKey Container { get; set; }
+        public string Property { get; set; }
+        public string Requirement { get; set; }
+        public string Value { get; set; }
     }
 }

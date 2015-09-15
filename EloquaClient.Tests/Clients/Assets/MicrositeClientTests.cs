@@ -6,27 +6,27 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class MicrositeClientTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public MicrositeClientTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new EloquaRestClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void GetMicrositeTest()
         {
             const int originalId = 8;
-            var microsite = client.Assets.Microsite.Get(originalId);
+            var microsite = _client.Assets.Microsite.Get(originalId);
 
-            Assert.Equal(originalId, microsite.id);
+            Assert.Equal(originalId, microsite.Id);
         }
 
         [Fact]
         public void GetMicrositeListTest()
         {
-            var result = client.Assets.Microsite.Get("*", 1, 1);
-            Assert.Equal(1, result.elements.Count);
+            var result = _client.Assets.Microsite.Get("*", 1, 1);
+            Assert.Equal(1, result.Elements.Count);
         }
 
         [Fact]
@@ -39,18 +39,18 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
                 var expectedMicrosite = new Microsite
                 {
                     name = "sample",
-                    domains = new List<string> {"sample.com"},
-                    isSecure = false
+                    Domains = new List<string> {"sample.com"},
+                    IsSecure = false
                 };
 
-                microsite = client.Assets.Microsite.Post(expectedMicrosite);
+                microsite = _client.Assets.Microsite.Post(expectedMicrosite);
                 Assert.Equal(expectedMicrosite.name, microsite.name);
             }
             finally
             {
-                if (microsite != null && microsite.id > 0)
+                if (microsite != null && microsite.Id > 0)
                 {
-                    client.Assets.Microsite.Delete(microsite.id);
+                    _client.Assets.Microsite.Delete(microsite.Id);
                 }
             }
         }

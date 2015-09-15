@@ -2,15 +2,15 @@
 {
     public class DataField : IdentifiableObject
     {
-        public string checkedValue { get; set; }
-        public string dataType { get; set; }
-        public string defaultValue { get; set; }
-        public string displayType { get; set; }
-        public string internalName { get; set; }
-        public string isReadOnly { get; set; }
-        public string isRequired { get; set; }
-        public string isStandard { get; set; }
-        public int? optionListId { get; set; }
-        public string uncheckedValue { get; set; }
+        public string CheckedValue { get; set; }
+        public string DataType { get; set; }
+        public string DefaultValue { get; set; }
+        public string DisplayType { get; set; }
+        public string InternalName { get; set; }
+        public string IsReadOnly { get; set; }
+        public string IsRequired { get; set; }
+        public string IsStandard { get; set; }
+        public int? OptionListId { get; set; }
+        public string UncheckedValue { get; set; }
     }
 }

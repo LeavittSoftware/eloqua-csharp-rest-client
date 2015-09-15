@@ -2,7 +2,7 @@
 {
     public enum Scope
     {
-        global = 1,
-        local = 2
+        Global = 1,
+        Local = 2
     }
 }

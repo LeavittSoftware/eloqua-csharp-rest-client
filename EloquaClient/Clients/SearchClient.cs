@@ -4,20 +4,20 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients
 {
     public class SearchClient<T> where T : RestObject, ISearchable, new()
     {
-        public SearchClient(BaseClient baseClient)
+        public SearchClient(EloquaRestClient eloquaRestClient)
         {
-            _baseClient = baseClient;
+            _eloquaRestClient = eloquaRestClient;
         }
-        readonly BaseClient _baseClient;
+        readonly EloquaRestClient _eloquaRestClient;
 
-        public SearchResponse<T> Get(string search, int pageNumber, int pageSize, Depth depth = Depth.complete)
+        public SearchResponse<T> Get(string search, int pageNumber, int pageSize, Depth depth = Depth.Complete)
         {
-            return _baseClient.Search<T>(new T
+            return _eloquaRestClient.Search<T>(new T
             {
-                searchTerm = search,
-                page = pageNumber,
-                pageSize = pageSize,
-                depth = depth.ToString()
+                SearchTerm = search,
+                Page = pageNumber,
+                PageSize = pageSize,
+                Depth = depth.ToString()
             });
         }
     }

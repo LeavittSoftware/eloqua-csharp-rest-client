@@ -7,26 +7,33 @@ using RestSharp.Deserializers;
 
 namespace Eloqua.Api.Rest.ClientLibrary
 {
-    public class BaseClient
+    public sealed class EloquaRestClient
     {
-        protected BaseClient() { }
-
-        public BaseClient(string site, string user, string password, Uri baseUrl)
+        public IRestClient RestClient
         {
-            Client = new RestClient
-            {
-                BaseUrl = baseUrl,
-                Authenticator = new HttpBasicAuthenticator(site + "\\" + user, password)
-            };
-
-            Client.AddHandler("text/plain", new JsonDeserializer());
+            get; private
+            set;
         }
 
-        internal RestClient Client { get; set; }
-
-        internal T Execute<T>(IRestRequest request) where T : new()
+        public EloquaRestClient(IRestClient restClient)
         {
-            var response = Client.Execute<T>(request);
+            RestClient = restClient;
+        }
+
+        public EloquaRestClient(string site, string username, string password, Uri baseUri)
+        {
+            var restClient = new RestClient
+            {
+                BaseUrl = baseUri,
+                Authenticator = new HttpBasicAuthenticator(site + "\\" + username, password)
+            };
+            restClient.AddHandler("text/plain", new JsonDeserializer());
+            RestClient = restClient;
+        }
+
+        public T ExecuteWithErrorHandling<T>(IRestRequest request) where T : new()
+        {
+            var response = RestClient.Execute<T>(request);
 
             switch (response.ResponseStatus)
             {
@@ -43,37 +50,37 @@ namespace Eloqua.Api.Rest.ClientLibrary
         public T Get<T>(T data) where T : RestObject, new()
         {
             var request = Request.Get(Request.Type.Get, data);
-            return Execute<T>(request);
+            return ExecuteWithErrorHandling<T>(request);
         }
 
         public void Delete<T>(T data) where T : RestObject, new()
         {
             var request = Request.Get(Request.Type.Delete, data);
-            Execute<T>(request);
+            ExecuteWithErrorHandling<T>(request);
         }
 
         public T Post<T>(T data) where T : RestObject, new()
         {
             var request = Request.Get(Request.Type.Post, data);
-            return Execute<T>(request);
+            return ExecuteWithErrorHandling<T>(request);
         }
 
         public T Put<T>(T data) where T : RestObject, new()
         {
             var request = Request.Get(Request.Type.Put, data);
-            return Execute<T>(request);
+            return ExecuteWithErrorHandling<T>(request);
         }
 
         public SearchResponse<T> Search<T>(T data) where T : RestObject, ISearchable, new()
         {
             var request = Request.Get(Request.Type.Search, data);
-            return Execute<SearchResponse<T>>(request);
+            return ExecuteWithErrorHandling<SearchResponse<T>>(request);
         }
 
         public SearchResponse<T> Search<T>(int id, T data) where T : RestObject, ISearchable, new()
         {
             var request = Request.Get(Request.Type.Search, data);
-            return Execute<SearchResponse<T>>(request);
+            return ExecuteWithErrorHandling<SearchResponse<T>>(request);
         }
     }
 }

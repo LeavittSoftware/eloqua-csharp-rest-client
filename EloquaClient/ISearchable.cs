@@ -2,8 +2,8 @@
 {
     public interface ISearchable
     {
-        int page { get; set; }
-        int pageSize { get; set; }
-        string searchTerm { get; set; }
+        int Page { get; set; }
+        int PageSize { get; set; }
+        string SearchTerm { get; set; }
     }
 }

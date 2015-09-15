@@ -6,15 +6,15 @@
         public string ActivateUrl { get; set; }
         public string Description { get; set; }
         public bool? IsActive { get; set; }
-        public string IconURL { get; set; }
+        public string IconUrl { get; set; }
         public string Name { get; set; }
-        public string ProviderURL { get; set; }
+        public string ProviderUrl { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

@@ -2,12 +2,12 @@
 {
     public class Activity
     {
-        public string assetName{ get; set; }
-        public string assetType { get; set; }
-        public string activityType { get; set; }
-        public string activityDate { get; set; }
-        public string contactID { get; set; }
-        public string fieldValues { get; set; }
-        public string type { get; set; }
+        public string AssetName{ get; set; }
+        public string AssetType { get; set; }
+        public string ActivityType { get; set; }
+        public string ActivityDate { get; set; }
+        public string ContactId { get; set; }
+        public string FieldValues { get; set; }
+        public string Type { get; set; }
     }
 }

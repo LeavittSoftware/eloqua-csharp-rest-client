@@ -2,12 +2,12 @@
 {
     public class EmailDeploymentStatistics
     {
-        public string bouncebackType { get; set; }
-        public int? clickThroughCount { get; set; }
-        public string emailAddress { get; set; }
-        public long? lastClickThrough { get; set; }
-        public long? lastOpen { get; set; }
-        public int? openCount { get; set; }
-        public long? sentAt { get; set; }
+        public string BouncebackType { get; set; }
+        public int? ClickThroughCount { get; set; }
+        public string EmailAddress { get; set; }
+        public long? LastClickThrough { get; set; }
+        public long? LastOpen { get; set; }
+        public int? OpenCount { get; set; }
+        public long? SentAt { get; set; }
     }
 }

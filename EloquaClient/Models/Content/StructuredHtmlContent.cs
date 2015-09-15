@@ -2,13 +2,13 @@
 {
     public class StructuredHtmlContent
     {
-        public string cssHeader { get; set; }
-        public string docType { get; set; }
-        public string htmlBody { get; set; }
-        public int? id { get; set; }
-        public string javascriptHeader { get; set; }
-        public string root { get; set; }
-        public string type
+        public string CssHeader { get; set; }
+        public string DocType { get; set; }
+        public string HtmlBody { get; set; }
+        public int? Id { get; set; }
+        public string JavascriptHeader { get; set; }
+        public string Root { get; set; }
+        public string Type
         {
             get { return "StructuredHtmlContent"; }
         }

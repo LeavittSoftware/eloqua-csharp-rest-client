@@ -5,17 +5,17 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Systems.Users
     [Resource("/system/user", "User")]
     public class User : RestObject, ISearchable
     {
-        public List<string> betaAccess { get; set; }
-        public List<string> capabilities { get; set; }
-        public int? defaultContactViewId { get; set; }
-        public string emailAddress { get; set; }
-        public string loginName { get; set; }
-        public string name { get; set; }
-        public List<ProductPermission> productPermissions { get; set; }
-        public List<TypePermissions> typePermissions { get; set; } 
+        public List<string> BetaAccess { get; set; }
+        public List<string> Capabilities { get; set; }
+        public int? DefaultContactViewId { get; set; }
+        public string EmailAddress { get; set; }
+        public string LoginName { get; set; }
+        public string Name { get; set; }
+        public List<ProductPermission> ProductPermissions { get; set; }
+        public List<TypePermissions> TypePermissions { get; set; } 
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

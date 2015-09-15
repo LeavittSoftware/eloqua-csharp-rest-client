@@ -2,6 +2,6 @@
 {
     public class ContactField : DataField
     {
-        public string updateType { get; set; }
+        public string UpdateType { get; set; }
     }
 }
