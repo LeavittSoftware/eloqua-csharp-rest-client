@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>   
+    <id>LG.Eloqua.Api.Rest.ClientLibrary</id>
+	<version>1.1.0.6</version>
+    <owners>LG Engineering</owners>
+	<title>Eloqua Rest API Client</title>
+    <authors>Leavitt Group Enterprises</authors>
+	<copyright>Leavitt Group Enterprises 2016</copyright>	
+	<projectUrl>http://builds.leavitt.com/</projectUrl>	
+    <description>This library contains the classes that facilitate interaction with Eloqua Rest API.</description>	 
+    <dependencies>
+      <dependency id="RestSharp"/>  
+    </dependencies> 
+	<references>
+	  <reference file="Eloqua.Api.Rest.ClientLibrary.dll" />
+	</references>	
+  </metadata>
+  <files>
+		<file src="EloquaClient\bin\Release\Eloqua.Api.Rest.ClientLibrary.dll" target="lib" />
+  </files>
+</package>
