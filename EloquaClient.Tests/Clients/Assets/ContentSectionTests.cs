@@ -6,18 +6,18 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class ContentSectionTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public ContentSectionTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void SearchContentSectionTest()
         {
-            var contentSections = client.Assets.ContentSection.Get("*", 1, 100);
-            Assert.True(contentSections.total > 0);
+            var contentSections = _client.Assets.ContentSection.Get("*", 1, 100);
+            Assert.True(contentSections.Total > 0);
         }
 
         [Fact]
@@ -25,13 +25,13 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
         {
             var contentSection = new ContentSection
             {
-                id = -1,
+                Id = -1,
                 name = "sample content",
-                scope = Scope.global.ToString(),
-                contentHtml = "<html><head></head><body>sample content</body></html>"
+                Scope = Scope.Global.ToString(),
+                ContentHtml = "<html><head></head><body>sample content</body></html>"
             };
 
-            var returnedContentSection = client.Assets.ContentSection.Post(contentSection);
+            var returnedContentSection = _client.Assets.ContentSection.Post(contentSection);
             Assert.Equal(contentSection.name, returnedContentSection.name);
         }
     }

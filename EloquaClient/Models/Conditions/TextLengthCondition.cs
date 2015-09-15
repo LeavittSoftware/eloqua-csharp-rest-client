@@ -2,7 +2,7 @@
 {
     public class TextLengthCondition : Condition
     {
-        public string maximum { get; set; }
-        public string minimum { get; set; }
+        public string Maximum { get; set; }
+        public string Minimum { get; set; }
     }
 }

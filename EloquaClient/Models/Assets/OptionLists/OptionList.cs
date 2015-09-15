@@ -5,13 +5,13 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists
     [Resource("/assets/optionList", "OptionList")]
     public class OptionList : RestObject, ISearchable
     {
-        public List<Option> elements { get; set; }
+        public List<Option> Elements { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

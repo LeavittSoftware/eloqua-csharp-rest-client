@@ -2,8 +2,8 @@
 {
     public class ObjectKey
     {
-        public string container { get; set; }
-        public int? objectId { get; set; }
-        public string objectType { get; set; }
+        public string Container { get; set; }
+        public int? ObjectId { get; set; }
+        public string ObjectType { get; set; }
     }
 }

@@ -19,33 +19,30 @@ namespace Eloqua.Api.Rest.ClientLibrary
         {
             restObj.type = restObj.Type;
 
-            var request = new RestRequest
-                              {
-                                  RequestFormat = DataFormat.Json
-                              };
+            var request = new RestRequest { RequestFormat = DataFormat.Json };
 
             switch (type)
             {
                 case Type.Get:
                     request.Method = Method.GET;
-                    request.Resource = restObj.Uri + "/" + restObj.id + "?depth=" + restObj.depth;
+                    request.Resource = restObj.Uri + "/" + restObj.Id + "?depth=" + restObj.Depth;
                     break;
 
                 case Type.Put:
                     request.Method = Method.PUT;
-                    request.Resource = restObj.Uri + "/" + restObj.id;
+                    request.Resource = restObj.Uri + "/" + restObj.Id;
                     request.AddBody(restObj);
                     break;
 
                 case Type.Post:
                     request.Method = Method.POST;
-                    request.Resource = restObj.Uri;
+                    request.Resource = restObj.Uri + (restObj.Id != null ? "/" + restObj.Id : "");
                     request.AddBody(restObj);
                     break;
 
                 case Type.Delete:
                     request.Method = Method.DELETE;
-                    request.Resource = restObj.Uri + "/" + restObj.id;
+                    request.Resource = restObj.Uri + "/" + restObj.Id;
                     break;
 
                 case Type.Search:
@@ -54,19 +51,19 @@ namespace Eloqua.Api.Rest.ClientLibrary
                     var resource = new StringBuilder(100);
                     resource.Append(restObj.Uri);
 
-                    if (restObj.id != null && restObj.id > 0)
+                    if (restObj.Id != null && restObj.Id > 0)
                     {
-                        resource.Append("/" + restObj.id);
+                        resource.Append("/" + restObj.Id);
                     } else
                     {
                         resource.Append("s"); // pluralize the endpoint
                     }
 
                     var searchObj = restObj as ISearchable;
-                    resource.Append("?search=" + searchObj.searchTerm +
-                                    "&count=" + searchObj.pageSize +
-                                    "&page=" + searchObj.page +
-                                    "&depth=" + restObj.depth
+                    resource.Append("?search=" + searchObj.SearchTerm +
+                                    "&count=" + searchObj.PageSize +
+                                    "&page=" + searchObj.Page +
+                                    "&depth=" + restObj.Depth
                                     );
 
                     request.Resource = resource.ToString();

@@ -6,8 +6,8 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Segments
     [KnownType(typeof(ContactFilterSegmentElement))]
     public class SegmentElement : IdentifiableObject
     {
-        public int? count { get; set; }
-        public bool? isIncluded { get; set; }
-        public string lastCalculatedAt { get; set; }
+        public int? Count { get; set; }
+        public bool? IsIncluded { get; set; }
+        public string LastCalculatedAt { get; set; }
     }
 }

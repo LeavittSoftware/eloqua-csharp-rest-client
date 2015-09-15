@@ -2,7 +2,7 @@
 {
     public class TypePermissions
     {
-        public bool? create { get; set; }
-        public bool? read { get; set; }
+        public bool? Create { get; set; }
+        public bool? Read { get; set; }
     }
 }

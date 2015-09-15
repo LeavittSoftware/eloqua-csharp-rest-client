@@ -2,12 +2,12 @@
 {
     public enum FieldDisplayType
     {
-        text = 1,
-        textArea = 2,
-        singleSelect = 3,
-        radio = 4,
-        checkbox = 5,
-        multiSelect = 6,
-        hidden = 7
+        Text = 1,
+        TextArea = 2,
+        SingleSelect = 3,
+        Radio = 4,
+        Checkbox = 5,
+        MultiSelect = 6,
+        Hidden = 7
     }
 }

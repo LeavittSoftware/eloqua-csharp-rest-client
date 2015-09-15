@@ -2,7 +2,7 @@
 {
     public class Contact
     {
-        public string emailAddress { get; set; }
-        public int? id { get; set; }
+        public string EmailAddress { get; set; }
+        public int? Id { get; set; }
     }
 }

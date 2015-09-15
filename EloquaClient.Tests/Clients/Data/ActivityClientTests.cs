@@ -6,11 +6,11 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
     public class ActivityClientTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public ActivityClientTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         #region helpers
@@ -27,7 +27,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
         [Fact]
         public void GetActivitiesTest()
         {
-            var activities = client.Data.Activity.Get(7120511, ActivityType.externalActivity.ToString(), 1000,
+            var activities = _client.Data.Activity.Get(7120511, ActivityType.ExternalActivity.ToString(), 1000,
                 ConvertToUnixEpoch(new DateTime(2012, 01, 01)),
                 ConvertToUnixEpoch(new DateTime(2012, 08, 01)), 1);
 

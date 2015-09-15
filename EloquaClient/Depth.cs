@@ -2,8 +2,8 @@
 {
     public enum Depth
     {
-        minimal = 1,
-        partial = 2,
-        complete =3
+        Minimal = 1,
+        Partial = 2,
+        Complete =3
     }
 }

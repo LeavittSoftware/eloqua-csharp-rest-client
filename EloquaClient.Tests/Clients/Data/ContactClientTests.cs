@@ -5,27 +5,27 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
     public class ContactClientTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public ContactClientTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void GetContactTest()
         {
             const int originalId = 1;
-            var contact = client.Data.Contact.Get(originalId);
+            var contact = _client.Data.Contact.Get(originalId);
 
-            Assert.Equal(originalId, contact.id);
+            Assert.Equal(originalId, contact.Id);
         }
 
         [Fact]
         public void SearchContactTest()
         {
-            var result = client.Data.Contact.Get("*", 1, 1);
-            Assert.Equal(1, result.elements.Count);
+            var result = _client.Data.Contact.Get("*", 1, 1);
+            Assert.Equal(1, result.Elements.Count);
         }
 
         [Fact]
@@ -33,15 +33,15 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
         {
             var contact = new Contact
             {
-                id = -500002,
-                firstName = "sample",
-                lastName = "test",
-                emailAddress = "sample@test.com"
+                Id = -500002,
+                FirstName = "sample",
+                LastName = "test",
+                EmailAddress = "sample@test.com"
             };
 
-            var returnedContact = client.Data.Contact.Post(contact);
+            var returnedContact = _client.Data.Contact.Post(contact);
 
-            Assert.Equal(contact.emailAddress, returnedContact.emailAddress);
+            Assert.Equal(contact.EmailAddress, returnedContact.EmailAddress);
         }
     }
 }

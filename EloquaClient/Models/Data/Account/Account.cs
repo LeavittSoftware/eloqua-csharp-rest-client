@@ -3,19 +3,19 @@
     [Resource("/data/account", "Account")]
     public class Account : RestObject, ISearchable
     {
-        public string address1 { get; set; }
-        public string address2 { get; set; }
-        public string address3 { get; set; }
-        public string businessPhone { get; set; }
-        public string city { get; set; }
-        public string country { get; set; }
-        public string fieldValues { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string Address3 { get; set; }
+        public string BusinessPhone { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string FieldValues { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

@@ -3,9 +3,9 @@
     [Resource("/assets/external", "ExternalAsset")]
     public class ExternalAsset : RestObject, ISearchable
     {
-        public int? externalAssetTypeId { get; set; }
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int? ExternalAssetTypeId { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

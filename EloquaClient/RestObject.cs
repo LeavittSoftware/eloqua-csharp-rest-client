@@ -4,21 +4,19 @@ namespace Eloqua.Api.Rest.ClientLibrary
 {
     public class RestObject : IIdentifiable
     {
-        public int? id { get; set; }
+        public int? Id { get; set; }
         public string name { get; set; }
 
         public string type;
-        public string depth { get; set; }
+        public string Depth { get; set; }
 
         public string Uri
         {
             get
             {
-                if (string.IsNullOrEmpty(_uri))
-                {
-                    var att = (Resource) Attribute.GetCustomAttribute(GetType(), typeof (Resource));
-                    _uri = att.Uri;
-                }
+                if (!string.IsNullOrEmpty(_uri)) return _uri;
+                var att = (Resource) Attribute.GetCustomAttribute(GetType(), typeof (Resource));
+                _uri = att.Uri;
                 return _uri;
             }
         }
@@ -28,11 +26,9 @@ namespace Eloqua.Api.Rest.ClientLibrary
         {
             get
             {
-                if (string.IsNullOrEmpty(_type))
-                {
-                    var att = (Resource)Attribute.GetCustomAttribute(GetType(), typeof(Resource));
-                    _type = att.Type;
-                }
+                if (!string.IsNullOrEmpty(_type)) return _type;
+                var att = (Resource)Attribute.GetCustomAttribute(GetType(), typeof(Resource));
+                _type = att.Type;
                 return _type;
             }
         }

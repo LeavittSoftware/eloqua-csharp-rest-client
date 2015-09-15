@@ -17,7 +17,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
             var request = new RestRequest
             {
                 RequestFormat = DataFormat.Json,
-                Resource = string.Format("/data/contact/{0}/email/group/{1}/subscription", contactId, emailGroupId)
+                Resource = $"/data/contact/{contactId}/email/group/{emailGroupId}/subscription"
             };
 
             return _baseClient.Execute<ContactEmailSubscription>(request);
@@ -29,7 +29,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
             {
                 RequestFormat = DataFormat.Json,
                 RootElement = "elements",
-                Resource = string.Format("/data/contact/{0}/email/groups/subscription?search={1}&page={2}&count={3}", contactId, searchTerm, page, pageSize)
+                Resource = $"/data/contact/{contactId}/email/groups/subscription?search={searchTerm}&page={page}&count={pageSize}"
             };
 
             return _baseClient.Execute<List<ContactEmailSubscription>>(request);

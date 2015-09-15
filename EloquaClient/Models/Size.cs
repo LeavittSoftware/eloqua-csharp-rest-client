@@ -2,7 +2,7 @@
 {
     public class Size
     {
-        public int? height { get; set; }
-        public int? width { get; set; }
+        public int? Height { get; set; }
+        public int? Width { get; set; }
     }
 }

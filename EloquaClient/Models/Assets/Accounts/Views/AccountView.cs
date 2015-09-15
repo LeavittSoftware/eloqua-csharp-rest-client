@@ -5,13 +5,13 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Accounts.Views
     [Resource("/assets/account/view", "AccountView")]
     public class AccountView : RestObject, ISearchable
     {
-        public List<DataField> fields { get; set; }
+        public List<DataField> Fields { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
 

@@ -3,20 +3,20 @@
     [Resource("/assets/email/deployment", "EmailTestDeployment")]
     public class EmailTestDeployment : RestObject, ISearchable
     {
-        public int? contactId { get; set; }
-        public Email email { get; set; }
-        public int? successfulSendCount { get; set; }
-        public int? failedSendCount { get; set; }
-        public string endAt { get; set; }
-        public int? sendFromUserId { get; set; }
-        public string sentContent { get; set; }
-        public string sentSubject { get; set; }
+        public int? ContactId { get; set; }
+        public Email Email { get; set; }
+        public int? SuccessfulSendCount { get; set; }
+        public int? FailedSendCount { get; set; }
+        public string EndAt { get; set; }
+        public int? SendFromUserId { get; set; }
+        public string SentContent { get; set; }
+        public string SentSubject { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

@@ -6,11 +6,11 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class CampaignTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public CampaignTests()
         {
-            client = new Client("site", "user", "pass", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
@@ -22,12 +22,12 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 
             do
             {
-                fields = client.Assets.Campaign.Get("*", page, 300, Depth.partial);
+                fields = _client.Assets.Campaign.Get("*", page, 300, Depth.Partial);
                 page++;
 
-            } while (fields.elements.Count == 300);
+            } while (fields.Elements.Count == 300);
 
-            Assert.NotEqual(fields.total, 0);
+            Assert.NotEqual(fields.Total, 0);
         }
 
     }

@@ -8,26 +8,26 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class CustomObjectTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public CustomObjectTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void GetCustomObjectTest()
         {
             const int id = 32;
-            var customObject = client.Assets.CustomObject.Get(id);
-            Assert.Equal(id, customObject.id);
+            var customObject = _client.Assets.CustomObject.Get(id);
+            Assert.Equal(id, customObject.Id);
         }
 
         [Fact]
         public void GetCustomObjectsTest()
         {
-            var customObjects = client.Assets.CustomObject.Get("*", 1, 50);
-            Assert.True(customObjects.total > 0);
+            var customObjects = _client.Assets.CustomObject.Get("*", 1, 50);
+            Assert.True(customObjects.Total > 0);
         }
 
         [Fact]
@@ -35,55 +35,55 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
         {
             var customObject = new CustomObject
             {
-                name = string.Format("test-{0}", Guid.NewGuid()),
-                fields = new List<CustomObjectField>
+                name = $"test-{Guid.NewGuid()}",
+                Fields = new List<CustomObjectField>
                 {
                     new CustomObjectField
                     {
-                        name = "text field",
-                        dataType =
+                        Name = "text field",
+                        DataType =
                             Enum.GetName(typeof (FieldDataType),
-                                FieldDataType.text),
-                        displayType =
+                                FieldDataType.Text),
+                        DisplayType =
                             Enum.GetName(typeof (FieldDisplayType),
-                                FieldDisplayType.text),
-                        type = "CustomObjectField"
+                                FieldDisplayType.Text),
+                        Type = "CustomObjectField"
                     },
                     new CustomObjectField
                     {
-                        name = "numeric field",
-                        dataType =
+                        Name = "numeric field",
+                        DataType =
                             Enum.GetName(typeof (FieldDataType),
-                                FieldDataType.number),
-                        displayType =
+                                FieldDataType.Number),
+                        DisplayType =
                             Enum.GetName(typeof (FieldDisplayType),
-                                FieldDisplayType.text),
-                        type = "CustomObjectField"
+                                FieldDisplayType.Text),
+                        Type = "CustomObjectField"
                     },
 
                     new CustomObjectField
                     {
-                        name = "date field",
-                        dataType =
+                        Name = "date field",
+                        DataType =
                             Enum.GetName(typeof (FieldDataType),
-                                FieldDataType.date),
-                        displayType =
+                                FieldDataType.Date),
+                        DisplayType =
                             Enum.GetName(typeof (FieldDisplayType),
-                                FieldDisplayType.text),
-                        type = "CustomObjectField"
+                                FieldDisplayType.Text),
+                        Type = "CustomObjectField"
                     }
                 }
             };
 
-            var response = client.Assets.CustomObject.Post(customObject);
-            Assert.True(response.id > 0);
+            var response = _client.Assets.CustomObject.Post(customObject);
+            Assert.True(response.Id > 0);
         }
 
         [Fact]
         public void DeleteCustomObject()
         {
             const int id = 33;
-            client.Assets.CustomObject.Delete(id);
+            _client.Assets.CustomObject.Delete(id);
         }
     }
 }

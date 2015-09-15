@@ -2,14 +2,14 @@
 {
     public enum ActivityType
     {
-        emailOpen = 1,
-        emailSend = 2,
-        emailClickThrough = 3,
-        emailSubscribe = 4,
-        emailUnsubscribe = 5,
-        formSubmit = 6,
-        webVisit = 7,
-        campaignMembership = 9,
-        externalActivity  = 10
+        EmailOpen = 1,
+        EmailSend = 2,
+        EmailClickThrough = 3,
+        EmailSubscribe = 4,
+        EmailUnsubscribe = 5,
+        FormSubmit = 6,
+        WebVisit = 7,
+        CampaignMembership = 9,
+        ExternalActivity  = 10
     }
 }

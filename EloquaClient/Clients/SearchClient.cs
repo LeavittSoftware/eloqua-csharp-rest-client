@@ -10,14 +10,14 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients
         }
         readonly BaseClient _baseClient;
 
-        public SearchResponse<T> Get(string search, int pageNumber, int pageSize, Depth depth = Depth.complete)
+        public SearchResponse<T> Get(string search, int pageNumber, int pageSize, Depth depth = Depth.Complete)
         {
             return _baseClient.Search<T>(new T
             {
-                searchTerm = search,
-                page = pageNumber,
-                pageSize = pageSize,
-                depth = depth.ToString()
+                SearchTerm = search,
+                Page = pageNumber,
+                PageSize = pageSize,
+                Depth = depth.ToString()
             });
         }
     }

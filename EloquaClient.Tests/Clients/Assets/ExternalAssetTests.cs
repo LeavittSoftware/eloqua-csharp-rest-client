@@ -4,18 +4,18 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class ExternalAssetTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public ExternalAssetTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void GetExternalAssetsTest()
         {
-            var response = client.Assets.ExternalAsset.Get("*", 1, 10);
-            Assert.True(response.total > 0);
+            var response = _client.Assets.ExternalAsset.Get("*", 1, 10);
+            Assert.True(response.Total > 0);
         }
     }
 }

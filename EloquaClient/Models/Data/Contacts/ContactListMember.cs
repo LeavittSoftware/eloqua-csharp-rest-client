@@ -3,8 +3,8 @@
     [Resource("/data/contacts/list", "Contact")]
     public class ContactListMember : RestObject, ISearchable
     {
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

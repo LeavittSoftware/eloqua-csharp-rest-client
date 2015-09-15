@@ -2,7 +2,7 @@
 {
     public class Option
     {
-        public string displayName { get; set; }
-        public string value { get; set; }
+        public string DisplayName { get; set; }
+        public string Value { get; set; }
     }
 }

@@ -3,13 +3,13 @@
     [Resource("/assets/contentSection", "ContentSection")]
     public class ContentSection : RestObject, ISearchable
     {
-        public string contentHtml { get; set; }
-        public string contentText { get; set; }
-        public Size size { get; set; }
-        public string scope { get; set; }
+        public string ContentHtml { get; set; }
+        public string ContentText { get; set; }
+        public Size Size { get; set; }
+        public string Scope { get; set; }
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

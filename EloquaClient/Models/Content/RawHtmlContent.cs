@@ -2,8 +2,8 @@
 {
     public class RawHtmlContent
     {
-        public string type { get; set; }
-        public string html { get; set; }
-        public string htmlBody { get; set; }
+        public string Type { get; set; }
+        public string Html { get; set; }
+        public string HtmlBody { get; set; }
     }
 }

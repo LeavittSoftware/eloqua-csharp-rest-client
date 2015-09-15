@@ -9,18 +9,18 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class EmailDeploymentTest
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public EmailDeploymentTest()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void ListEmailDeployments()
         {
-            var deployments = client.Assets.EmailDeployment.Get("*", 1, 100);
-            Assert.True(0 > deployments.total);
+            var deployments = _client.Assets.EmailDeployment.Get("*", 1, 100);
+            Assert.True(0 > deployments.Total);
         }
 
         [Fact]
@@ -28,8 +28,8 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
         {
             var contact = new Models.Assets.Emails.Deployment.Contact
             {
-                id = 1,
-                emailAddress = "fred.sakr@eloqua.com"
+                Id = 1,
+                EmailAddress = "fred.sakr@eloqua.com"
             };
 
             var contacts = new List<Models.Assets.Emails.Deployment.Contact>
@@ -39,25 +39,25 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 
             var email = new Email
             {
-                name = "sample email",
-                subject = "sample subject",
-                htmlContent = new RawHtmlContent
+                Name = "sample email",
+                Subject = "sample subject",
+                HtmlContent = new RawHtmlContent
                 {
-                    html = "<html><head></head><body>test</body></html>",
-                    type = "RawHtmlContent"
+                    Html = "<html><head></head><body>test</body></html>",
+                    Type = "RawHtmlContent"
                 },
             };
 
-            var name = string.Format("unit-test_{0}", Guid.NewGuid());
+            var name = $"unit-test_{Guid.NewGuid()}";
             var inlineDeployment = new EmailInlineDeployment
             {
                 name = name,
-                contacts = contacts,
-                email = email,
+                Contacts = contacts,
+                Email = email,
                 type = "EmailInlineDeployment"
             };
 
-            var response = client.Assets.EmailInlineDeployment.Post(inlineDeployment);
+            var response = _client.Assets.EmailInlineDeployment.Post(inlineDeployment);
             Assert.Equal(name, response.name);
         }
     }

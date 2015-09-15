@@ -5,19 +5,19 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages.Structured
     [Resource("/assets/landingPage", "LandingPage")]
     public class LandingPage : RestObject, ISearchable
     {
-        public int? createdAt { get; set; }
-        public int? createdBy { get; set; }
-        public StructuredHtmlContent htmlContent { get; set; }
-        public int? micrositeId { get; set; }
-        public string style { get; set; }
-        public int? updatedAt { get; set; }
-        public int? updatedBy { get; set; }
+        public int? CreatedAt { get; set; }
+        public int? CreatedBy { get; set; }
+        public StructuredHtmlContent HtmlContent { get; set; }
+        public int? MicrositeId { get; set; }
+        public string Style { get; set; }
+        public int? UpdatedAt { get; set; }
+        public int? UpdatedBy { get; set; }
 
         #region ISearchable
 
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
 
         #endregion
     }

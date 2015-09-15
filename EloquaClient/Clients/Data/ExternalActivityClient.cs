@@ -16,7 +16,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
             var request = new RestRequest(Method.GET)
             {
                 RequestFormat = DataFormat.Json,
-                Resource = string.Format("/data/activity/{0}", id)
+                Resource = $"/data/activity/{id}"
             };
 
             return _baseClient.Execute<ExternalActivities>(request);

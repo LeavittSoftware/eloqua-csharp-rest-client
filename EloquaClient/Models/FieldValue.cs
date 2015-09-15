@@ -2,7 +2,7 @@
 {
     public class FieldValue
     {
-        public int? id { get; set; }
-        public string value { get; set; }
+        public int? Id { get; set; }
+        public string Value { get; set; }
     }
 }

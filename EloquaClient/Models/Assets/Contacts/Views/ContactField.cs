@@ -3,11 +3,11 @@
     [Resource("/assets/contact/field", "ContactField")]
     public class ContactField : RestObject, ISearchable
     {
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
-        public string updateType { get; set; }
-        public string displayType { get; set; }
-        public string dataType { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
+        public string UpdateType { get; set; }
+        public string DisplayType { get; set; }
+        public string DataType { get; set; }
     }
 }

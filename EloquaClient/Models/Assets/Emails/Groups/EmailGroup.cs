@@ -5,19 +5,19 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Groups
     [Resource("/assets/email/group", "EmailGroup")]
     public class EmailGroup : RestObject, ISearchable
     {
-        public string displayName { get; set; }
-        public int? emailFooterId { get; set; }
-        public int? emailHeaderId { get; set; }
-        public List<string> emailIds { get; set; }
-        public bool? isVisibleInOutlookPlugin { get; set; }
-        public string subscriptionListDataLookupId { get; set; }
-        public int? subscriptionLandingPageId { get; set; }
-        public int? subscriptionListId { get; set; }
-        public string unSubscriptionListDataLookupId { get; set; }
-        public int? unsubscriptionLandingPageId { get; set; }
-        public int? unSubscriptionListId { get; set; }
-        public int page { get; set; }
-        public int pageSize { get; set; }
-        public string searchTerm { get; set; }
+        public string DisplayName { get; set; }
+        public int? EmailFooterId { get; set; }
+        public int? EmailHeaderId { get; set; }
+        public List<string> EmailIds { get; set; }
+        public bool? IsVisibleInOutlookPlugin { get; set; }
+        public string SubscriptionListDataLookupId { get; set; }
+        public int? SubscriptionLandingPageId { get; set; }
+        public int? SubscriptionListId { get; set; }
+        public string UnSubscriptionListDataLookupId { get; set; }
+        public int? UnsubscriptionLandingPageId { get; set; }
+        public int? UnSubscriptionListId { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public string SearchTerm { get; set; }
     }
 }

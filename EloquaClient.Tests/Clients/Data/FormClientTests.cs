@@ -4,18 +4,18 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
     public class FormClientTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public FormClientTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void GetFormDataTest()
         {
-            var data = client.Data.FormData.Get(1);
-            Assert.True(data.fieldValues.Count > 0);
+            var data = _client.Data.FormData.Get(1);
+            Assert.True(data.FieldValues.Count > 0);
         }
     }
 }

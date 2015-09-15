@@ -2,14 +2,14 @@
 {
     public enum ConditionOperator
     {
-        equal = 1,
-        less = 2,
-        greater = 3,
-        @in = 4,
-        between = 5,
-        contains = 6,
-        startsWith = 7,
-        endsWith = 8,
-        matchesWildcardPattern = 9
+        Equal = 1,
+        Less = 2,
+        Greater = 3,
+        In = 4,
+        Between = 5,
+        Contains = 6,
+        StartsWith = 7,
+        EndsWith = 8,
+        MatchesWildcardPattern = 9
     }
 }

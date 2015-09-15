@@ -6,27 +6,27 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 {
     public class EmailClientTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public EmailClientTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void GetEmailTest()
         {
             const int originalId = 8;
-            var email = client.Assets.Email.Get(originalId);
+            var email = _client.Assets.Email.Get(originalId);
 
-            Assert.Equal(originalId, email.id);
+            Assert.Equal(originalId, email.Id);
         }
 
         [Fact]
         public void GetEmailListTest()
         {
-            var result = client.Assets.Email.Get("*", 1, 100);
-            Assert.Equal(1, result.elements.Count);
+            var result = _client.Assets.Email.Get("*", 1, 100);
+            Assert.Equal(1, result.Elements.Count);
         }
 
         [Fact]
@@ -38,18 +38,18 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
             {
                 var expectedEmail = new Email
                                         {
-                                            emailGroupId = 1,
-                                            name = string.Format("test-{0}", Guid.NewGuid())
+                                            EmailGroupId = 1,
+                                            name = $"test-{Guid.NewGuid()}"
                                         };
 
-                email = client.Assets.Email.Post(expectedEmail);
+                email = _client.Assets.Email.Post(expectedEmail);
                 Assert.Equal(expectedEmail.name, email.name);
             }
             finally
             {
-                if (email != null && email.id > 0)
+                if (email != null && email.Id > 0)
                 {
-                    client.Assets.Email.Delete(email.id);
+                    _client.Assets.Email.Delete(email.Id);
                 }
             }
         }
@@ -63,24 +63,24 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
             {
                 var expectedEmail = new Email()
                                         {
-                                            emailGroupId = 1,
-                                            name = string.Format("test-{0}", Guid.NewGuid())
+                                            EmailGroupId = 1,
+                                            name = $"test-{Guid.NewGuid()}"
                                         };
 
-                email = client.Assets.Email.Post(expectedEmail);
+                email = _client.Assets.Email.Post(expectedEmail);
                 Assert.Equal(expectedEmail.name, email.name);
 
-                string updatedName = string.Format("test-{0}", Guid.NewGuid());
+                string updatedName = $"test-{Guid.NewGuid()}";
                 email.name = updatedName;
-                email = client.Assets.Email.Put(email);
+                email = _client.Assets.Email.Put(email);
 
                 Assert.Equal(updatedName, email.name);
             }
             finally 
             {
-                if (email != null && email.id > 0)
+                if (email != null && email.Id > 0)
                 {
-                    client.Assets.Email.Delete(email.id);
+                    _client.Assets.Email.Delete(email.Id);
                 }
             }
         }
@@ -92,14 +92,14 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
             var email = new Email
                             {
                                 name = emailName,
-                                emailGroupId = 1
+                                EmailGroupId = 1
                             };
 
-            email = client.Assets.Email.Post(email);
-            client.Assets.Email.Delete(email.id);
+            email = _client.Assets.Email.Post(email);
+            _client.Assets.Email.Delete(email.Id);
 
-            var result = client.Assets.Email.Get(emailName, 1, 1);
-            Assert.Equal(0, result.elements.Count);
+            var result = _client.Assets.Email.Get(emailName, 1, 1);
+            Assert.Equal(0, result.Elements.Count);
         }
     }
 }

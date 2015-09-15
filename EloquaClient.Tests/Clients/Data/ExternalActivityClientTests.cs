@@ -5,17 +5,17 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 {
     public class ExternalActivityClientTests
     {
-        private readonly Client client;
+        private readonly Client _client;
 
         public ExternalActivityClientTests()
         {
-            client = new Client("site", "user", "password", Constants.BaseUrl);
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
         public void GetActivityTest()
         {
-            var response = client.Data.ExternalActivity.Get(1);
+            var response = _client.Data.ExternalActivity.Get(1);
             Assert.NotNull(response);
         }
 
@@ -26,17 +26,17 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 
             var externalActivities = new ExternalActivities
             {
-                activityDate = "1362543780",
-                activityType = "Webinar",
-                assetName = "TEST_GENERIC_Asset",
-                assetType = "Test_Generic_Asset_Type",
-                contactId = "100",
-                campaignId = "4",
-                type = "ExternalActivities"
+                ActivityDate = "1362543780",
+                ActivityType = "Webinar",
+                AssetName = "TEST_GENERIC_Asset",
+                AssetType = "Test_Generic_Asset_Type",
+                ContactId = "100",
+                CampaignId = "4",
+                Type = "ExternalActivities"
             };
 
-            var postExternalActivities = client.Data.ExternalActivity.Post(externalActivities);
-            var returnExternalActivities = client.Data.ExternalActivity.Get(int.Parse(postExternalActivities.contactId));
+            var postExternalActivities = _client.Data.ExternalActivity.Post(externalActivities);
+            var returnExternalActivities = _client.Data.ExternalActivity.Get(int.Parse(postExternalActivities.ContactId));
 
             Assert.NotNull(returnExternalActivities);
         }
