@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using RestSharp;
 using Eloqua.Api.Rest.ClientLibrary.Models;
@@ -7,20 +8,19 @@ using RestSharp.Deserializers;
 
 namespace Eloqua.Api.Rest.ClientLibrary
 {
-    public sealed class EloquaRestClient
+    public sealed class BaseClient
     {
         public IRestClient RestClient
         {
-            get; private
-            set;
+            get; private set;
         }
 
-        public EloquaRestClient(IRestClient restClient)
+        public BaseClient(IRestClient restClient)
         {
             RestClient = restClient;
         }
 
-        public EloquaRestClient(string site, string username, string password, Uri baseUri)
+        public BaseClient(string site, string username, string password, Uri baseUri)
         {
             var restClient = new RestClient
             {
@@ -31,9 +31,9 @@ namespace Eloqua.Api.Rest.ClientLibrary
             RestClient = restClient;
         }
 
-        public T ExecuteWithErrorHandling<T>(IRestRequest request) where T : new()
+        public async Task<T> ExecuteAsync<T>(IRestRequest request) where T : new()
         {
-            var response = RestClient.Execute<T>(request);
+            var response = await RestClient.ExecuteTaskAsync<T>(request);
 
             switch (response.ResponseStatus)
             {
@@ -47,40 +47,74 @@ namespace Eloqua.Api.Rest.ClientLibrary
             }
         }
 
-        public T Get<T>(T data) where T : RestObject, new()
+        public T Execute<T>(IRestRequest request) where T : new()
+        {
+            return ExecuteAsync<T>(request).Result;
+        }
+
+        public async Task<T> GetAsync<T>(T data) where T : RestObject, new()
         {
             var request = Request.Get(Request.Type.Get, data);
-            return ExecuteWithErrorHandling<T>(request);
+            return await ExecuteAsync<T>(request);
+        }
+
+        public T Get<T>(T data) where T : RestObject, new()
+        {
+            return GetAsync(data).Result;
         }
 
         public void Delete<T>(T data) where T : RestObject, new()
         {
+            DeleteAsync(data).Wait();
+        }
+
+        public async Task DeleteAsync<T>(T data) where T : RestObject, new()
+        {
             var request = Request.Get(Request.Type.Delete, data);
-            ExecuteWithErrorHandling<T>(request);
+            await ExecuteAsync<T>(request);
         }
 
         public T Post<T>(T data) where T : RestObject, new()
         {
-            var request = Request.Get(Request.Type.Post, data);
-            return ExecuteWithErrorHandling<T>(request);
+            return PostAsync(data).Result;
         }
 
+        public async Task<T> PostAsync<T>(T data) where T : RestObject, new()
+        {
+            var request = Request.Get(Request.Type.Post, data);
+            return await ExecuteAsync<T>(request);
+        }
         public T Put<T>(T data) where T : RestObject, new()
         {
+            return PutAsync(data).Result;
+        }
+
+        public async Task<T> PutAsync<T>(T data) where T : RestObject, new()
+        {
             var request = Request.Get(Request.Type.Put, data);
-            return ExecuteWithErrorHandling<T>(request);
+            return await ExecuteAsync<T>(request);
+        }
+
+        public async Task<SearchResponse<T>> SearchAsync<T>(T data) where T : RestObject, ISearchable, new()
+        {
+            var request = Request.Get(Request.Type.Search, data);
+            return await ExecuteAsync<SearchResponse<T>>(request);
         }
 
         public SearchResponse<T> Search<T>(T data) where T : RestObject, ISearchable, new()
         {
+            return SearchAsync(data).Result;
+        }
+
+        public async Task<SearchResponse<T>> SearchAsync<T>(int id, T data) where T : RestObject, ISearchable, new()
+        {
             var request = Request.Get(Request.Type.Search, data);
-            return ExecuteWithErrorHandling<SearchResponse<T>>(request);
+            return await ExecuteAsync<SearchResponse<T>>(request);
         }
 
         public SearchResponse<T> Search<T>(int id, T data) where T : RestObject, ISearchable, new()
         {
-            var request = Request.Get(Request.Type.Search, data);
-            return ExecuteWithErrorHandling<SearchResponse<T>>(request);
+            return SearchAsync(id, data).Result;
         }
     }
 }

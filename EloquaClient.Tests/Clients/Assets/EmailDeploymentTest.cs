@@ -13,7 +13,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 
         public EmailDeploymentTest()
         {
-             _client = new Client(new EloquaRestClient("sites", "user", "password", Constants.BaseUrl));
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
                 },
             };
 
-            var name = string.Format("unit-test_{0}", Guid.NewGuid());
+            var name = $"unit-test_{Guid.NewGuid()}";
             var inlineDeployment = new EmailInlineDeployment
             {
                 name = name,

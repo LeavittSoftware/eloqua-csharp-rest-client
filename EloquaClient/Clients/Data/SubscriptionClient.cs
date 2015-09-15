@@ -6,11 +6,11 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class SubscriptionClient
     {
-        public SubscriptionClient(EloquaRestClient eloquaRestClient)
+        public SubscriptionClient(BaseClient baseClient)
         {
-            _eloquaRestClient = eloquaRestClient;
+            _baseClient = baseClient;
         }
-        readonly EloquaRestClient _eloquaRestClient;
+        readonly BaseClient _baseClient;
 
         public ContactEmailSubscription Get(int? contactId, int? emailGroupId)
         {
@@ -20,7 +20,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
                 Resource = $"/data/contact/{contactId}/email/group/{emailGroupId}/subscription"
             };
 
-            return _eloquaRestClient.ExecuteWithErrorHandling<ContactEmailSubscription>(request);
+            return _baseClient.Execute<ContactEmailSubscription>(request);
         }
 
         public List<ContactEmailSubscription> Get(int? contactId, string searchTerm, int page, int pageSize)
@@ -32,7 +32,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
                 Resource = $"/data/contact/{contactId}/email/groups/subscription?search={searchTerm}&page={page}&count={pageSize}"
             };
 
-            return _eloquaRestClient.ExecuteWithErrorHandling<List<ContactEmailSubscription>>(request);
+            return _baseClient.Execute<List<ContactEmailSubscription>>(request);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 
         public EmailGroupClientTests()
         {
-             _client = new Client(new EloquaRestClient("sites", "user", "password", Constants.BaseUrl));
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]

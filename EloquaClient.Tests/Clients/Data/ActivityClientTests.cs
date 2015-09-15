@@ -10,7 +10,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Data
 
         public ActivityClientTests()
         {
-             _client = new Client(new EloquaRestClient("sites", "user", "password", Constants.BaseUrl));
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         #region helpers

@@ -9,37 +9,37 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
     {
         #region constructor 
 
-        public DataClient(EloquaRestClient eloquaRestClient)
+        public DataClient(BaseClient baseClient)
         {
-            EloquaRestClient = eloquaRestClient;
+            BaseClient = baseClient;
         }
 
         #endregion
 
         #region properties
 
-        protected EloquaRestClient EloquaRestClient;
+        protected BaseClient BaseClient;
 
         #endregion
 
         #region Contacts
 
-        public GenericClient<Contact> Contact => _contactClient ?? (_contactClient = new GenericClient<Contact>(EloquaRestClient));
+        public GenericClient<Contact> Contact => _contactClient ?? (_contactClient = new GenericClient<Contact>(BaseClient));
         private GenericClient<Contact> _contactClient;
 
-        public SearchMembersClient<ContactListMember> ContactListMember => _contactListMemberClient ?? (_contactListMemberClient = new SearchMembersClient<ContactListMember>(EloquaRestClient));
+        public SearchMembersClient<ContactListMember> ContactListMember => _contactListMemberClient ?? (_contactListMemberClient = new SearchMembersClient<ContactListMember>(BaseClient));
 
         private SearchMembersClient<ContactListMember> _contactListMemberClient;
 
-        public ActivityClient Activity => _activity ?? (_activity = new ActivityClient(EloquaRestClient));
+        public ActivityClient Activity => _activity ?? (_activity = new ActivityClient(BaseClient));
 
         private ActivityClient _activity;
 
-        public SubscriptionClient ContactEmailSubscription => _subscription ?? (_subscription = new SubscriptionClient(EloquaRestClient));
+        public SubscriptionClient ContactEmailSubscription => _subscription ?? (_subscription = new SubscriptionClient(BaseClient));
 
         private SubscriptionClient _subscription;
 
-        public GenericClient<FormData> FormData => _formData ?? (_formData = new GenericClient<FormData>(EloquaRestClient));
+        public GenericClient<FormData> FormData => _formData ?? (_formData = new GenericClient<FormData>(BaseClient));
 
         private GenericClient<FormData> _formData;
 
@@ -48,21 +48,21 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
 
         #region Accounts
 
-        public GenericClient<Account> Account => _accountClient ?? (_accountClient = new GenericClient<Account>(EloquaRestClient));
+        public GenericClient<Account> Account => _accountClient ?? (_accountClient = new GenericClient<Account>(BaseClient));
         private GenericClient<Account> _accountClient;
 
         #endregion
 
         #region CustomObjects
 
-        public GenericClient<CustomObject> CustomObject => _customObjectDataClient ?? (_customObjectDataClient = new GenericClient<CustomObject>(EloquaRestClient));
+        public GenericClient<CustomObject> CustomObject => _customObjectDataClient ?? (_customObjectDataClient = new GenericClient<CustomObject>(BaseClient));
         private GenericClient<CustomObject> _customObjectDataClient;
 
         #endregion
 
         #region External Activities
 
-        public ExternalActivityClient ExternalActivity => _externalActivity ?? (_externalActivity = new ExternalActivityClient(EloquaRestClient));
+        public ExternalActivityClient ExternalActivity => _externalActivity ?? (_externalActivity = new ExternalActivityClient(BaseClient));
 
         private ExternalActivityClient _externalActivity;
 

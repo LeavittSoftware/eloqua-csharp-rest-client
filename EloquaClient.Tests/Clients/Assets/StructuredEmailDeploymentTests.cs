@@ -10,7 +10,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 
         public StructuredEmailDeploymentTest()
         {
-             _client = new Client(new EloquaRestClient("sites", "user", "password", Constants.BaseUrl));
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 
             var email = _client.Assets.StructuredEmail.Get(5219);
 
-            var name = string.Format("unit-test_{0}", Guid.NewGuid());
+            var name = $"unit-test_{Guid.NewGuid()}";
             var inlineDeployment = new Models.Assets.Emails.Deployment.Structured.EmailInlineDeployment()
             {
                 name = name,

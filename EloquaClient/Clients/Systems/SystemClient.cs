@@ -7,16 +7,16 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Systems
     {
         #region constructor 
 
-        public SystemClient(EloquaRestClient eloquaRestClient)
+        public SystemClient(BaseClient baseClient)
         {
-            EloquaRestClient = eloquaRestClient;
+            BaseClient = baseClient;
         }
 
         #endregion
 
         #region properties
 
-        protected EloquaRestClient EloquaRestClient;
+        protected BaseClient BaseClient;
 
         #endregion
 
@@ -24,7 +24,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Systems
 
         public GenericClient<User> User
         {
-            get { return _userClient ?? (_userClient = new GenericClient<User>(EloquaRestClient)); }
+            get { return _userClient ?? (_userClient = new GenericClient<User>(BaseClient)); }
         }
         private GenericClient<User> _userClient;
 
@@ -34,7 +34,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Systems
 
         public GenericClient<CloudDataInstance> CloudData
         {
-            get { return _cloudDataClient ?? (_cloudDataClient = new GenericClient<CloudDataInstance>(EloquaRestClient)); }
+            get { return _cloudDataClient ?? (_cloudDataClient = new GenericClient<CloudDataInstance>(BaseClient)); }
         }
         private GenericClient<CloudDataInstance> _cloudDataClient;
 

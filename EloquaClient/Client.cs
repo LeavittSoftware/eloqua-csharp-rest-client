@@ -2,9 +2,6 @@
 using Eloqua.Api.Rest.ClientLibrary.Clients.Assets;
 using Eloqua.Api.Rest.ClientLibrary.Clients.Data;
 using Eloqua.Api.Rest.ClientLibrary.Clients.Systems;
-using Eloqua.Api.Rest.ClientLibrary.Models.Account;
-using RestSharp;
-using RestSharp.Deserializers;
 
 namespace Eloqua.Api.Rest.ClientLibrary
 {
@@ -20,11 +17,11 @@ namespace Eloqua.Api.Rest.ClientLibrary
 
         public SystemClient Systems => _systemClientLazy.Value;
 
-        public Client(EloquaRestClient eloquaRestClient)
+        public Client(BaseClient baseClient)
         {
-            _assetClientLazy = new Lazy<AssetClient>(() => new AssetClient(eloquaRestClient));
-            _dataLazy = new Lazy<DataClient>(() => new DataClient(eloquaRestClient));
-            _systemClientLazy = new Lazy<SystemClient>(() => new SystemClient(eloquaRestClient));
+            _assetClientLazy = new Lazy<AssetClient>(() => new AssetClient(baseClient));
+            _dataLazy = new Lazy<DataClient>(() => new DataClient(baseClient));
+            _systemClientLazy = new Lazy<SystemClient>(() => new SystemClient(baseClient));
         }
 
         //public static AccountInfo GetAccountInfo(string site, string user, string password)

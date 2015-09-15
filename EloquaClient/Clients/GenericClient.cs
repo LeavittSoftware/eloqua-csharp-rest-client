@@ -1,58 +1,89 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models;
+﻿using System.Threading.Tasks;
+using Eloqua.Api.Rest.ClientLibrary.Models;
 
 namespace Eloqua.Api.Rest.ClientLibrary.Clients
 {
     public class GenericClient<T> where T : RestObject, ISearchable, new()
     {
-        public GenericClient(EloquaRestClient eloquaRestClient)
+        public GenericClient(BaseClient baseClient)
         {
-            _eloquaRestClient = eloquaRestClient;
+            _baseClient = baseClient;
         }
-        readonly EloquaRestClient _eloquaRestClient;
+        readonly BaseClient _baseClient;
 
         public T Get(int id, Depth depth = Depth.Minimal)
         {
+            return GetAsync(id, depth).Result;
+        }
+
+        public async Task<T> GetAsync(int id, Depth depth = Depth.Minimal)
+        {
             var data = new T { Id = id, Depth = depth.ToString() };
-            return _eloquaRestClient.Get(data);
+            return await _baseClient.GetAsync(data);
         }
 
         public T Post(T data)
         {
-            return _eloquaRestClient.Post(data);
+            return PostAsync(data).Result;
+        }
+
+        public async Task<T> PostAsync(T data)
+        {
+            return await _baseClient.PostAsync(data);
         }
 
         public T Put(T data)
         {
-            return _eloquaRestClient.Put(data);
+            return PutAsync(data).Result;
+        }
+
+        public async Task<T> PutAsync(T data)
+        {
+            return await _baseClient.PutAsync(data);
+        }
+
+        public async Task DeleteAsync(int? id)
+        {
+            var data = new T { Id = id };
+            await _baseClient.DeleteAsync(data);
         }
 
         public void Delete(int? id)
         {
-            var data = new T { Id = id };
-            _eloquaRestClient.Delete(data);
+            DeleteAsync(id).Wait();
+        }
+
+        public async Task<SearchResponse<T>> GetAsync(string search, int pageNumber, int pageSize, Depth depth = Depth.Complete)
+        {
+            return await _baseClient.SearchAsync(new T
+            {
+                SearchTerm = search,
+                Page = pageNumber,
+                PageSize = pageSize,
+                Depth = depth.ToString()
+            });
         }
 
         public SearchResponse<T> Get(string search, int pageNumber, int pageSize, Depth depth = Depth.Complete)
         {
-            return _eloquaRestClient.Search(new T
-                {
-                    SearchTerm = search,
-                    Page = pageNumber,
-                    PageSize = pageSize,
-                    Depth = depth.ToString()
-                });
+            return GetAsync(search, pageNumber, pageSize, depth).Result;
         }
 
         public SearchResponse<T> Get(int? id, string search, int pageNumber, int pageSize, Depth depth = Depth.Complete)
         {
-            return _eloquaRestClient.Search(new T
-                    {
-                        Id = id,
-                        SearchTerm = search,
-                        Page = pageNumber,
-                        PageSize = pageSize,
-                        Depth = depth.ToString()
-                    });
+            return GetAsync(id, search, pageNumber, pageSize, depth).Result;
+        }
+
+        public async Task<SearchResponse<T>> GetAsync(int? id, string search, int pageNumber, int pageSize, Depth depth = Depth.Complete)
+        {
+            return await _baseClient.SearchAsync(new T
+            {
+                Id = id,
+                SearchTerm = search,
+                Page = pageNumber,
+                PageSize = pageSize,
+                Depth = depth.ToString()
+            });
         }
     }
 }

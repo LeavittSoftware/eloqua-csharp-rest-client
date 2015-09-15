@@ -122,7 +122,6 @@
   <ItemGroup>
     <Compile Include="Clients\Data\FormDataClient.cs" />
     <Compile Include="Exceptions\ConnectionErrorException.cs" />
-    <Compile Include="IBaseClient.cs" />
     <Compile Include="Models\Account\AccountInfo.cs" />
     <Compile Include="Clients\Assets\AssetClient.cs" />
     <Compile Include="Clients\Data\ActivityClient.cs" />

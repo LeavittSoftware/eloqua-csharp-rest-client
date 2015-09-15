@@ -6,11 +6,11 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class ActivityClient
     {
-        public ActivityClient(EloquaRestClient eloquaRestClient)
+        public ActivityClient(BaseClient baseClient)
         {
-            _eloquaRestClient = eloquaRestClient;
+            _baseClient = baseClient;
         }
-        readonly EloquaRestClient _eloquaRestClient;
+        readonly BaseClient _baseClient;
 
         public List<Activity> Get(int? id, string type, int count, long startDate, long endDate, int page)
         {
@@ -20,7 +20,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
                 Resource = $"/data/activities/contact/{id}/{type}?count={count}&startAt={startDate}&endAt={endDate}&page={page}"
             };
 
-            return _eloquaRestClient.ExecuteWithErrorHandling<List<Activity>>(request);
+            return _baseClient.Execute<List<Activity>>(request);
         }
 
         public List<BouncebackActivity> Get(int? id, int count, long startDate, long endDate, int page)
@@ -32,7 +32,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
                 Resource = $"/data/activities/contact/{id}/automation/bounceback?count={count}&startAt={startDate}&endAt={endDate}&page={page}"
             };
 
-            return _eloquaRestClient.ExecuteWithErrorHandling<List<BouncebackActivity>>(request);
+            return _baseClient.Execute<List<BouncebackActivity>>(request);
         }
     }
 }

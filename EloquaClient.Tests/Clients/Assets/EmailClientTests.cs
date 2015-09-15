@@ -10,7 +10,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
 
         public EmailClientTests()
         {
-             _client = new Client(new EloquaRestClient("sites", "user", "password", Constants.BaseUrl));
+             _client = new Client(new BaseClient("sites", "user", "password", Constants.BaseUrl));
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
                 var expectedEmail = new Email
                                         {
                                             EmailGroupId = 1,
-                                            name = string.Format("test-{0}", Guid.NewGuid())
+                                            name = $"test-{Guid.NewGuid()}"
                                         };
 
                 email = _client.Assets.Email.Post(expectedEmail);
@@ -64,13 +64,13 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Clients.Assets
                 var expectedEmail = new Email()
                                         {
                                             EmailGroupId = 1,
-                                            name = string.Format("test-{0}", Guid.NewGuid())
+                                            name = $"test-{Guid.NewGuid()}"
                                         };
 
                 email = _client.Assets.Email.Post(expectedEmail);
                 Assert.Equal(expectedEmail.name, email.name);
 
-                string updatedName = string.Format("test-{0}", Guid.NewGuid());
+                string updatedName = $"test-{Guid.NewGuid()}";
                 email.name = updatedName;
                 email = _client.Assets.Email.Put(email);
 

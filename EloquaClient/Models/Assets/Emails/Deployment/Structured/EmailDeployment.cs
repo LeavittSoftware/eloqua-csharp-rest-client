@@ -11,7 +11,7 @@ namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment.Structur
         public int? OpenCount { get; set; }
         public int? SendFromUserId { get; set; }
         public List<EmailDeploymentStatistics> Statistics { get; set; }
-        public Assets.Emails.Structured.Email Email { get; set; }
+        public Emails.Structured.Email Email { get; set; }
         public DateTime EndAt { get; set; }
         public int? FailedSendCount { get; set; }
         public string SentSubject { get; set; }
