@@ -10,7 +10,8 @@
 	<projectUrl>http://builds.leavitt.com/</projectUrl>	
     <description>This library contains the classes that facilitate interaction with Eloqua Rest API.</description>	 
     <dependencies>
-      <dependency id="RestSharp"/>  
+      <dependency id="RestSharp"/>
+	  <dependency id="Moq"/>
     </dependencies> 
 	<references>
 	  <reference file="Eloqua.Api.Rest.ClientLibrary.dll" />
