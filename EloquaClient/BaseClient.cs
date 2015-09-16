@@ -4,6 +4,7 @@ using Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using RestSharp;
 using Eloqua.Api.Rest.ClientLibrary.Models;
 using Eloqua.Api.Rest.ClientLibrary.Validation;
+using RestSharp.Authenticators;
 using RestSharp.Deserializers;
 
 namespace Eloqua.Api.Rest.ClientLibrary
