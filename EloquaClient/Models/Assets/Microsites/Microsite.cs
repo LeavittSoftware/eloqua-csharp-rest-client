@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Microsites
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Microsites
 {
     [Resource("/assets/microsite", "Microsite")]
     public class Microsite : RestObject, ISearchable

@@ -2,7 +2,7 @@
 using System.Text;
 using RestSharp;
 
-namespace Eloqua.Api.Rest.ClientLibrary
+namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     internal class Request
     {

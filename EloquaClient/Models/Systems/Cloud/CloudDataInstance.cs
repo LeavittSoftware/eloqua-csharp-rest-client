@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Systems.Cloud
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Systems.Cloud
 {
     [Resource("/system/cloud/data", "CloudDataInstance")]
     public class CloudDataInstance : RestObject, ISearchable

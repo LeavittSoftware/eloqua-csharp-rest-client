@@ -1,8 +1,8 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Hyperlinks;
-using Eloqua.Api.Rest.ClientLibrary.Models.Content;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Hyperlinks;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Content;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Structured
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Structured
 {
     [Resource("/assets/email", "Email")]
     public class Email : RestObject, ISearchable

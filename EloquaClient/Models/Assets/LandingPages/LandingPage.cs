@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.ContentSections;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.DynamicContents;
-using Eloqua.Api.Rest.ClientLibrary.Models.Content;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.ContentSections;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.DynamicContents;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Content;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages
 {
     [Resource("/assets/landingPage", "LandingPage")]
     public class LandingPage : RestObject, ISearchable

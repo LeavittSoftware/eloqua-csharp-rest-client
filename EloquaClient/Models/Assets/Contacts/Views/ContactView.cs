@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views
 {
     [Resource("/assets/contact/view", "ContactView")]
     public class ContactView : RestObject, ISearchable

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Campaigns
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Campaigns
 {
     [Resource("/assets/campaign", "Campaign")]
     public class Campaign : RestObject, ISearchable

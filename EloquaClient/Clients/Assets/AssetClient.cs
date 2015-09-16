@@ -1,20 +1,20 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Accounts.Views;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Campaigns;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Lists;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Segments;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.ContentSections;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.CustomObjects;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.DynamicContents;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Groups;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.External;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Microsites;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Forms;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Accounts.Views;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Campaigns;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Lists;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Segments;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.ContentSections;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.CustomObjects;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.DynamicContents;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Groups;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.External;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Forms;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages.Structured;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Microsites;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Clients.Assets
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients.Assets
 {
     public class AssetClient
     {
@@ -62,8 +62,8 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Assets
         public GenericClient<Email> Email => _emailClient ?? (_emailClient = new GenericClient<Email>(BaseClient));
         private GenericClient<Email> _emailClient;
 
-        public GenericClient<Models.Assets.Emails.Structured.Email> StructuredEmail => _structuredEmailClient ?? ( _structuredEmailClient = new GenericClient<Models.Assets.Emails.Structured.Email>(BaseClient));
-        private GenericClient<Models.Assets.Emails.Structured.Email> _structuredEmailClient;
+        public GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Structured.Email> StructuredEmail => _structuredEmailClient ?? ( _structuredEmailClient = new GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Structured.Email>(BaseClient));
+        private GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Structured.Email> _structuredEmailClient;
 
         public GenericClient<EmailGroup> EmailGroup => _emailGroupClient ?? (_emailGroupClient = new GenericClient<EmailGroup>(BaseClient));
         private GenericClient<EmailGroup> _emailGroupClient; 
@@ -78,8 +78,8 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Assets
         public GenericClient<EmailInlineDeployment> EmailInlineDeployment => _emailInlineDeployment ?? (_emailInlineDeployment = new GenericClient<EmailInlineDeployment>(BaseClient));
         private GenericClient<EmailInlineDeployment> _emailInlineDeployment;
 
-        public GenericClient<Models.Assets.Emails.Deployment.Structured.EmailInlineDeployment> StructuredEmailInlineDeployment => _structuredEmailInlineDeployment ?? (_structuredEmailInlineDeployment = new GenericClient<Models.Assets.Emails.Deployment.Structured.EmailInlineDeployment>(BaseClient));
-        private GenericClient<Models.Assets.Emails.Deployment.Structured.EmailInlineDeployment> _structuredEmailInlineDeployment;
+        public GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment.Structured.EmailInlineDeployment> StructuredEmailInlineDeployment => _structuredEmailInlineDeployment ?? (_structuredEmailInlineDeployment = new GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment.Structured.EmailInlineDeployment>(BaseClient));
+        private GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment.Structured.EmailInlineDeployment> _structuredEmailInlineDeployment;
 
         public GenericClient<EmailTestDeployment> EmailTestDeployment => _emailTestDeployment ?? (_emailTestDeployment = new GenericClient<EmailTestDeployment>(BaseClient));
         private GenericClient<EmailTestDeployment> _emailTestDeployment;
@@ -91,8 +91,8 @@ namespace Eloqua.Api.Rest.ClientLibrary.Clients.Assets
         public GenericClient<LandingPage> LandingPage => _landingPage ?? (_landingPage = new GenericClient<LandingPage>(BaseClient));
         private GenericClient<LandingPage> _landingPage;
 
-        public GenericClient<Models.Assets.LandingPages.Structured.LandingPage> StructuredLandingPage => _structuredLandingPage ?? (_structuredLandingPage = new GenericClient<Models.Assets.LandingPages.Structured.LandingPage>(BaseClient));
-        private GenericClient<Models.Assets.LandingPages.Structured.LandingPage> _structuredLandingPage;
+        public GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages.Structured.LandingPage> StructuredLandingPage => _structuredLandingPage ?? (_structuredLandingPage = new GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages.Structured.LandingPage>(BaseClient));
+        private GenericClient<global::LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages.Structured.LandingPage> _structuredLandingPage;
 
         #endregion
 

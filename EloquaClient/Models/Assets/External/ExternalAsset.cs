@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.External
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.External
 {
     [Resource("/assets/external", "ExternalAsset")]
     public class ExternalAsset : RestObject, ISearchable

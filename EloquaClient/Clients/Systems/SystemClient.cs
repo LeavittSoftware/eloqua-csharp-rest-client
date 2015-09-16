@@ -1,7 +1,7 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Systems.Cloud;
-using Eloqua.Api.Rest.ClientLibrary.Models.Systems.Users;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Systems.Cloud;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Systems.Users;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Clients.Systems
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients.Systems
 {
     public class SystemClient
     {

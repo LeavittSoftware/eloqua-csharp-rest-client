@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists
 {
     [Resource("/assets/optionList", "OptionList")]
     public class OptionList : RestObject, ISearchable

@@ -1,6 +1,6 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Assets.ContentSections;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.ContentSections;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.DynamicContents
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.DynamicContents
 {
     [Resource("/assets/dynamicContent", "DynamicContent")]
     public class DynamicContent : RestObject, ISearchable

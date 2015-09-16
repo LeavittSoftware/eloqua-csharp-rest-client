@@ -11,13 +11,12 @@
     <description>This library contains the classes that facilitate interaction with Eloqua Rest API.</description>	 
     <dependencies>
       <dependency id="RestSharp"/>
-	  <dependency id="Moq"/>
     </dependencies> 
 	<references>
-	  <reference file="Eloqua.Api.Rest.ClientLibrary.dll" />
+	  <reference file="LG.Eloqua.Api.Rest.ClientLibrary.dll" />
 	</references>	
   </metadata>
   <files>
-		<file src="EloquaClient\bin\P5 - UATCD\Eloqua.Api.Rest.ClientLibrary.dll" target="lib" />
+		<file src="EloquaClient\bin\P5 - UATCD\LG.Eloqua.Api.Rest.ClientLibrary.dll" target="lib" />
   </files>
 </package>

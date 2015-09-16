@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
 {
     public class EmailDeploymentStatistics
     {

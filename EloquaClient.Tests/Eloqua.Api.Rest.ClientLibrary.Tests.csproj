@@ -11,8 +11,8 @@
     <ProjectGuid>{F6318901-5D29-4D4E-B27E-5A6ED8744BAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eloqua.Api.Rest.ClientLibrary.Tests</RootNamespace>
-    <AssemblyName>Eloqua.Api.Rest.ClientLibrary.Tests</AssemblyName>
+    <RootNamespace>LG.Eloqua.Api.Rest.ClientLibrary.Tests</RootNamespace>
+    <AssemblyName>LG.Eloqua.Api.Rest.ClientLibrary.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -42,7 +42,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
       <Private>True</Private>
@@ -74,31 +76,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients\AccountInfoTests.cs" />
-    <Compile Include="Clients\Assets\ContentSectionTests.cs" />
-    <Compile Include="Clients\Assets\ContactFieldTests.cs" />
-    <Compile Include="Clients\Assets\CustomObjectTests.cs" />
-    <Compile Include="Clients\Assets\DynamicContentTests.cs" />
-    <Compile Include="Clients\Assets\EmailClientTests.cs" />
-    <Compile Include="Clients\Assets\EmailDeploymentTest.cs" />
-    <Compile Include="Clients\Assets\EmailGroupClientTests.cs" />
-    <Compile Include="Clients\Assets\ExternalAssetTests.cs" />
-    <Compile Include="Clients\Assets\FormTests.cs" />
-    <Compile Include="Clients\Assets\LandingPageClientTests.cs" />
-    <Compile Include="Clients\Assets\MicrositeClientTests.cs" />
-    <Compile Include="Clients\Assets\StructuredEmailDeploymentTests.cs" />
-    <Compile Include="Clients\Assets\CampaignTests.cs" />
-    <Compile Include="Clients\Constants.cs" />
-    <Compile Include="Clients\Data\ActivityClientTests.cs" />
-    <Compile Include="Clients\Data\ContactClientTests.cs" />
-    <Compile Include="Clients\Data\CustomObjectClientTests.cs" />
-    <Compile Include="Clients\Data\ExternalActivityClientTests.cs" />
-    <Compile Include="Clients\Data\FormClientTests.cs" />
-    <Compile Include="Clients\Data\SubscriptionClientTests.cs" />
-    <Compile Include="Clients\Systems\CloudDataClientTests.cs" />
-    <Compile Include="Clients\Systems\UserClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\MockBaseClientTests.cs" />
+    <Compile Include="Integration\ClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EloquaClient\Eloqua.Api.Rest.ClientLibrary.csproj">

@@ -1,4 +1,4 @@
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Account
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Account
 {
     public class Site
     {

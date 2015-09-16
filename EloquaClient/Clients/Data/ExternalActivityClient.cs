@@ -1,7 +1,7 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Data.ExternalActivities;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.ExternalActivities;
 using RestSharp;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class ExternalActivityClient
     {

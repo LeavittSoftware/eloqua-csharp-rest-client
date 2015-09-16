@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Systems.Users
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Systems.Users
 {
     [Resource("/system/user", "User")]
     public class User : RestObject, ISearchable

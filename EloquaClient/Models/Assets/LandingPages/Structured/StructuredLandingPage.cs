@@ -1,6 +1,6 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Content;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Content;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages.Structured
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages.Structured
 {
     [Resource("/assets/landingPage", "LandingPage")]
     public class LandingPage : RestObject, ISearchable

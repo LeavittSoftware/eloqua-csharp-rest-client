@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Groups
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Groups
 {
     [Resource("/assets/email/group", "EmailGroup")]
     public class EmailGroup : RestObject, ISearchable

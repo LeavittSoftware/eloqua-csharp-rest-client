@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
     [Resource("/data/contacts/list", "Contact")]
     public class ContactListMember : RestObject, ISearchable

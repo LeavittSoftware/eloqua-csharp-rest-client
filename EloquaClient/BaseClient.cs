@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
+using LG.Eloqua.Api.Rest.ClientLibrary.Validation;
 using RestSharp;
-using Eloqua.Api.Rest.ClientLibrary.Models;
-using Eloqua.Api.Rest.ClientLibrary.Validation;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
 
-namespace Eloqua.Api.Rest.ClientLibrary
+namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     public sealed class BaseClient
     {

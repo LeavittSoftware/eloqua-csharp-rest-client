@@ -1,9 +1,9 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
-using Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
-using Eloqua.Api.Rest.ClientLibrary.Models.Data.Account;
-using Eloqua.Api.Rest.ClientLibrary.Models.Data.Forms;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Account;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Forms;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class DataClient
     {

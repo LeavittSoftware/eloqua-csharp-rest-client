@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.CustomObjects
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.CustomObjects
 {
     public class CustomObjectField
     {

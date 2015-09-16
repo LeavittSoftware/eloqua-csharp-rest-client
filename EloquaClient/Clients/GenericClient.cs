@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Eloqua.Api.Rest.ClientLibrary.Models;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Clients
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients
 {
     public class GenericClient<T> where T : RestObject, ISearchable, new()
     {

@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     public interface IIdentifiable
     {

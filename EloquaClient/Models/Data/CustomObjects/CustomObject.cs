@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects
 {
     [Resource("/data/customObject", "CustomObject")]
     public class CustomObject : RestObject, ISearchable

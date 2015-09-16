@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models
 {
     public enum FieldDisplayType
     {

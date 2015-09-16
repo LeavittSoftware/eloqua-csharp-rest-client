@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Net;
 using System.Collections.Generic;
-using Eloqua.Api.Rest.ClientLibrary.Exceptions;
-using Eloqua.Api.Rest.ClientLibrary.Models.Errors;
+using System.Net;
+using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using RestSharp;
 using RestSharp.Deserializers;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Validation
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Validation
 {
     public class ResponseValidator
     {

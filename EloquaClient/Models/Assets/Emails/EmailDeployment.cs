@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
 {
     [Resource("/assets/email/deployment", "EmailDeployment")]
     public class EmailDeployment : RestObject, ISearchable

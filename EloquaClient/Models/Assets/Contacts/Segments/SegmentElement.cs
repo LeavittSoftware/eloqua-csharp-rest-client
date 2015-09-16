@@ -1,7 +1,6 @@
 ﻿using System.Runtime.Serialization;
-using Eloqua.Api.Rest.ClientLibrary.Models;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Segments
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Segments
 {
     [KnownType(typeof(ContactFilterSegmentElement))]
     public class SegmentElement : IdentifiableObject

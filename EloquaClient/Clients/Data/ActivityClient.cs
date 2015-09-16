@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Eloqua.Api.Rest.ClientLibrary.Models.Data.Activities;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Activities;
 using RestSharp;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class ActivityClient
     {

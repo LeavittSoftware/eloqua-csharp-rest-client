@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.Forms
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Forms
 {
     [Resource("/data/form", "FormData")]
     public class FormData : RestObject, ISearchable

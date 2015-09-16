@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.Account
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Account
 {
     [Resource("/data/account", "Account")]
     public class Account : RestObject, ISearchable

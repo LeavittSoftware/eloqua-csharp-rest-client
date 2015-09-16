@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
 {
     [Resource("/assets/email/deployment", "EmailInlineDeployment")]
     public class EmailInlineDeployment : RestObject, ISearchable

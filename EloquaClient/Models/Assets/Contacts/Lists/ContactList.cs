@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Lists
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Lists
 {
     [Resource("/assets/contact/list", "ContactList")]
     public class ContactList : RestObject, ISearchable

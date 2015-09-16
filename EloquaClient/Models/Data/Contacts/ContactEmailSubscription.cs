@@ -1,6 +1,6 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Groups;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Groups;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
     [Resource("/data/contact", "ContactEmailSubscription")]
     public class ContactEmailSubscription : RestObject

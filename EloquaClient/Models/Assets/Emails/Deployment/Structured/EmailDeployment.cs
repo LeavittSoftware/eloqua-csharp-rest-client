@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment.Structured
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment.Structured
 {
     [Resource("/assets/email/deployment", "EmailInlineDeployment")]
     public class EmailInlineDeployment : RestObject, ISearchable

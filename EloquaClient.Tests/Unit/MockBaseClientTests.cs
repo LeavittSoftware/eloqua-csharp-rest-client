@@ -1,14 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RestSharp;
-using Contact = Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts.Contact;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Tests.Unit
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
 {
     [TestClass]
     public class DataContactUnitTests

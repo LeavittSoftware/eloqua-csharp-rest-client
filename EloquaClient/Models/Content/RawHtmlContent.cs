@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Content
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Content
 {
     public class RawHtmlContent
     {

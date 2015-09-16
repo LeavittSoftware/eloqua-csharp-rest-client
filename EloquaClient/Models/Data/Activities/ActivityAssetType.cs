@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.Activities
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Activities
 {
     public enum ActivityAssetType
     {

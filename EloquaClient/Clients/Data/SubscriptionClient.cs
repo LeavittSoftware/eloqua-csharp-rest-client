@@ -1,8 +1,8 @@
-﻿using RestSharp;
-using System.Collections.Generic;
-using Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+﻿using System.Collections.Generic;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+using RestSharp;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Clients.Data
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class SubscriptionClient
     {

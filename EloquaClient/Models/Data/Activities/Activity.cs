@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.Activities
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Activities
 {
     [Resource("/data/activities/contact/", "Activity")]
     public class Activity : RestObject, ISearchable

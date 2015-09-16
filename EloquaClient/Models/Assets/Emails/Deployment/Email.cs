@@ -1,6 +1,6 @@
-﻿using Eloqua.Api.Rest.ClientLibrary.Models.Content;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Content;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment
 {
     public class Email
     {

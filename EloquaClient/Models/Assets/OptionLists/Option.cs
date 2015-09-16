@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists
 {
     public class Option
     {

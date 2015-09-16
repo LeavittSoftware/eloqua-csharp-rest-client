@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Data.ExternalActivities
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.ExternalActivities
 {
     public class Activity
     {

@@ -1,9 +1,9 @@
 ﻿using System;
-using Eloqua.Api.Rest.ClientLibrary.Clients.Assets;
-using Eloqua.Api.Rest.ClientLibrary.Clients.Data;
-using Eloqua.Api.Rest.ClientLibrary.Clients.Systems;
+using LG.Eloqua.Api.Rest.ClientLibrary.Clients.Assets;
+using LG.Eloqua.Api.Rest.ClientLibrary.Clients.Data;
+using LG.Eloqua.Api.Rest.ClientLibrary.Clients.Systems;
 
-namespace Eloqua.Api.Rest.ClientLibrary
+namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     public sealed class Client 
     {

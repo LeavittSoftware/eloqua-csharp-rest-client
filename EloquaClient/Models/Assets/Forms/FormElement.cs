@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Forms
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Forms
 {
     public class FormElement : IdentifiableObject
     {

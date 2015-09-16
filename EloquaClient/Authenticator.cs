@@ -1,7 +1,7 @@
 ﻿using RestSharp;
 using RestSharp.Authenticators;
 
-namespace Eloqua.Api.Rest.ClientLibrary
+namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     internal class Authenticator : IAuthenticator
     {

@@ -8,8 +8,8 @@
     <ProjectGuid>{ED7D459B-29D8-4505-AD01-6DF6B76D9B2E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eloqua.Api.Rest.ClientLibrary</RootNamespace>
-    <AssemblyName>Eloqua.Api.Rest.ClientLibrary</AssemblyName>
+    <RootNamespace>LG.Eloqua.Api.Rest.ClientLibrary</RootNamespace>
+    <AssemblyName>LG.Eloqua.Api.Rest.ClientLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

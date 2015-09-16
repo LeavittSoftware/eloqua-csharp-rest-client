@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets
 {
     public class DataField : IdentifiableObject
     {

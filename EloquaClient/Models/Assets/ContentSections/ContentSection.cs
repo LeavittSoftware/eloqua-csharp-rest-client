@@ -1,4 +1,4 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.ContentSections
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.ContentSections
 {
     [Resource("/assets/contentSection", "ContentSection")]
     public class ContentSection : RestObject, ISearchable

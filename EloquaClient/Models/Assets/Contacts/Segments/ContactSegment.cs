@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Segments
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Segments
 {
     [Resource("/assets/contact/segment", "ContactSegment")]
     public class ContactSegment : RestObject, ISearchable
