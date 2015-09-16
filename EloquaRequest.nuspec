@@ -18,6 +18,6 @@
 	</references>	
   </metadata>
   <files>
-		<file src="EloquaClient\bin\Release\Eloqua.Api.Rest.ClientLibrary.dll" target="lib" />
+		<file src="EloquaClient\bin\P5 - UATCD\Eloqua.Api.Rest.ClientLibrary.dll" target="lib" />
   </files>
 </package>
