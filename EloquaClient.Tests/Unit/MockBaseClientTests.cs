@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Eloqua.Api.Rest.ClientLibrary.Exceptions;
@@ -74,7 +75,6 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Unit
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ValidationException))]
         public async Task ContactGetConflictUnitTest()
         {
             //Arrange
@@ -82,19 +82,35 @@ namespace Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             restResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.None);
             restResponse.SetupGet(o => o.StatusCode).Returns(HttpStatusCode.Conflict);
             restResponse.SetupGet(o => o.Data).Returns(new Contact());
+            restResponse.SetupGet(o => o.Content).Returns(@"[
+    {
+        ""Container"": {
+            ""Container"": ""Test"",
+            ""ObjectId"": 1,
+            ""ObjectType"": ""string""
+        },
+        ""Property"": ""SomePropName"",
+        ""Requirement"": ""DuplicateId"",
+        ""Value"": ""22""
+    }
+]");
 
             var restClient = new Mock<IRestClient>();
             restClient.Setup(o => o.ExecuteTaskAsync<Contact>(It.IsAny<IRestRequest>())).ReturnsAsync(restResponse.Object);
-
             var client = new Client(new BaseClient(restClient.Object));
 
-            //Act
-            await client.Data.Contact.GetAsync(1, Depth.Complete);
 
-            //Assert -throws
+            try
+            {
+                //Act
+                await client.Data.Contact.GetAsync(1, Depth.Complete);
+            }
+            catch (ValidationException ex)
+            {
+                //Assert 
+                Assert.AreEqual(1, ex.ValidationError.Count);
+                Assert.AreEqual("Test", ex.ValidationError.First().Container.Container);
+            }
         }
-
-
-
     }
 }
