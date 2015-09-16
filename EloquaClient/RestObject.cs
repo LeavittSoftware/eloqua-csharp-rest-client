@@ -1,37 +1,33 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     public class RestObject : IIdentifiable
     {
         public int? Id { get; set; }
-        public string name { get; set; }
-
-        public string type;
+        public string Name { get; set; }
+        public string Type { get; set; }
         public string Depth { get; set; }
 
+        [JsonIgnore]
         public string Uri
         {
             get
             {
-                if (!string.IsNullOrEmpty(_uri)) return _uri;
-                var att = (Resource) Attribute.GetCustomAttribute(GetType(), typeof (Resource));
-                _uri = att.Uri;
-                return _uri;
+                var att = (Resource)Attribute.GetCustomAttribute(GetType(), typeof(Resource));
+                return att.Uri;
             }
         }
-        private string _uri;
 
-        public string Type
+        [JsonIgnore]
+        public string DeclaredType
         {
             get
             {
-                if (!string.IsNullOrEmpty(_type)) return _type;
                 var att = (Resource)Attribute.GetCustomAttribute(GetType(), typeof(Resource));
-                _type = att.Type;
-                return _type;
+                return att.Type;
             }
         }
-        private string _type;
     }
 }

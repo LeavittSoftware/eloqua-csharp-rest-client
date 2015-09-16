@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
+using LG.Eloqua.Api.Rest.ClientLibrary.RestSharp.Serializers;
 using LG.Eloqua.Api.Rest.ClientLibrary.Validation;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -9,6 +10,7 @@ using RestSharp.Deserializers;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
+
     public sealed class BaseClient
     {
         public IRestClient RestClient

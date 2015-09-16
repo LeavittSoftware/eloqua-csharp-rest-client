@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RestSharp.Serializers;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {

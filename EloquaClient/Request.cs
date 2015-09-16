@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Text;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RestSharp;
+using JsonSerializer = LG.Eloqua.Api.Rest.ClientLibrary.RestSharp.Serializers.JsonSerializer;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
@@ -17,9 +20,15 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
         internal static RestRequest Get(Type type, RestObject restObj)
         {
-            restObj.type = restObj.Type;
-
-            var request = new RestRequest { RequestFormat = DataFormat.Json };
+            restObj.Type = restObj.DeclaredType;
+            var request = new RestRequest
+            {
+                RequestFormat = DataFormat.Json,
+                JsonSerializer = new JsonSerializer(new Newtonsoft.Json.JsonSerializer
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                })
+            };
 
             switch (type)
             {
@@ -54,7 +63,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                     if (restObj.Id != null && restObj.Id > 0)
                     {
                         resource.Append("/" + restObj.Id);
-                    } else
+                    }
+                    else
                     {
                         resource.Append("s"); // pluralize the endpoint
                     }

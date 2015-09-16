@@ -58,6 +58,9 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients.Data
         public GenericClient<CustomObject> CustomObject => _customObjectDataClient ?? (_customObjectDataClient = new GenericClient<CustomObject>(BaseClient));
         private GenericClient<CustomObject> _customObjectDataClient;
 
+        public EloquaCustomObjectClient<LLStep1> LLStep1 => _eloquaCustomObjectClient ?? (_eloquaCustomObjectClient = new EloquaCustomObjectClient<LLStep1>(BaseClient));
+        private EloquaCustomObjectClient<LLStep1> _eloquaCustomObjectClient;
+
         #endregion
 
         #region External Activities
