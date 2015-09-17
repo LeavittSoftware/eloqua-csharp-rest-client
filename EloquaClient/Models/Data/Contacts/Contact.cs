@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
-using RestSharp.Serializers;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Clients;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
-    [Resource("/data/contact", "Contact")]
-    public class Contact : RestObject, ISearchable
+    public interface IEloquaDataObject
     {
+        int? Id { get; set; }
+    }
+
+    [Resource("/data/contact", "Contact")]
+    public partial class Contact : IEloquaDataObject
+    {
+        public int? Id { get; set; }
+        public string Name { get; set; }
+
         public string AccountName { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -20,16 +27,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
         public bool? IsBounceBack { get; set; }
         public string SalesPerson { get; set; }
         public string Title { get; set; }
-        public List<FieldValue> FieldValues { get; set; }
 
-        public string Name => EmailAddress; // TODO : add attribute to ignore these properties
+        
 
-        #region ISearchable
-
-        public int Page { get; set; }
-        public int PageSize { get; set; }
-        public string SearchTerm { get; set; }
-
-        #endregion
     }
 }

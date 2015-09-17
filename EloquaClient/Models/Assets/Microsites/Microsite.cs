@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Microsites
 {
     [Resource("/assets/microsite", "Microsite")]
-    public class Microsite : RestObject, ISearchable
+    public class Microsite : EloquaDto, ISearchable
     {
         public int? DefaultLandingPageId { get; set; }
         public List<string> Domains { get; set; }

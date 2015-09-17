@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Forms
 {
     [Resource("/assets/form", "Form")]
-    public class Form : RestObject, ISearchable
+    public class Form : EloquaDto, ISearchable
     {
         public int? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }

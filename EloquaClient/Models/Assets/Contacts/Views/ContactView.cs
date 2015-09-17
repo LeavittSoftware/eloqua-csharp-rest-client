@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views
 {
     [Resource("/assets/contact/view", "ContactView")]
-    public class ContactView : RestObject, ISearchable
+    public class ContactView : EloquaDto, ISearchable
     {
         public List<DataField> Fields { get; set; }
 

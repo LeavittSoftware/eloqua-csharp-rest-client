@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Campaigns
 {
     [Resource("/assets/campaign", "Campaign")]
-    public class Campaign : RestObject, ISearchable
+    public class Campaign : EloquaDto, ISearchable
     {
         public int? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }

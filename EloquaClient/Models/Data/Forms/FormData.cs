@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Forms
 {
     [Resource("/data/form", "FormData")]
-    public class FormData : RestObject, ISearchable
+    public class FormData : EloquaDto, ISearchable
     {
         public List<FieldValue> FieldValues { get; set; }
         public int? SubmittedAt { get; set; }

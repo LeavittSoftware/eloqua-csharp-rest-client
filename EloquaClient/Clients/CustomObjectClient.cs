@@ -34,12 +34,30 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients
     {
         public int Id { get; set; }
 
+        [EloquaCustomProperty(824)]
+        public string AppId { get; set; }
+
+        [EloquaCustomProperty(457)]
+        public string ContactId { get; set; }
+
+        [EloquaCustomProperty(441)]
+        public string EmailAddress { get; set; }
+
         [EloquaCustomProperty(447)]
-        public string HasOwned { get; set; }
+        public string Last30 { get; set; }
+
+        [EloquaCustomProperty(448)]
+        public string MonthsInsured { get; set; }
+
+        [EloquaCustomProperty(450)]
+        public string CurrentLiabilityLimits { get; set; }
+
+        [EloquaCustomProperty(451)]
+        public string Source { get; set; }
+
+        [EloquaCustomProperty(452)]
+        public string RefUrl { get; set; }
     }
-
-
-
 
     public class EloquaCustomObjectClient<T> where T : ICustomEloquaObject, new()
     {

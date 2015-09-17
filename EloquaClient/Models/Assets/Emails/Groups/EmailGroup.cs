@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Groups
 {
     [Resource("/assets/email/group", "EmailGroup")]
-    public class EmailGroup : RestObject, ISearchable
+    public class EmailGroup : EloquaDto, ISearchable
     {
         public string DisplayName { get; set; }
         public int? EmailFooterId { get; set; }

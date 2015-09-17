@@ -1,7 +1,7 @@
 ﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Account
 {
     [Resource("/data/account", "Account")]
-    public class Account : RestObject, ISearchable
+    public class Account : EloquaDto, ISearchable
     {
         public string Address1 { get; set; }
         public string Address2 { get; set; }

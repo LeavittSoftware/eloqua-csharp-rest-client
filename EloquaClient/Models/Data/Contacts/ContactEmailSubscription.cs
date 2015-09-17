@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
     [Resource("/data/contact", "ContactEmailSubscription")]
-    public class ContactEmailSubscription : RestObject
+    public class ContactEmailSubscription : EloquaDto
     {
         public int? ContactId { get; set; }
         public EmailGroup EmailGroup { get; set; }

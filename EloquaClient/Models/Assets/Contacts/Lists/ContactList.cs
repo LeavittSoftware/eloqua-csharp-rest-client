@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Lists
 {
     [Resource("/assets/contact/list", "ContactList")]
-    public class ContactList : RestObject, ISearchable
+    public class ContactList : EloquaDto, ISearchable
     {
         public int? Count { get; set; }
         public List<string> MembershipAdditions { get; set; }

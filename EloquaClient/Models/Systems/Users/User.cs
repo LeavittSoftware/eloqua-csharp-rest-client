@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Systems.Users
 {
     [Resource("/system/user", "User")]
-    public class User : RestObject, ISearchable
+    public class User : EloquaDto, ISearchable
     {
         public List<string> BetaAccess { get; set; }
         public List<string> Capabilities { get; set; }

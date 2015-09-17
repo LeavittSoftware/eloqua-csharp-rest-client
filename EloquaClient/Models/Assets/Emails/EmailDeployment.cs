@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
 {
     [Resource("/assets/email/deployment", "EmailDeployment")]
-    public class EmailDeployment : RestObject, ISearchable
+    public class EmailDeployment : EloquaDto, ISearchable
     {
         public Email Email { get; set; }
         public DateTime EndAt { get; set; }

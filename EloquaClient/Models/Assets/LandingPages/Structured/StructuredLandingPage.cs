@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages.Structured
 {
     [Resource("/assets/landingPage", "LandingPage")]
-    public class LandingPage : RestObject, ISearchable
+    public class LandingPage : EloquaDto, ISearchable
     {
         public int? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }

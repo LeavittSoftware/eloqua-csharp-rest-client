@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.OptionLists
 {
     [Resource("/assets/optionList", "OptionList")]
-    public class OptionList : RestObject, ISearchable
+    public class OptionList : EloquaDto, ISearchable
     {
         public List<Option> Elements { get; set; }
 

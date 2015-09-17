@@ -5,7 +5,7 @@ using LG.Eloqua.Api.Rest.ClientLibrary.Models.Content;
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
 {
     [Resource("/assets/email", "Email")]
-    public class Email : RestObject, ISearchable
+    public class Email : EloquaDto, ISearchable
     {
         public string BouncebackEmail { get; set; }
         public int? CreatedAt { get; set; }

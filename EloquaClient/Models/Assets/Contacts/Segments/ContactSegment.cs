@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Segments
 {
     [Resource("/assets/contact/segment", "ContactSegment")]
-    public class ContactSegment : RestObject, ISearchable
+    public class ContactSegment : EloquaDto, ISearchable
     {
         public int? Count { get; set; }
         public string LastCalculatedAt { get; set; }

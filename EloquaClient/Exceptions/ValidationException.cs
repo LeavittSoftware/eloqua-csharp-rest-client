@@ -13,16 +13,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Exceptions
         public string ResponseContent;
         public List<ObjectValidationError> ValidationError;
 
-        public ValidationException(IRestResponse response) : base(response.ErrorMessage)
-        {
-            StatusCode = response.StatusCode;
-            ErrorMessage = response.StatusCode.ToString();
-            ResponseContent = response.Content;
-            ValidationError = new List<ObjectValidationError>();
-        }
-
-        public ValidationException(IRestResponse response, List<ObjectValidationError> validationError)
-            : base(response.ErrorMessage)
+       public ValidationException(IRestResponse response, List<ObjectValidationError> validationError)
+            : base(response.StatusCode.ToString())
         {
             StatusCode = response.StatusCode;
             ErrorMessage = response.ErrorMessage;

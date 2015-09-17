@@ -1,7 +1,7 @@
 ﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
 {
     [Resource("/assets/email/deployment", "EmailTestDeployment")]
-    public class EmailTestDeployment : RestObject, ISearchable
+    public class EmailTestDeployment : EloquaDto, ISearchable
     {
         public int? ContactId { get; set; }
         public Email Email { get; set; }

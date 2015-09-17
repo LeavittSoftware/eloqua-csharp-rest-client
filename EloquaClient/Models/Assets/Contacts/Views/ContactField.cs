@@ -1,7 +1,7 @@
 ﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Contacts.Views
 {
     [Resource("/assets/contact/field", "ContactField")]
-    public class ContactField : RestObject, ISearchable
+    public class ContactField : EloquaDto, ISearchable
     {
         public int Page { get; set; }
         public int PageSize { get; set; }

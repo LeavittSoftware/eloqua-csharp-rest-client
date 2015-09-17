@@ -1,7 +1,7 @@
 ﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Activities
 {
     [Resource("/data/activities/contact/", "BouncebackActivity")]
-    public class BouncebackActivity : RestObject, ISearchable
+    public class BouncebackActivity : EloquaDto, ISearchable
     {
         public string SmtpErrorCode { get; set; }
         public string SmtpSatusCode { get; set; }

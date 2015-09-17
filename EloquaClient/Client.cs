@@ -2,10 +2,13 @@
 using LG.Eloqua.Api.Rest.ClientLibrary.Clients.Assets;
 using LG.Eloqua.Api.Rest.ClientLibrary.Clients.Data;
 using LG.Eloqua.Api.Rest.ClientLibrary.Clients.Systems;
+using RestSharp;
+using RestSharp.Authenticators;
+using RestSharp.Deserializers;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
-    public sealed class Client 
+    public sealed class Client
     {
         private readonly Lazy<AssetClient> _assetClientLazy;
         private readonly Lazy<DataClient> _dataLazy;
@@ -17,11 +20,24 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
         public SystemClient Systems => _systemClientLazy.Value;
 
-        public Client(BaseClient baseClient)
+        public Client(string site, string username, string password, Uri baseUri)
         {
-            _assetClientLazy = new Lazy<AssetClient>(() => new AssetClient(baseClient));
-            _dataLazy = new Lazy<DataClient>(() => new DataClient(baseClient));
-            _systemClientLazy = new Lazy<SystemClient>(() => new SystemClient(baseClient));
+            var restClient = new RestClient
+            {
+                BaseUrl = baseUri,
+                Authenticator = new HttpBasicAuthenticator(site + "\\" + username, password)
+            };
+            restClient.AddHandler("text/plain", new JsonDeserializer());
+
+            _dataLazy = new Lazy<DataClient>(() => new DataClient(restClient));
+        }
+
+
+        public Client(IRestClient restClient)
+        {
+            // _assetClientLazy = new Lazy<AssetClient>(() => new AssetClient(restClient));
+            _dataLazy = new Lazy<DataClient>(() => new DataClient(restClient));
+            //  _systemClientLazy = new Lazy<SystemClient>(() => new SystemClient(restClient));
         }
 
         //public static AccountInfo GetAccountInfo(string site, string user, string password)

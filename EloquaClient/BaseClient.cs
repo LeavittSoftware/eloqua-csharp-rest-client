@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using LG.Eloqua.Api.Rest.ClientLibrary.RestSharp.Serializers;
-using LG.Eloqua.Api.Rest.ClientLibrary.Validation;
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
@@ -46,7 +45,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                 case ResponseStatus.TimedOut:
                     throw new ConnectionErrorException(response);
                 default:
-                    throw ResponseValidator.GetExceptionFromResponse(response);
+                    throw new ConnectionErrorException(response);
             }
         }
 
@@ -55,67 +54,67 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             return ExecuteAsync<T>(request).Result;
         }
 
-        public async Task<T> GetAsync<T>(T data) where T : RestObject, new()
+        public async Task<T> GetAsync<T>(T data) where T : EloquaDto, new()
         {
             var request = Request.Get(Request.Type.Get, data);
             return await ExecuteAsync<T>(request);
         }
 
-        public T Get<T>(T data) where T : RestObject, new()
+        public T Get<T>(T data) where T : EloquaDto, new()
         {
             return GetAsync(data).Result;
         }
 
-        public void Delete<T>(T data) where T : RestObject, new()
+        public void Delete<T>(T data) where T : EloquaDto, new()
         {
             DeleteAsync(data).Wait();
         }
 
-        public async Task DeleteAsync<T>(T data) where T : RestObject, new()
+        public async Task DeleteAsync<T>(T data) where T : EloquaDto, new()
         {
             var request = Request.Get(Request.Type.Delete, data);
             await ExecuteAsync<T>(request);
         }
 
-        public T Post<T>(T data) where T : RestObject, new()
+        public T Post<T>(T data) where T : EloquaDto, new()
         {
             return PostAsync(data).Result;
         }
 
-        public async Task<T> PostAsync<T>(T data) where T : RestObject, new()
+        public async Task<T> PostAsync<T>(T data) where T : EloquaDto, new()
         {
             var request = Request.Get(Request.Type.Post, data);
             return await ExecuteAsync<T>(request);
         }
-        public T Put<T>(T data) where T : RestObject, new()
+        public T Put<T>(T data) where T : EloquaDto, new()
         {
             return PutAsync(data).Result;
         }
 
-        public async Task<T> PutAsync<T>(T data) where T : RestObject, new()
+        public async Task<T> PutAsync<T>(T data) where T : EloquaDto, new()
         {
             var request = Request.Get(Request.Type.Put, data);
             return await ExecuteAsync<T>(request);
         }
 
-        public async Task<SearchResponse<T>> SearchAsync<T>(T data) where T : RestObject, ISearchable, new()
+        public async Task<SearchResponse<T>> SearchAsync<T>(T data) where T : EloquaDto, ISearchable, new()
         {
             var request = Request.Get(Request.Type.Search, data);
             return await ExecuteAsync<SearchResponse<T>>(request);
         }
 
-        public SearchResponse<T> Search<T>(T data) where T : RestObject, ISearchable, new()
+        public SearchResponse<T> Search<T>(T data) where T : EloquaDto, ISearchable, new()
         {
             return SearchAsync(data).Result;
         }
 
-        public async Task<SearchResponse<T>> SearchAsync<T>(int id, T data) where T : RestObject, ISearchable, new()
+        public async Task<SearchResponse<T>> SearchAsync<T>(int id, T data) where T : EloquaDto, ISearchable, new()
         {
             var request = Request.Get(Request.Type.Search, data);
             return await ExecuteAsync<SearchResponse<T>>(request);
         }
 
-        public SearchResponse<T> Search<T>(int id, T data) where T : RestObject, ISearchable, new()
+        public SearchResponse<T> Search<T>(int id, T data) where T : EloquaDto, ISearchable, new()
         {
             return SearchAsync(id, data).Result;
         }

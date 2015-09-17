@@ -5,7 +5,7 @@ using LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails.Deployment;
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.Emails
 {
     [Resource("/assets/email/deployment", "EmailInlineDeployment")]
-    public class EmailInlineDeployment : RestObject, ISearchable
+    public class EmailInlineDeployment : EloquaDto, ISearchable
     {
         public int? ClickthroughCount { get; set; }
         public List<Contact> Contacts { get; set; }

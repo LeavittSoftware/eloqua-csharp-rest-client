@@ -3,7 +3,7 @@ using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients
 {
-    public class GenericClient<T> where T : RestObject, ISearchable, new()
+    public class GenericClient<T> where T : EloquaDto, ISearchable, new()
     {
         public GenericClient(BaseClient baseClient)
         {

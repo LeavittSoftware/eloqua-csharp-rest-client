@@ -1,74 +1,16 @@
-﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Account;
+﻿using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Forms;
+using RestSharp;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients.Data
 {
     public class DataClient
     {
-        #region constructor 
-
-        public DataClient(BaseClient baseClient)
+        public DataClient(IRestClient restClient)
         {
-            BaseClient = baseClient;
+            Contacts = new DbSet<Contact>(restClient);
         }
 
-        #endregion
-
-        #region properties
-
-        protected BaseClient BaseClient;
-
-        #endregion
-
-        #region Contacts
-
-        public GenericClient<Contact> Contact => _contactClient ?? (_contactClient = new GenericClient<Contact>(BaseClient));
-        private GenericClient<Contact> _contactClient;
-
-        public SearchMembersClient<ContactListMember> ContactListMember => _contactListMemberClient ?? (_contactListMemberClient = new SearchMembersClient<ContactListMember>(BaseClient));
-
-        private SearchMembersClient<ContactListMember> _contactListMemberClient;
-
-        public ActivityClient Activity => _activity ?? (_activity = new ActivityClient(BaseClient));
-
-        private ActivityClient _activity;
-
-        public SubscriptionClient ContactEmailSubscription => _subscription ?? (_subscription = new SubscriptionClient(BaseClient));
-
-        private SubscriptionClient _subscription;
-
-        public GenericClient<FormData> FormData => _formData ?? (_formData = new GenericClient<FormData>(BaseClient));
-
-        private GenericClient<FormData> _formData;
-
-
-        #endregion
-
-        #region Accounts
-
-        public GenericClient<Account> Account => _accountClient ?? (_accountClient = new GenericClient<Account>(BaseClient));
-        private GenericClient<Account> _accountClient;
-
-        #endregion
-
-        #region CustomObjects
-
-        public GenericClient<CustomObject> CustomObject => _customObjectDataClient ?? (_customObjectDataClient = new GenericClient<CustomObject>(BaseClient));
-        private GenericClient<CustomObject> _customObjectDataClient;
-
-        public EloquaCustomObjectClient<LLStep1> LLStep1 => _eloquaCustomObjectClient ?? (_eloquaCustomObjectClient = new EloquaCustomObjectClient<LLStep1>(BaseClient));
-        private EloquaCustomObjectClient<LLStep1> _eloquaCustomObjectClient;
-
-        #endregion
-
-        #region External Activities
-
-        public ExternalActivityClient ExternalActivity => _externalActivity ?? (_externalActivity = new ExternalActivityClient(BaseClient));
-
-        private ExternalActivityClient _externalActivity;
-
-        #endregion
+        public DbSet<Contact> Contacts { get; } 
     }
 }

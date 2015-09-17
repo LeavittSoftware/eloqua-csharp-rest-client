@@ -3,7 +3,7 @@
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.CustomObjects
 {
     [Resource("/assets/customObject", "CustomObject")]
-    public class CustomObject : RestObject, ISearchable
+    public class CustomObject : EloquaDto, ISearchable
     {
         public string DisplayNameFieldId { get; set; }
         public List<CustomObjectField> Fields { get; set; }

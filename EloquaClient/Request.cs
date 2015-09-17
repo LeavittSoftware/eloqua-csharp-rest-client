@@ -18,7 +18,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             Search
         }
 
-        internal static RestRequest Get(Type type, RestObject restObj)
+        internal static RestRequest Get(Type type, EloquaDto restObj)
         {
             restObj.Type = restObj.DeclaredType;
             var request = new RestRequest

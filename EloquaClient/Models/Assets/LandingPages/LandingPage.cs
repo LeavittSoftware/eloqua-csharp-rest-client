@@ -6,7 +6,7 @@ using LG.Eloqua.Api.Rest.ClientLibrary.Models.Content;
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Assets.LandingPages
 {
     [Resource("/assets/landingPage", "LandingPage")]
-    public class LandingPage : RestObject, ISearchable
+    public class LandingPage : EloquaDto, ISearchable
     {
         public List<ContentSection> ContentSections { get; set; }
         public int? CreatedAt { get; set; }

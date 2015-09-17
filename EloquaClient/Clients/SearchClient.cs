@@ -2,7 +2,7 @@
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Clients
 {
-    public class SearchClient<T> where T : RestObject, ISearchable, new()
+    public class SearchClient<T> where T : EloquaDto, ISearchable, new()
     {
         public SearchClient(BaseClient baseClient)
         {
