@@ -1,5 +1,4 @@
 ﻿using System;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -7,15 +6,14 @@ using RestSharp.Deserializers;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
-    public class EloquaContext
+    public class EloquaContext : IEloquaContext
     {
-
         public EloquaContext(IRestClient restClient)
         {
             Contacts = new DbSet<Contact>(restClient);
         }
 
-        public DbSet<Contact> Contacts { get; }
+        public IDbSet<Contact> Contacts { get; }
 
         public static IRestClient CreateClient(string site, string username, string password, Uri baseUri)
         {

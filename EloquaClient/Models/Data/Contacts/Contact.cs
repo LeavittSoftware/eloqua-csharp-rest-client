@@ -1,6 +1,4 @@
-﻿using LG.Eloqua.Api.Rest.ClientLibrary.Clients;
-
-namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
     public interface IEloquaDataObject
     {

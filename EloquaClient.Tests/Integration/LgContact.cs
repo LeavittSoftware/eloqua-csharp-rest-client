@@ -1,4 +1,3 @@
-using LG.Eloqua.Api.Rest.ClientLibrary.Clients;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration

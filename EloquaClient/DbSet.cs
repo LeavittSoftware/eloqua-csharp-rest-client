@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using LG.Eloqua.Api.Rest.ClientLibrary.Clients;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using Newtonsoft.Json;
@@ -14,15 +13,14 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using RestSharp;
 
-namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data
+namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
-    public class DbSet<T> where T : IEloquaDataObject, new()
+    public class DbSet<T> : IDbSet<T> where T : IEloquaDataObject, new()
     {
         private readonly IRestClient _restClient;
         public DbSet(IRestClient restClient)
         {
             _restClient = restClient;
-
         }
 
         public async Task<T> GetAsync(int id, Depth depth = Depth.Minimal)
@@ -206,7 +204,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data
         }
         private T ConvertToConcreateClass(string content)
         {
-            var dto = JsonConvert.DeserializeObject<EloquaDTO>(content);
+            var dto = JsonConvert.DeserializeObject<EloquaDto>(content);
             var resultObject = JsonConvert.DeserializeObject<T>(content);
 
             if (dto == null || resultObject == null)
@@ -227,7 +225,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data
             return resultObject;
         }
 
-        private class EloquaDTO
+        private class EloquaDto
         {
             public IEnumerable<FieldValue> FieldValues { get; } = new List<FieldValue>();
         }
