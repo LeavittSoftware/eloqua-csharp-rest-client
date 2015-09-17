@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using Eloqua.Api.Rest.ClientLibrary.Models.Errors;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using RestSharp;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Exceptions
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Exceptions
 {
     public class ValidationException : Exception
     {
@@ -13,16 +13,8 @@ namespace Eloqua.Api.Rest.ClientLibrary.Exceptions
         public string ResponseContent;
         public List<ObjectValidationError> ValidationError;
 
-        public ValidationException(IRestResponse response) : base(response.ErrorMessage)
-        {
-            StatusCode = response.StatusCode;
-            ErrorMessage = response.StatusCode.ToString();
-            ResponseContent = response.Content;
-            ValidationError = new List<ObjectValidationError>();
-        }
-
-        public ValidationException(IRestResponse response, List<ObjectValidationError> validationError)
-            : base(response.ErrorMessage)
+       public ValidationException(IRestResponse response, List<ObjectValidationError> validationError)
+            : base(response.StatusCode.ToString())
         {
             StatusCode = response.StatusCode;
             ErrorMessage = response.ErrorMessage;
