@@ -8,8 +8,8 @@
     <ProjectGuid>{ED7D459B-29D8-4505-AD01-6DF6B76D9B2E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Eloqua.Api.Rest.ClientLibrary</RootNamespace>
-    <AssemblyName>Eloqua.Api.Rest.ClientLibrary</AssemblyName>
+    <RootNamespace>LG.Eloqua.Api.Rest.ClientLibrary</RootNamespace>
+    <AssemblyName>LG.Eloqua.Api.Rest.ClientLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -101,12 +101,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=4.2.1507.118, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>C:\NuGetPackageCache\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+      <HintPath>C:\NuGetPackageCache\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -120,117 +120,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients\Data\FormDataClient.cs" />
+    <Compile Include="EloquaContext.cs" />
+    <Compile Include="EloquaCustomObjectAttribute.cs" />
+    <Compile Include="EloquaCustomPropertyAttribute.cs" />
     <Compile Include="Exceptions\ConnectionErrorException.cs" />
-    <Compile Include="Models\Account\AccountInfo.cs" />
-    <Compile Include="Clients\Assets\AssetClient.cs" />
-    <Compile Include="Clients\Data\ActivityClient.cs" />
-    <Compile Include="Clients\Data\DataClient.cs" />
-    <Compile Include="Clients\Data\ExternalActivityClient.cs" />
-    <Compile Include="Clients\Data\SubscriptionClient.cs" />
-    <Compile Include="Clients\GenericClient.cs" />
-    <Compile Include="Clients\SearchClient.cs" />
-    <Compile Include="Clients\SearchMembersClient.cs" />
-    <Compile Include="Clients\Systems\SystemClient.cs" />
     <Compile Include="Depth.cs" />
-    <Compile Include="IIdentifiable.cs" />
-    <Compile Include="ISearchable.cs" />
-    <Compile Include="Models\Account\Apis.cs" />
-    <Compile Include="Models\Account\Rest.cs" />
-    <Compile Include="Models\Account\Site.cs" />
-    <Compile Include="Models\Account\Soap.cs" />
-    <Compile Include="Models\Account\Urls.cs" />
-    <Compile Include="Models\Account\ApiAccount.cs" />
-    <Compile Include="Models\Assets\Accounts\Views\AccountView.cs" />
-    <Compile Include="Models\Assets\Campaigns\Campaign.cs" />
-    <Compile Include="Models\Assets\Campaigns\CampaignRelatedElement.cs" />
-    <Compile Include="Models\Assets\Contacts\Fields\ContactField.cs" />
-    <Compile Include="Models\Assets\Contacts\Filters\ContactFilter.cs" />
-    <Compile Include="Models\Assets\Contacts\Filters\Criteria\ActivityCriterion.cs" />
-    <Compile Include="Models\Assets\Contacts\Filters\Criteria\Criterion.cs" />
-    <Compile Include="Models\Assets\Contacts\Filters\EmailSentCriterion.cs" />
-    <Compile Include="Models\Assets\Contacts\Lists\ContactList.cs" />
-    <Compile Include="Models\Assets\Contacts\Segments\ContactFilterSegmentElement.cs" />
-    <Compile Include="Models\Assets\Contacts\Segments\SegmentElement.cs" />
-    <Compile Include="Models\Assets\Contacts\Views\ContactField.cs" />
-    <Compile Include="Models\Assets\Contacts\Views\ContactView.cs" />
-    <Compile Include="Models\Assets\ContentSections\ContentSection.cs" />
-    <Compile Include="Models\Assets\CustomObjects\CustomObject.cs" />
-    <Compile Include="Models\Assets\CustomObjects\CustomObjectField.cs" />
-    <Compile Include="Models\Assets\DataField.cs" />
-    <Compile Include="Models\Assets\DataView.cs" />
-    <Compile Include="Models\Assets\DynamicContents\DynamicContent.cs" />
-    <Compile Include="Models\Assets\DynamicContents\DynamicContentRule.cs" />
-    <Compile Include="Models\Assets\Emails\Deployment\Contact.cs" />
-    <Compile Include="Models\Assets\Emails\Deployment\Email.cs" />
-    <Compile Include="Models\Assets\Emails\Deployment\Structured\EmailDeployment.cs" />
-    <Compile Include="Models\Assets\Emails\Email.cs" />
-    <Compile Include="Authenticator.cs" />
-    <Compile Include="BaseClient.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="Models\Assets\Emails\EmailDeployment.cs" />
-    <Compile Include="Models\Assets\Emails\EmailDeploymentStatistics.cs" />
-    <Compile Include="Models\Assets\Emails\EmailInlineDeployment.cs" />
-    <Compile Include="Models\Assets\Emails\EmailTestDeployment.cs" />
-    <Compile Include="Models\Assets\Emails\Groups\EmailGroup.cs" />
-    <Compile Include="Models\Assets\Emails\Structured\Email.cs" />
-    <Compile Include="Models\Assets\External\ExternalAsset.cs" />
-    <Compile Include="Models\Assets\Forms\Form.cs" />
-    <Compile Include="Models\Assets\Forms\FormElement.cs" />
-    <Compile Include="Models\Assets\Hyperlinks\Hyperlink.cs" />
-    <Compile Include="Models\Assets\LandingPages\Structured\StructuredLandingPage.cs" />
-    <Compile Include="Models\Assets\Microsites\Microsite.cs" />
-    <Compile Include="Models\Assets\OptionLists\Option.cs" />
-    <Compile Include="Models\Assets\OptionLists\OptionList.cs" />
-    <Compile Include="Models\Content\StructuredHtmlContent.cs" />
-    <Compile Include="Models\Data\Account\Account.cs" />
-    <Compile Include="Models\Data\Activities\Activity.cs" />
-    <Compile Include="Models\Data\Activities\ActivityAssetType.cs" />
-    <Compile Include="Models\Data\Activities\ActivityList.cs" />
-    <Compile Include="Models\Data\Activities\ActivityType.cs" />
-    <Compile Include="Models\Data\Activities\BouncebackActivity.cs" />
-    <Compile Include="Models\Data\Activities\BouncebackType.cs" />
-    <Compile Include="Models\Data\Contacts\ContactEmailSubscription.cs" />
-    <Compile Include="Models\Data\Contacts\ContactListMember.cs" />
-    <Compile Include="Models\Data\ExternalActivities\Activity.cs" />
-    <Compile Include="Models\Data\ExternalActivities\ExternalActivities.cs" />
-    <Compile Include="Models\Data\Forms\FormData.cs" />
-    <Compile Include="Models\Errors\ObjectKey.cs" />
-    <Compile Include="Models\Errors\ObjectValidationError.cs" />
-    <Compile Include="Models\Errors\ValidationError.cs" />
-    <Compile Include="Models\FieldDataType.cs" />
-    <Compile Include="Models\FieldDisplayType.cs" />
-    <Compile Include="Models\Scope.cs" />
-    <Compile Include="Models\Size.cs" />
-    <Compile Include="Models\Systems\Cloud\CloudDataInstance.cs" />
-    <Compile Include="Models\Systems\Users\ProductPermission.cs" />
-    <Compile Include="Models\Systems\Users\TypePermission.cs" />
-    <Compile Include="Models\Systems\Users\TypePermissions.cs" />
-    <Compile Include="Models\Systems\Users\User.cs" />
-    <Compile Include="RestObject.cs" />
-    <Compile Include="Models\Conditions\Condition.cs" />
-    <Compile Include="Models\Conditions\ConditionOperator.cs" />
-    <Compile Include="Models\Conditions\DateValueCondition.cs" />
-    <Compile Include="Models\Conditions\NumericValueCondition.cs" />
-    <Compile Include="Models\Conditions\TextLengthCondition.cs" />
-    <Compile Include="Models\Conditions\ValueCondition.cs" />
-    <Compile Include="Models\DateValue.cs" />
-    <Compile Include="Models\IdentifiableObject.cs" />
-    <Compile Include="Models\RelativeDate.cs" />
-    <Compile Include="Models\Assets\LandingPages\LandingPage.cs" />
-    <Compile Include="Models\Assets\Contacts\Segments\ContactSegment.cs" />
-    <Compile Include="Models\Content\HtmlContent.cs" />
-    <Compile Include="Models\Content\RawHtmlContent.cs" />
+    <Compile Include="IDbSet.cs" />
+    <Compile Include="IEloquaContext.cs" />
     <Compile Include="Models\Data\Contacts\Contact.cs" />
-    <Compile Include="Models\Data\CustomObjects\CustomObject.cs" />
+    <Compile Include="DbSet.cs" />
+    <Compile Include="Models\Data\CustomObjects\CustomObjectData.cs" />
+    <Compile Include="Models\Errors\ObjectValidationError.cs" />
     <Compile Include="Models\FieldValue.cs" />
-    <Compile Include="Models\SearchResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Request.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="Exceptions\ValidationException.cs" />
-    <Compile Include="Serializers\DynamicJsonDeserializer.cs" />
-    <Compile Include="Validation\ResponseValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

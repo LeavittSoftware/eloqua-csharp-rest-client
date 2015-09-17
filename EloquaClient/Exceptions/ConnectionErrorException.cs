@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using RestSharp;
 
-namespace Eloqua.Api.Rest.ClientLibrary.Exceptions
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Exceptions
 {
     public class ConnectionErrorException : Exception
     {

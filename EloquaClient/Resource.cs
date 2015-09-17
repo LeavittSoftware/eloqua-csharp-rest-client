@@ -1,18 +1,16 @@
-﻿namespace Eloqua.Api.Rest.ClientLibrary
+﻿namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     [System.AttributeUsage(System.AttributeTargets.Class)]
     public class Resource : System.Attribute
     {
         public Resource(string uri, string type)
         {
-            _uri = uri;
-            _type = type;
+            Uri = uri;
+            Type = type;
         }
 
-        public string Uri { get { return _uri; } }
-        private readonly string _uri;
+        public string Uri { get; }
 
-        public string Type { get { return _type; } }
-        private readonly string _type;
+        public string Type { get; }
     }
 }
