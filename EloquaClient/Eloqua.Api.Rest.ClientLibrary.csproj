@@ -121,10 +121,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EloquaContext.cs" />
-    <Compile Include="EloquaCustomObjectAttribute.cs" />
     <Compile Include="EloquaCustomPropertyAttribute.cs" />
+    <Compile Include="EloquaResponseHandler.cs" />
+    <Compile Include="EloquaSerializer.cs" />
     <Compile Include="Exceptions\ConnectionErrorException.cs" />
     <Compile Include="Depth.cs" />
+    <Compile Include="Exceptions\DbSetException.cs" />
+    <Compile Include="Exceptions\EloquaApiException.cs" />
     <Compile Include="IDbSet.cs" />
     <Compile Include="IEloquaContext.cs" />
     <Compile Include="Models\Data\Contacts\Contact.cs" />
