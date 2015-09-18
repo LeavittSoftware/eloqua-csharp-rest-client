@@ -9,8 +9,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
     [TestClass]
     public class ClientTests
     {
-        private string Username = "Leavitt.Group";
-        private string Password = "7q7T8G^mN!3^";
+        private string Username = "";
+        private string Password = "";
 
         [TestMethod]
         public async Task GetTest()
@@ -41,7 +41,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EloquaApiException))]
+        [ExpectedException(typeof(Exception))]
         public async Task GetBadUrlTest()
         {
             //Arrange
@@ -50,7 +50,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             //Act
             var existingContact = await client.BadContacts.GetAsync(486201, Depth.Complete);
 
-            //Assert - throws
+            //Assert
             Assert.IsNull(existingContact);
         }
 

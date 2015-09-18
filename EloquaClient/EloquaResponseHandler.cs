@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using Newtonsoft.Json;

@@ -63,16 +63,13 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Unit\EloquaContextTests.cs" />
-    <Compile Include="Unit\EloquaSerializerTests.cs" />
-    <Compile Include="Unit\EloquaResponseHandlerTests.cs" />
     <Compile Include="Integration\BadContact.cs" />
     <Compile Include="Integration\ExtendedContact.cs" />
     <Compile Include="Integration\LgContact.cs" />
     <Compile Include="Integration\LgEloquaContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\MockBaseClientTests.cs" />
     <Compile Include="Integration\ClientTests.cs" />
-    <Compile Include="Unit\DbSetTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EloquaClient\Eloqua.Api.Rest.ClientLibrary.csproj">
