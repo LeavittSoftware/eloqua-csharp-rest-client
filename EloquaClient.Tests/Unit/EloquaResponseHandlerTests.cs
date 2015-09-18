@@ -1,10 +1,10 @@
 ﻿using System.Net;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RestSharp;
 
-namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
 {
     [TestClass()]
     public class EloquaResponseHandlerTests
@@ -229,7 +229,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests
             mockRestResponse.SetupGet(o => o.Content).Returns("Response Ok");
 
             //Act
-            var response = EloquaResponseHandler.ErrorCheck(mockRestResponse.Object);
+            EloquaResponseHandler.ErrorCheck(mockRestResponse.Object);
 
             //Assert - throws
         }
