@@ -1,4 +1,3 @@
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data;
 using RestSharp;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
