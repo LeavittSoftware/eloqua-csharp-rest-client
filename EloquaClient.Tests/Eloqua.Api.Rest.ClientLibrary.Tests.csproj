@@ -68,7 +68,10 @@
     <Compile Include="Integration\LgContact.cs" />
     <Compile Include="Integration\LgEloquaContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Unit\MockBaseClientTests.cs" />
+    <Compile Include="Unit\DbSetTests.cs" />
+    <Compile Include="Unit\EloquaContextTests.cs" />
+    <Compile Include="Unit\EloquaResponseHandlerTests.cs" />
+    <Compile Include="Unit\EloquaJsonSerializerTests.cs" />
     <Compile Include="Integration\ClientTests.cs" />
   </ItemGroup>
   <ItemGroup>

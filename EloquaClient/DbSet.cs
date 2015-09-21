@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
@@ -37,7 +39,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             response = EloquaResponseHandler.ErrorCheck(response);
 
-            return EloquaSerializer.Serializer<T>(response.Content);
+            return EloquaJsonSerializer.Deserializer<T>(response.Content);
         }
         public async Task<List<T>> SearchAsync(string searchTerm, int pageSize = 1000, int page = 1, Depth depth = Depth.Complete)
         {
@@ -58,8 +60,9 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             var searchObject = JObject.Parse(response.Content);
 
             var elements = searchObject["elements"] as JArray;
-            return elements?.Select(o => EloquaSerializer.Serializer<T>(response.Content) ).ToList() ?? new List<T>();
+            return elements?.Select(o => EloquaJsonSerializer.Deserializer<T>(response.Content)).ToList() ?? new List<T>();
         }
+
         public async Task<T> PostAsync(T data)
         {
             var resourceAttribute = Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) as Resource;
@@ -73,11 +76,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             //Static Fields
             foreach (var property in data.GetType().GetProperties().Where(prop => !prop.IsDefined(typeof(EloquaCustomPropertyAttribute), false)))
             {
-                var value = property.GetValue(data);
-                string asString = null;
-                if (value != null)
-                    asString = value.ToString();
-                requestObject[property.Name] = asString;
+                var value = EloquaJsonSerializer.SerializeProperty(property, data);
+                if (value == null)
+                    continue;
+
+                requestObject[property.Name] = value;
             }
 
             //Dynamic Fields
@@ -85,13 +88,13 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             {
                 var attribute = property.GetCustomAttributes(true).FirstOrDefault(o => o is EloquaCustomPropertyAttribute) as EloquaCustomPropertyAttribute;
 
-                var value = property.GetValue(data);
+                var value = EloquaJsonSerializer.SerializeProperty(property, data);
                 if (value == null)
                     continue;
 
                 dynamic fieldValue = new JObject();
                 fieldValue.Id = attribute?.EloquaCustomFieldId;
-                fieldValue.Value = value.ToString();
+                fieldValue.Value = value;
 
                 requestObject.FieldValues.Add(fieldValue);
             }
@@ -111,7 +114,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             response = EloquaResponseHandler.ErrorCheck(response);
 
-            return EloquaSerializer.Serializer<T>(response.Content);
+            return EloquaJsonSerializer.Deserializer<T>(response.Content);
         }
         public async Task<T> PutAsync(T data)
         {
@@ -126,11 +129,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             //Static Fields
             foreach (var property in data.GetType().GetProperties().Where(prop => !prop.IsDefined(typeof(EloquaCustomPropertyAttribute), false)))
             {
-                var value = property.GetValue(data);
+                var value = EloquaJsonSerializer.SerializeProperty(property, data);
                 if (value == null)
                     continue;
 
-                requestObject[property.Name] = value.ToString();
+                requestObject[property.Name] = value;
             }
 
             //Dynamic Fields
@@ -138,13 +141,13 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             {
                 var attribute = property.GetCustomAttributes(true).FirstOrDefault(o => o is EloquaCustomPropertyAttribute) as EloquaCustomPropertyAttribute;
 
-                var value = property.GetValue(data);
+                var value = EloquaJsonSerializer.SerializeProperty(property, data);
                 if (value == null)
                     continue;
 
                 dynamic fieldValue = new JObject();
                 fieldValue.Id = attribute?.EloquaCustomFieldId;
-                fieldValue.Value = value.ToString();
+                fieldValue.Value = value;
 
                 requestObject.FieldValues.Add(fieldValue);
             }
@@ -163,7 +166,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             response = EloquaResponseHandler.ErrorCheck(response);
 
-            return EloquaSerializer.Serializer<T>(response.Content);
+            return EloquaJsonSerializer.Deserializer<T>(response.Content);
         }
 
     }

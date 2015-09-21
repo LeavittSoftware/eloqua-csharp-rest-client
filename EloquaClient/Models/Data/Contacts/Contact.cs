@@ -1,12 +1,15 @@
-﻿namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
     public interface IEloquaDataObject
     {
         int? Id { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     [Resource("/data/contact", "Contact")]
-    public partial class Contact : IEloquaDataObject
+    public class Contact : IEloquaDataObject
     {
         public int? Id { get; set; }
         public string Name { get; set; }

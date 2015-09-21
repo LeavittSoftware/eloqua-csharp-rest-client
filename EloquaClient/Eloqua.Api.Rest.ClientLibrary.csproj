@@ -123,7 +123,7 @@
     <Compile Include="EloquaContext.cs" />
     <Compile Include="EloquaCustomPropertyAttribute.cs" />
     <Compile Include="EloquaResponseHandler.cs" />
-    <Compile Include="EloquaSerializer.cs" />
+    <Compile Include="EloquaJsonSerializer.cs" />
     <Compile Include="Exceptions\ConnectionErrorException.cs" />
     <Compile Include="Depth.cs" />
     <Compile Include="Exceptions\DbSetException.cs" />
