@@ -32,7 +32,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                 var type = property.PropertyType;
 
                 int unixTimeValue;
-                if (type == typeof(DateTime) && int.TryParse(fieldvalue.Value, out unixTimeValue))
+                if ((type == typeof(DateTime?) || type == typeof(DateTime)) && int.TryParse(fieldvalue.Value, out unixTimeValue))
                 {
                     var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
                     epoch = epoch.AddSeconds(unixTimeValue);
@@ -75,7 +75,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             if (propertyInfo.PropertyType == typeof(DateTime))
             {
-                eloquaString = (((DateTime)value) - new DateTime(1970, 1, 1,0,0,0).ToLocalTime()).TotalSeconds.ToString("F0", CultureInfo.InvariantCulture);
+                eloquaString = (((DateTime)value) - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime()).TotalSeconds.ToString("F0", CultureInfo.InvariantCulture);
+            }
+            else if (propertyInfo.PropertyType == typeof(DateTime?))
+            {
+                eloquaString = (((DateTime?)value) - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime()).Value.TotalSeconds.ToString("F0", CultureInfo.InvariantCulture);
             }
             else if (propertyInfo.PropertyType == typeof(decimal))
             {
