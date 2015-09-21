@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;

@@ -5,12 +5,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 {
-    [Ignore]
+     [Ignore]
     [TestClass]
     public class ClientTests
     {
-        private const string Username = "";
-        private const string Password = "";
+        private const string Username = " ";
+        private const string Password = " ";
         [TestMethod]
         public async Task GetTest()
         {
@@ -74,7 +74,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
         public async Task PostTest()
         {
 
-            var emailAddress = "aaron-drabeck131@leavitt.com";
+            var emailAddress = "aaron-drabeck136@leavitt.com";
 
             //Arrange
             var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));

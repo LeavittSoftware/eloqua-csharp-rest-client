@@ -75,7 +75,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             if (propertyInfo.PropertyType == typeof(DateTime))
             {
-                eloquaString = (((DateTime)value) - new DateTime(1970, 1, 1).ToLocalTime()).TotalSeconds.ToString(CultureInfo.InvariantCulture);
+                eloquaString = (((DateTime)value) - new DateTime(1970, 1, 1,0,0,0).ToLocalTime()).TotalSeconds.ToString("F0", CultureInfo.InvariantCulture);
             }
             else if (propertyInfo.PropertyType == typeof(decimal))
             {

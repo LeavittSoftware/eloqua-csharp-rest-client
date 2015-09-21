@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -33,7 +31,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                                 }
                             case HttpStatusCode.Conflict:
                             case HttpStatusCode.BadRequest:
-                                var validationErrors = JsonConvert.DeserializeObject<List<ObjectValidationError>>(response.Content);
+                                var validationErrors = JsonConvert.DeserializeObject<dynamic>(response.Content);
                                 throw new ValidationException(response, validationErrors);
                             default:
                                 throw new EloquaApiException(response);

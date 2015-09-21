@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Errors;
 using RestSharp;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Exceptions
@@ -11,15 +9,15 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Exceptions
         public HttpStatusCode StatusCode;
         public string ErrorMessage;
         public string ResponseContent;
-        public List<ObjectValidationError> ValidationError;
+        public dynamic EloquaReponseObject;
 
-       public ValidationException(IRestResponse response, List<ObjectValidationError> validationError)
+       public ValidationException(IRestResponse response, dynamic eloquaReponseObject)
             : base(response.StatusCode.ToString())
         {
             StatusCode = response.StatusCode;
             ErrorMessage = response.ErrorMessage;
             ResponseContent = response.Content;
-            ValidationError = validationError;
+            EloquaReponseObject = eloquaReponseObject;
         }
     }
 }
