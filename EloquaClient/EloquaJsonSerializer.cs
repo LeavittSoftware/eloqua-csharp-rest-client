@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -26,10 +27,37 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                 if (fieldvalue == null)
                     continue;
 
-                property.SetValue(resultObject, fieldvalue.Value);
+
+
+                var type = property.PropertyType;
+
+                int unixTimeValue;
+                if (type == typeof(DateTime) && int.TryParse(fieldvalue.Value, out unixTimeValue))
+                {
+                    var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
+                    epoch = epoch.AddSeconds(unixTimeValue);
+                    property.SetValue(resultObject, epoch);
+                }
+                else
+                {
+                    try
+                    {
+                        property.SetValue(resultObject,
+                            TypeDescriptor.GetConverter(type).ConvertFromString(fieldvalue.Value));
+                    }
+                    catch (Exception)
+                    {
+                        if (type.IsValueType)
+                        {
+                            property.SetValue(resultObject, Activator.CreateInstance(type));
+                        }
+                        property.SetValue(resultObject, null);
+                    }
+                }
             }
             return resultObject;
         }
+
 
         /// <summary>
         /// Converts properties to Eloqua formatted strings

@@ -9,9 +9,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
     [TestClass]
     public class ClientTests
     {
-        private string Username = "";
-        private string Password = "";
-
+        private const string Username = "";
+        private const string Password = "";
         [TestMethod]
         public async Task GetTest()
         {
@@ -75,7 +74,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
         public async Task PostTest()
         {
 
-            var emailAddress = "aaron-drabeck15@leavitt.com";
+            var emailAddress = "aaron-drabeck131@leavitt.com";
 
             //Arrange
             var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
@@ -84,9 +83,18 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var result = await client.LgContacts.PostAsync(new LgContact
             {
                 EmailAddress = emailAddress,
-                Name = emailAddress,
-                Address1 = "Test home number 1",
-                RefUrl = "testLink.com"
+                FirstName = "Aaron",
+                LastName = "Drabeck",
+                BusinessPhone = "555-1212",
+                RefUrl = "testLink.com",
+                SmsText = "no",
+                MobilePhone = "555-1515",
+                ResidentialPhone = "55-1616",
+                ZipCode = "84720-555",
+                ContactId = "122",
+                LeadSource = "Google",
+                DateOfBirth = new DateTime(1983, 08, 31),
+                Employee = 1222222.23123123213213213213213123123123123123213213213213213123
             });
 
             //Assert

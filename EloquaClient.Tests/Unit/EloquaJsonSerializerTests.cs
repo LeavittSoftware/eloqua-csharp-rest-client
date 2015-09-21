@@ -16,6 +16,14 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
                       ""value"": ""transxId12321321321321""
                     },
                     {
+                      ""id"": ""201"",
+                      ""value"": ""1442855798""
+                    },
+{
+                      ""id"": ""202"",
+                      ""value"": ""double""
+                    },
+                    {
                       ""id"": ""200"",
                       ""value"": ""NotInModel""
                     }
@@ -39,6 +47,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             Assert.AreEqual("Bob Tester", contact.Name);
             Assert.AreEqual("transxId12321321321321", contact.CustomField);
             Assert.AreEqual("/data/customObject", contact.Uri);
+            Assert.AreEqual(DateTime.Parse("09/21/2015 10:16:38 AM"), contact.DateTime);
+            Assert.AreEqual(0, contact.Double);
             Assert.IsNull(contact.CustomFieldNotInContent);
         }
 
@@ -223,5 +233,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
 
         [EloquaCustomProperty(100)]
         public string CustomFieldNotInContent { get; set; }
+
+        [EloquaCustomProperty(202)]
+        public double Double { get; set; }
+
+        [EloquaCustomProperty(201)]
+        public DateTime DateTime { get; set; }
     }
 }

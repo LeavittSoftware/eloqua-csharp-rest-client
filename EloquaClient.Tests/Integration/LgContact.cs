@@ -1,3 +1,4 @@
+using System;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
@@ -7,6 +8,12 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
     {
         [EloquaCustomProperty(100258)]
         public string RefUrl { get; set; }
+
+        [EloquaCustomProperty(100045)]
+        public string LeadSource { get; set; }
+
+        [EloquaCustomProperty(100194)]
+        public DateTime DateOfBirth { get; set; }
 
         [EloquaCustomProperty(100256)]
         public string SmsText { get; set; }
@@ -28,5 +35,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 
         [EloquaCustomProperty(100214)]
         public string County { get; set; }
+
+        [EloquaCustomProperty(100236)]
+        public string ContactId { get; set; }
+
+        [EloquaCustomProperty(100184)]
+        public double Employee { get; set; }
     }
 }
