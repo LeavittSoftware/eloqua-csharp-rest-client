@@ -20,6 +20,10 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
                       ""value"": ""1442855798""
                     },
 {
+                      ""id"": ""203"",
+                      ""value"": ""1442855798""
+                    },
+{
                       ""id"": ""202"",
                       ""value"": ""double""
                     },
@@ -50,6 +54,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             Assert.AreEqual(DateTime.Parse("09/21/2015 10:16:38 AM"), contact.DateTime);
             Assert.AreEqual(0, contact.Double);
             Assert.IsNull(contact.CustomFieldNotInContent);
+            Assert.AreEqual(DateTime.Parse("09/21/2015 10:16:38 AM"),contact.DateTimeNullable);
         }
 
         [TestMethod]
@@ -67,6 +72,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             Assert.IsNull(contact.CustomField);
             Assert.IsNull(contact.Uri);
             Assert.IsNull(contact.CustomFieldNotInContent);
+            Assert.IsNull(contact.DateTimeNullable);
         }
 
         [TestMethod]
@@ -109,6 +115,22 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             //Assert
             Assert.AreEqual("1441055722", result);
         }
+
+        [TestMethod]
+        public void SerializeDateTimeNullablePropery()
+        {
+            //Arrange 
+            var eloquaObject = new EloquaObject { DateTimeNullable = DateTime.Parse("08-31-2015 2:15:22PM") };
+            var property = eloquaObject.GetType().GetProperty(nameof(EloquaObject.DateTimeNullable));
+
+            //Act
+            var result = EloquaJsonSerializer.SerializeProperty(property, eloquaObject);
+
+            //Assert
+            Assert.AreEqual("1441055722", result);
+        }
+
+        //
 
         [TestMethod]
         public void SerializeDecimalPropery()
@@ -190,7 +212,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
         public string Text { get; set; }
         public int Integer { get; set; }
         public Color Color { get; set; }
-
+        public DateTime? DateTimeNullable { get; set; }
     }
 
     public enum Color
@@ -239,5 +261,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
 
         [EloquaCustomProperty(201)]
         public DateTime DateTime { get; set; }
+
+        [EloquaCustomProperty(203)]
+        public DateTime? DateTimeNullable { get; set; }
     }
 }
