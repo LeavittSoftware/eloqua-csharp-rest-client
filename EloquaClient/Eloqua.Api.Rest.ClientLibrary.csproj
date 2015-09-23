@@ -134,7 +134,9 @@
     <Compile Include="IEloquaContext.cs" />
     <Compile Include="Models\Data\Contacts\Contact.cs" />
     <Compile Include="DbSet.cs" />
+    <Compile Include="Models\IEloquaDataObject.cs" />
     <Compile Include="Models\Data\CustomObjects\CustomObjectData.cs" />
+    <Compile Include="Models\Data\CustomObjects\EloquaCustomObjectAttribute.cs" />
     <Compile Include="Models\FieldValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />

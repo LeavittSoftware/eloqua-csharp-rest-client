@@ -1,4 +1,5 @@
 ﻿using System;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

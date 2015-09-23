@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

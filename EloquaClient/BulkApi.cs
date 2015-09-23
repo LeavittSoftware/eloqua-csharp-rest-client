@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
 using Newtonsoft.Json;
 using RestSharp;
@@ -17,7 +19,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
         private const string BulkApiPath = "/api/bulk/2.0/";
 
-        public async Task<DateTime?> CreateCustomObjectDataAsync<T>(int importId, T customObjectData) where T : CustomObjectData
+        public async Task<DateTime?> CreateCustomObjectDataAsync<T>(int importId, T customObjectData) where T : IEloquaDataObject
         {
             //EloquaCustomObjectAttribute
             var resourceAttribute = Attribute.GetCustomAttribute(typeof(T), typeof(EloquaCustomObjectAttribute)) as EloquaCustomObjectAttribute;
