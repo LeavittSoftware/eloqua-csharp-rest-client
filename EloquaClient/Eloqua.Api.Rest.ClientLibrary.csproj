@@ -120,6 +120,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulkApi.cs" />
     <Compile Include="EloquaContext.cs" />
     <Compile Include="EloquaCustomPropertyAttribute.cs" />
     <Compile Include="EloquaResponseHandler.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Depth.cs" />
     <Compile Include="Exceptions\DbSetException.cs" />
     <Compile Include="Exceptions\EloquaApiException.cs" />
+    <Compile Include="IBulkApi.cs" />
     <Compile Include="IDbSet.cs" />
     <Compile Include="IEloquaContext.cs" />
     <Compile Include="Models\Data\Contacts\Contact.cs" />

@@ -5,17 +5,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 {
-     [Ignore]
+    [Ignore]
     [TestClass]
     public class ClientTests
     {
-        private const string Username = " ";
-        private const string Password = " ";
+        private const string Username = "";
+        private const string Password = "";
         [TestMethod]
         public async Task GetTest()
         {
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
             var existingContact = await client.Contacts.GetAsync(48620, Depth.Complete);
@@ -30,7 +30,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
         public async Task GetNotFoundTest()
         {
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
             var existingContact = await client.Contacts.GetAsync(486201111, Depth.Complete);
@@ -44,7 +44,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
         public async Task GetBadUrlTest()
         {
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
             var existingContact = await client.BadContacts.GetAsync(486201, Depth.Complete);
@@ -60,7 +60,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var emailAddress = "aaron-drabeck12@leavitt.com";
 
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
             var result = await client.Contacts.SearchAsync("*aaron*");
@@ -77,7 +77,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var emailAddress = "aaron-drabeck136@leavitt.com";
 
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
             var result = await client.LgContacts.PostAsync(new LgContact
@@ -109,7 +109,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var emailAddress = "aaron-drabeck14@leavitt.com";
 
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
             var result = await client.LgContacts.PostAsync(new LgContact
@@ -130,7 +130,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var emailAddress = "aaron-drabeck18@leavitt.com";
 
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
             var result = await client.ExtendedContacts.PostAsync(new ExtendedContact
@@ -152,7 +152,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var emailAddress = "aaron-drabeck13@leavitt.com";
 
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com/API/REST/1.0/")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
             var result = await client.LgContacts.PutAsync(new LgContact
@@ -170,6 +170,35 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             //Assert
             Assert.AreEqual("testLink.com", result.RefUrl);
         }
+
+
+        [TestMethod]
+        public async Task PostCustomObjectBulkApiTest()
+        {
+
+            //Arrange
+            var client = new EloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
+
+            var application = new LgApplication
+            {
+                ContactId = "48708",
+                ApplicationId = "testsAppId24",
+                CurrentLiabilityLimits = "100/200/50",
+                CurrentPolicyExpirationDate = DateTime.Now,
+                InsuredInLast30 = "Yes",
+                MonthsInsured = "50000",
+                PolicyStartDate = DateTime.Now
+            };
+
+
+
+            //Act
+            var result = await client.Bulk.CreateCustomObjectDataAsync(3326, application);
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
 
     }
 }

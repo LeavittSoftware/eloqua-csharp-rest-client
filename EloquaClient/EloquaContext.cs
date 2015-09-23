@@ -11,9 +11,15 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
         public EloquaContext(IRestClient restClient)
         {
             Contacts = new DbSet<Contact>(restClient);
+            Bulk = new BulkApi(restClient);
         }
 
         public IDbSet<Contact> Contacts { get; }
+
+        public IBulkApi Bulk { get; }
+
+        //Bulk.CreateCustomObjectData(int customObjectId, int importId)
+        ///customObjects/{parentId}/imports/{id}/data
 
         public static IRestClient CreateClient(string site, string username, string password, Uri baseUri)
         {
