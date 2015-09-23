@@ -20,13 +20,15 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             _restClient = restClient;
         }
 
+        private static string RestApiPath = "/api/REST/1.0/";
+
         public async Task<T> GetAsync(int id, Depth depth = Depth.Minimal)
         {
             var resourceAttribute = Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) as Resource;
             if (resourceAttribute == null)
                 throw new DbSetException();
 
-            var request = new RestRequest($"{resourceAttribute.Uri}/{{id}}", Method.GET);
+            var request = new RestRequest($"{RestApiPath}{resourceAttribute.Uri}/{{id}}", Method.GET);
             request.AddParameter("depth", depth.ToString());
             request.AddUrlSegment("id", id.ToString());
 
@@ -42,7 +44,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             if (resourceAttribute == null)
                 throw new DbSetException();
 
-            var request = new RestRequest($"{resourceAttribute.Uri}s", Method.GET);
+            var request = new RestRequest($"{RestApiPath}{resourceAttribute.Uri}s", Method.GET);
             request.AddParameter("depth", depth.ToString());
             request.AddParameter("count", pageSize.ToString());
             request.AddParameter("page", page.ToString());
@@ -95,7 +97,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             }
 
             var customDataPostUrl = requestObject["Id"] == null ? "" : $"/{requestObject["Id"]}";
-            var requestUrl = $"{resourceAttribute.Uri}{customDataPostUrl}";
+            var requestUrl = $"{RestApiPath}{resourceAttribute.Uri}{customDataPostUrl}";
             var request = new RestRequest(requestUrl, Method.POST);
 
             var jObject = JsonConvert.DeserializeObject<ExpandoObject>(requestObject.ToString());
@@ -147,7 +149,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                 requestObject.FieldValues.Add(fieldValue);
             }
             var customDataPostUrl = requestObject["Id"] == null ? "" : $"/{requestObject["Id"]}";
-            var requestUrl = $"{resourceAttribute.Uri}{customDataPostUrl}";
+            var requestUrl = $"{RestApiPath}{resourceAttribute.Uri}{customDataPostUrl}";
             var request = new RestRequest(requestUrl, Method.PUT);
 
             var jObject = JsonConvert.DeserializeObject<ExpandoObject>(requestObject.ToString());
