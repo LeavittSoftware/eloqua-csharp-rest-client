@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;

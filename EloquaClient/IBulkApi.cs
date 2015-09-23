@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     public interface IBulkApi
     {
-        Task<DateTime?> CreateCustomObjectDataAsync<T>(int importId, T customObjectData) where T : CustomObjectData;
+        Task<DateTime?> CreateCustomObjectDataAsync<T>(int importId, T customObjectData) where T : IEloquaDataObject;
     }
 }

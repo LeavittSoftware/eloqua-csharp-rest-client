@@ -21,9 +21,12 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             //Assert
             Assert.IsNotNull(eloquaContext.Contacts);
             Assert.IsInstanceOfType(eloquaContext.Contacts, typeof(IDbSet<Contact>));
+
+            Assert.IsNotNull(eloquaContext.Bulk);
+            Assert.IsInstanceOfType(eloquaContext.Bulk, typeof(BulkApi));
         }
 
-        [TestMethod()]
+        [TestMethod]
         public void CreateClientTest()
         {
             //Arrange
@@ -35,5 +38,6 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             Assert.IsInstanceOfType(restClient, typeof(IRestClient));
         }
 
+      
     }
 }

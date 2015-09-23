@@ -2,11 +2,6 @@
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
-    public interface IEloquaDataObject
-    {
-        int? Id { get; set; }
-    }
-
     [ExcludeFromCodeCoverage]
     [Resource("/data/contact", "Contact")]
     public class Contact : IEloquaDataObject
