@@ -6,10 +6,10 @@ using RestSharp;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
 {
-    [TestClass()]
+    [TestClass]
     public class EloquaContextTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void EloquaContextTest()
         {
             //Arrange

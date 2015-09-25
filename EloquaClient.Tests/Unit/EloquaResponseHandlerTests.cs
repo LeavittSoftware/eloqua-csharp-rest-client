@@ -6,7 +6,7 @@ using RestSharp;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
 {
-    [TestClass()]
+    [TestClass]
     public class EloquaResponseHandlerTests
     {
         [ExpectedException(typeof(ConnectionErrorException))]

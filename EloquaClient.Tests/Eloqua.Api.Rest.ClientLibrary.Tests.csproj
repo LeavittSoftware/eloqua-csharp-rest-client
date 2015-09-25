@@ -79,6 +79,7 @@
     <Compile Include="Unit\EloquaJsonSerializerTests.cs" />
     <Compile Include="Unit\EloquaResponseHandlerTests.cs" />
     <Compile Include="Integration\ClientTests.cs" />
+    <Compile Include="Unit\CustomObjectDataTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EloquaClient\Eloqua.Api.Rest.ClientLibrary.csproj">
