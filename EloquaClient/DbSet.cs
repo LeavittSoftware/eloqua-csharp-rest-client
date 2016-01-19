@@ -57,7 +57,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             var searchObject = JObject.Parse(response.Content);
 
             var elements = searchObject["elements"] as JArray;
-            return elements?.Select(o => EloquaJsonSerializer.Deserializer<T>(response.Content)).ToList() ?? new List<T>();
+            return elements?.Select(o => EloquaJsonSerializer.Deserializer<T>(o.ToString())).ToList() ?? new List<T>();
         }
 
         public async Task<T> PostAsync(T data)
