@@ -188,7 +188,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var result = EloquaJsonSerializer.SerializeProperty(property, eloquaObject);
 
             //Assert
-            Assert.AreEqual((int)Color.Green, ((JValue)result).Value);
+            Assert.AreEqual((long)Color.Green, ((JValue)result).Value);
         }
 
         [TestMethod]
@@ -219,7 +219,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var result = EloquaJsonSerializer.SerializeProperty(property, eloquaObject);
 
             //Assert
-            Assert.AreEqual(100, ((JObject)result).GetValue("Number"));
+            Assert.AreEqual(100, ((JObject)result).GetValue("number"));
         }
 
         [TestMethod]

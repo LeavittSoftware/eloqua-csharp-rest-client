@@ -13,8 +13,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
     [TestClass]
     public class ClientTests
     {
-        private const string Username = "Leavitt.Group";
-        private const string Password = "7q7T8G^mN!3^";
+        private const string Username = "";
+        private const string Password = "";
         [TestMethod]
         public async Task GetTest()
         {
@@ -60,6 +60,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             Assert.AreEqual(1000,existingContact.Elements.Count);
             Assert.IsInstanceOfType(existingContact.Elements.First(), typeof(Email));
         }
+
         [TestMethod]
         public async Task GetCampaignsTest()
         {
