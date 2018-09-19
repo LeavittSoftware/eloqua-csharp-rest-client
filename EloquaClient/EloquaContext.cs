@@ -1,4 +1,6 @@
 ﻿using System;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Email;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -12,14 +14,16 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
         {
             Contacts = new DbSet<Contact>(restClient);
             Bulk = new BulkApi(restClient);
+            Campaigns = new DbSet<Campaign>(restClient);
+            Emails = new DbSet<Email>(restClient);
+            EmailDeployments = new DbSet<EmailDeployment>(restClient);
         }
 
-        public IDbSet<Contact> Contacts { get; }
-
         public IBulkApi Bulk { get; }
-
-        //Bulk.CreateCustomObjectData(int customObjectId, int importId)
-        ///customObjects/{parentId}/imports/{id}/data
+        public IDbSet<Contact> Contacts { get; }
+        public IDbSet<Campaign> Campaigns { get; }
+        public IDbSet<Email> Emails { get; }
+        public IDbSet<EmailDeployment> EmailDeployments { get; }
 
         public static IRestClient CreateClient(string site, string username, string password, Uri baseUri)
         {
