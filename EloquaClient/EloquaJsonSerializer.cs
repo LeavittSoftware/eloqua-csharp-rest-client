@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
@@ -23,16 +25,14 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             {
                 var attribute = (EloquaCustomPropertyAttribute)property.GetCustomAttributes(true).FirstOrDefault(o => o is EloquaCustomPropertyAttribute);
 
-                var fieldvalue = dto.FieldValues.FirstOrDefault(o => o.Id == attribute?.EloquaCustomFieldId);
-                if (fieldvalue == null)
+                var fieldValue = dto.FieldValues.FirstOrDefault(o => o.Id == attribute?.EloquaCustomFieldId);
+                if (fieldValue == null)
                     continue;
-
-
 
                 var type = property.PropertyType;
 
                 int unixTimeValue;
-                if ((type == typeof(DateTime?) || type == typeof(DateTime)) && int.TryParse(fieldvalue.Value, out unixTimeValue))
+                if ((type == typeof(DateTime?) || type == typeof(DateTime)) && int.TryParse(fieldValue.Value, out unixTimeValue))
                 {
                     var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
                     epoch = epoch.AddSeconds(unixTimeValue);
@@ -43,7 +43,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                     try
                     {
                         property.SetValue(resultObject,
-                            TypeDescriptor.GetConverter(type).ConvertFromString(fieldvalue.Value));
+                            TypeDescriptor.GetConverter(type).ConvertFromString(fieldValue.Value));
                     }
                     catch (Exception)
                     {
@@ -65,9 +65,9 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
         /// <param name="propertyInfo"></param>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string SerializeProperty(PropertyInfo propertyInfo, object obj)
+        public static dynamic SerializeProperty(PropertyInfo propertyInfo, object obj)
         {
-            string eloquaString;
+            dynamic eloquaString;
             var value = propertyInfo.GetValue(obj);
 
             if (value == null)
@@ -75,20 +75,27 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             if (propertyInfo.PropertyType == typeof(DateTime))
             {
-                eloquaString = (((DateTime)value) - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime()).TotalSeconds.ToString("F0", CultureInfo.InvariantCulture);
+                eloquaString = ((DateTime)value - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime()).TotalSeconds.ToString("F0", CultureInfo.InvariantCulture);
             }
             else if (propertyInfo.PropertyType == typeof(DateTime?))
             {
-                eloquaString = (((DateTime?)value) - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime()).Value.TotalSeconds.ToString("F0", CultureInfo.InvariantCulture);
+                eloquaString = ((DateTime?)value - new DateTime(1970, 1, 1, 0, 0, 0).ToLocalTime()).Value.TotalSeconds.ToString("F0", CultureInfo.InvariantCulture);
             }
             else if (propertyInfo.PropertyType == typeof(decimal))
             {
-                eloquaString = (((decimal)value).ToString("F19"));
+                eloquaString = ((decimal)value).ToString("F19");
+            }
+            else if (propertyInfo.PropertyType == typeof(string) || propertyInfo.PropertyType == typeof(int) || propertyInfo.PropertyType == typeof(int?))
+            {
+                eloquaString = value;
             }
             else
             {
-                eloquaString = value.ToString();
+                var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver(), NullValueHandling = NullValueHandling.Ignore };
+                var serialized = JsonConvert.SerializeObject(value, settings);
+                eloquaString = JToken.Parse(serialized);
             }
+
             return eloquaString;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
@@ -23,8 +24,6 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
         public bool? IsBounceBack { get; set; }
         public string SalesPerson { get; set; }
         public string Title { get; set; }
-
-        
-
+        public List<FieldValue> FieldValues { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using RestSharp;
+using static System.String;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
@@ -20,15 +20,12 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             _restClient = restClient;
         }
 
-        private static string RestApiPath = "/api/REST/1.0/";
-
         public async Task<T> GetAsync(int id, Depth depth = Depth.Minimal)
         {
-            var resourceAttribute = Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) as Resource;
-            if (resourceAttribute == null)
+            if (!(Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) is Resource resourceAttribute))
                 throw new DbSetException();
 
-            var request = new RestRequest($"{RestApiPath}{resourceAttribute.Uri}/{{id}}", Method.GET);
+            var request = new RestRequest($"{resourceAttribute.RestApiPath}{resourceAttribute.Uri}/{{id}}", Method.GET);
             request.AddParameter("depth", depth.ToString());
             request.AddUrlSegment("id", id.ToString());
 
@@ -38,13 +35,38 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             return EloquaJsonSerializer.Deserializer<T>(response.Content);
         }
-        public async Task<List<T>> SearchAsync(string searchTerm, int pageSize = 1000, int page = 1, Depth depth = Depth.Complete)
+
+        public async Task<Element<T>> GetListAsync(string orderBy = "", string searchTerm = "", int pageSize = 1000, int page = 1, Depth depth = Depth.Minimal)
         {
-            var resourceAttribute = Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) as Resource;
-            if (resourceAttribute == null)
+            if (!(Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) is Resource resourceAttribute))
                 throw new DbSetException();
 
-            var request = new RestRequest($"{RestApiPath}{resourceAttribute.Uri}s", Method.GET);
+            var request = new RestRequest($"{resourceAttribute.RestApiPath}{resourceAttribute.Uri}s", Method.GET);
+            request.AddParameter("depth", depth.ToString());
+            request.AddParameter("count", pageSize.ToString());
+            request.AddParameter("page", page.ToString());
+            if (!IsNullOrWhiteSpace(orderBy))
+            {
+                request.AddParameter("orderBy", orderBy);
+            }
+            if (!IsNullOrWhiteSpace(searchTerm))
+            {
+                request.AddParameter("search", searchTerm);
+            }
+
+            var response = await _restClient.ExecuteTaskAsync(request);
+
+            response = EloquaResponseHandler.ErrorCheck(response);
+            return EloquaJsonSerializer.Deserializer<Element<T>>(response.Content);
+        }
+
+        public async Task<Element<T>> SearchAsync(string searchTerm, int pageSize = 1000, int page = 1,
+            Depth depth = Depth.Complete)
+        {
+            if (!(Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) is Resource resourceAttribute))
+                throw new DbSetException();
+
+            var request = new RestRequest($"{resourceAttribute.RestApiPath}{resourceAttribute.Uri}s", Method.GET);
             request.AddParameter("depth", depth.ToString());
             request.AddParameter("count", pageSize.ToString());
             request.AddParameter("page", page.ToString());
@@ -54,16 +76,12 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             response = EloquaResponseHandler.ErrorCheck(response);
 
-            var searchObject = JObject.Parse(response.Content);
-
-            var elements = searchObject["elements"] as JArray;
-            return elements?.Select(o => EloquaJsonSerializer.Deserializer<T>(o.ToString())).ToList() ?? new List<T>();
+            return EloquaJsonSerializer.Deserializer<Element<T>>(response.Content);
         }
 
         public async Task<T> PostAsync(T data)
         {
-            var resourceAttribute = Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) as Resource;
-            if (resourceAttribute == null)
+            if (!(Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) is Resource resourceAttribute))
                 throw new DbSetException();
 
             dynamic requestObject = new JObject();
@@ -97,16 +115,14 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             }
 
             var customDataPostUrl = requestObject["Id"] == null ? "" : $"/{requestObject["Id"]}";
-            var requestUrl = $"{RestApiPath}{resourceAttribute.Uri}{customDataPostUrl}";
+            var requestUrl = $"{resourceAttribute.RestApiPath}{resourceAttribute.Uri}{customDataPostUrl}";
             var request = new RestRequest(requestUrl, Method.POST);
 
-            var jObject = JsonConvert.DeserializeObject<ExpandoObject>(requestObject.ToString());
-            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            var serialized = JsonConvert.SerializeObject(jObject, settings);
-
+            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver()};
+            var serialized = JsonConvert.SerializeObject(requestObject, settings);
+            
             request.AddParameter("application/json", serialized, ParameterType.RequestBody);
             request.RequestFormat = DataFormat.Json;
-
             var response = await _restClient.ExecuteTaskAsync(request);
 
             response = EloquaResponseHandler.ErrorCheck(response);
@@ -115,8 +131,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
         }
         public async Task<T> PutAsync(T data)
         {
-            var resourceAttribute = Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) as Resource;
-            if (resourceAttribute == null)
+            if (!(Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) is Resource resourceAttribute))
                 throw new DbSetException();
 
             dynamic requestObject = new JObject();
@@ -148,12 +163,13 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
                 requestObject.FieldValues.Add(fieldValue);
             }
+
             var customDataPostUrl = requestObject["Id"] == null ? "" : $"/{requestObject["Id"]}";
-            var requestUrl = $"{RestApiPath}{resourceAttribute.Uri}{customDataPostUrl}";
+            var requestUrl = $"{resourceAttribute.RestApiPath}{resourceAttribute.Uri}{customDataPostUrl}";
             var request = new RestRequest(requestUrl, Method.PUT);
 
             var jObject = JsonConvert.DeserializeObject<ExpandoObject>(requestObject.ToString());
-            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver(), NullValueHandling = NullValueHandling.Ignore };
             var serialized = JsonConvert.SerializeObject(jObject, settings);
 
             request.AddParameter("application/json", serialized, ParameterType.RequestBody);
