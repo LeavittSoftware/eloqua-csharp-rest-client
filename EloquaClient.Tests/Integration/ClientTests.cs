@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Email;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
@@ -24,6 +28,80 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             Assert.IsNotNull(existingContact);
             Assert.IsNotNull(existingContact.Id);
             Assert.IsNotNull(existingContact.EmailAddress);
+        }
+
+        [TestMethod]
+        public async Task GetEmailTest()
+        {
+            //Arrange
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
+
+            //Act
+            var existingContact = await client.Emails.GetAsync(509, Depth.Complete);
+
+            //Assert
+            Assert.IsNotNull(existingContact);
+            Assert.IsNotNull(existingContact.Id);
+            Assert.IsNotNull(existingContact.Subject);
+            Assert.IsTrue(existingContact.Subject.Contains("Spring Cleaning for Your Car"));
+        }
+
+        [TestMethod]
+        public async Task GetEmailsTest()
+        {
+            //Arrange
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.p01.eloqua.com")));
+
+            //Act
+            var existingContact = await client.Emails.GetListAsync();
+
+            //Assert
+            Assert.IsNotNull(existingContact);
+            Assert.AreEqual(1000,existingContact.Elements.Count);
+            Assert.IsInstanceOfType(existingContact.Elements.First(), typeof(Email));
+        }
+
+        [TestMethod]
+        public async Task GetCampaignsTest()
+        {
+            //Arrange
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.p01.eloqua.com")));
+
+            //Act
+            var existingContact = await client.Campaigns.GetListAsync();
+
+            //Assert
+            Assert.IsNotNull(existingContact);
+            Assert.AreEqual(1000, existingContact.Elements.Count);
+            Assert.IsInstanceOfType(existingContact.Elements.First(), typeof(Campaign));
+        }
+
+        [TestMethod]
+        public async Task PostEmailDepolymentTest()
+        {
+            //Arrange
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.p01.eloqua.com")));
+
+            var emailDeployment = new EmailDeployment
+            {
+                ContactIds = new List<string>
+                {
+                    "39919"
+                },
+                Email = new Email
+                {
+                    Id = 3772,
+                    Name = "Shawn Johnson TEST EMAIL"
+                },
+                Name = "Test Email deployment"
+
+            };
+
+            //Act
+            var existingContact = await client.EmailDeployments.PostAsync(emailDeployment);
+
+            //Assert
+            Assert.IsNotNull(existingContact);
         }
 
         [TestMethod]
@@ -67,7 +145,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 
 
             //Assert
-            Assert.AreNotEqual(0, result.Count);
+            Assert.AreNotEqual(0, result.Elements.Count);
         }
 
         [TestMethod]

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
 {
@@ -172,7 +174,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var result = EloquaJsonSerializer.SerializeProperty(property, eloquaObject);
 
             //Assert
-            Assert.AreEqual("2333", result);
+            Assert.AreEqual((long)2333, ((JValue)result).Value);
         }
 
         [TestMethod]
@@ -186,7 +188,38 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var result = EloquaJsonSerializer.SerializeProperty(property, eloquaObject);
 
             //Assert
-            Assert.AreEqual("Green", result);
+            Assert.AreEqual((long)Color.Green, ((JValue)result).Value);
+        }
+
+        [TestMethod]
+        public void SerializeListPropery()
+        {
+            //Arrange 
+            var eloquaObject = new EloquaObject { Type = new List<string>()};
+            var property = eloquaObject.GetType().GetProperty(nameof(EloquaObject.Type));
+
+            //Act
+            var result = EloquaJsonSerializer.SerializeProperty(property, eloquaObject);
+
+            //Assert
+            Assert.AreEqual(0, ((JToken)result).Count());
+        }
+
+        [TestMethod]
+        public void SerializeObjectPropery()
+        {
+            //Arrange 
+            var eloquaObject = new EloquaObject { Element = new EloquaElement
+            {
+                Number = 100
+            }};
+            var property = eloquaObject.GetType().GetProperty(nameof(EloquaObject.Element));
+
+            //Act
+            var result = EloquaJsonSerializer.SerializeProperty(property, eloquaObject);
+
+            //Assert
+            Assert.AreEqual(100, ((JObject)result).GetValue("number"));
         }
 
         [TestMethod]
@@ -214,8 +247,13 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
         public int Integer { get; set; }
         public Color Color { get; set; }
         public DateTime? DateTimeNullable { get; set; }
+        public List<string> Type { get; set; }
+        public EloquaElement Element { get; set; }
     }
-
+    public class EloquaElement
+    {
+        public int Number { get; set; }
+    }
     public enum Color
     {
         Red,

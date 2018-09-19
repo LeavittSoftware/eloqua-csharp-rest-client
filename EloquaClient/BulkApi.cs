@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
 using Newtonsoft.Json;
 using RestSharp;
+using SimpleJson;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {

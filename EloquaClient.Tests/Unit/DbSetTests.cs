@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RestSharp;
@@ -230,9 +229,75 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var contact = await dbSet.SearchAsync("Bob tester");
 
             //Assert
-            Assert.AreEqual(1, contact.Count);
+            Assert.AreEqual(1, contact.Elements.Count);
         }
 
+        #endregion
+
+        #region GetList
+        [ExpectedException(typeof(DbSetException))]
+        [TestMethod]
+        public async Task DbSetGetListAsyncResourceAttributeNullTest()
+        {
+            //Arrange
+            var mockRestClient = new Mock<IRestClient>();
+
+            var dbSet = new DbSet<MockDbsetContact>(mockRestClient.Object);
+
+            //Act
+            await dbSet.GetListAsync();
+
+            //Assert - throws
+        }
+
+        [TestMethod]
+        public async Task DbSetGetListAsyncTest()
+        {
+            //Arrange
+            var mockRestResponse = new Mock<IRestResponse>();
+            mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
+            mockRestResponse.SetupGet(o => o.StatusCode).Returns(HttpStatusCode.OK);
+            mockRestResponse.SetupGet(o => o.Content).Returns(@"{
+                    ""elements"": [
+                        {
+                            ""type"": ""Contact"",
+                            ""currentStatus"": ""Awaiting action"",
+                            ""id"": ""39919"",
+                            ""createdAt"": ""1435697288"",
+                            ""depth"": ""complete"",
+                            ""name"": ""shawn-johnson@leavitt.com"",
+                            ""updatedAt"": ""1534778241"",
+                            ""accountName"": ""Leavitt Software Solutions"",
+                            ""city"": ""Cedar City"",
+                            ""emailAddress"": ""shawn-johnson@leavitt.com"",
+                            ""emailFormatPreference"": ""unspecified"",
+                            ""firstName"": ""Shawn"",
+                            ""isBounceback"": ""false"",
+                            ""isSubscribed"": ""true"",
+                            ""lastName"": ""Johnson"",
+                            ""postalCode"": ""84720"",
+                            ""province"": ""UT"",
+                            ""subscriptionDate"": ""1435697285""
+                        }
+                    ],
+                    ""page"": 1,
+                    ""pageSize"": 1000,
+                    ""total"": 1
+                }
+            ");
+
+
+            var mockRestClient = new Mock<IRestClient>();
+            mockRestClient.Setup(o => o.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(mockRestResponse.Object);
+
+            var dbSet = new DbSet<MockDbsetWithDataContact>(mockRestClient.Object);
+
+            //Act
+            var contact = await dbSet.GetListAsync("FieldName", "name='shawn-johnson*'");
+
+            //Assert
+            Assert.AreEqual(1, contact.Elements.Count);
+        }
         #endregion
     }
 
