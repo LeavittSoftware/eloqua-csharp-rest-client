@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
