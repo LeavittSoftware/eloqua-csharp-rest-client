@@ -11,6 +11,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign
         public int? CreatedBy { get; set; }
         public int? FolderId { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public int? UpdatedAt { get; set; }
         public int? UpdatedBy { get; set; }
         public float? ActualCost { get; set; }
