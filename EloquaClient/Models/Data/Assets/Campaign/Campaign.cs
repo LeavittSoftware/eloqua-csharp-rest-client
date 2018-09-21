@@ -9,6 +9,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign
 
         public int? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }
+        public string CurrentStatus { get; set; }
         public int? FolderId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
