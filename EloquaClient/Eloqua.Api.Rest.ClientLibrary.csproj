@@ -110,6 +110,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
@@ -142,6 +143,7 @@
     <Compile Include="Models\Data\Assets\Email\StructuredHtmlContent.cs" />
     <Compile Include="Models\Data\Contacts\Contact.cs" />
     <Compile Include="DbSet.cs" />
+    <Compile Include="Models\Dtos\CustomCampaignObjectDto.cs" />
     <Compile Include="Models\Element.cs" />
     <Compile Include="Models\IEloquaDataObject.cs" />
     <Compile Include="Models\Data\CustomObjects\CustomObjectData.cs" />

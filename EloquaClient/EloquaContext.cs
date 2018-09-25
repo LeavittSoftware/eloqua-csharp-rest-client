@@ -35,5 +35,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             restClient.AddHandler("text/plain", new JsonDeserializer());
             return restClient;
         }
+
+      
     }
 }
