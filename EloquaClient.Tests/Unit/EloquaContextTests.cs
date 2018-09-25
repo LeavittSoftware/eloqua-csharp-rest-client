@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Dtos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RestSharp;
@@ -38,6 +43,45 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             Assert.IsInstanceOfType(restClient, typeof(IRestClient));
         }
 
-      
+        #region DisableCustomCampaignObjectAsync
+        [TestMethod]
+        public async Task DbSetDisableCustomCampaignObjectAsyncTest()
+        {
+            //Arrange
+            var mockRestResponse = new Mock<IRestResponse>();
+            mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
+            mockRestResponse.SetupSequence(o => o.StatusCode).Returns(HttpStatusCode.OK).Returns(HttpStatusCode.BadRequest);
+
+            var mockRestClient = new Mock<IRestClient>();
+
+            //Act
+            var eloquaContext = new EloquaContext(mockRestClient.Object);
+
+            var list = new List<CustomCampaignObjectDto>
+            {
+                new CustomCampaignObjectDto
+                {
+                    ActivationId = 42,
+                    InstanceId = 666
+                },
+                new CustomCampaignObjectDto
+                {
+                    ActivationId = 42,
+                    InstanceId = 666
+                }
+            };
+
+            mockRestClient.Setup(o => o.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(mockRestResponse.Object);
+
+
+            //Act
+            var results =  await eloquaContext.DisableCustomCampaignObjectsAsync(list);
+
+            //Assert
+            Assert.AreEqual(results.Count, 2);
+            Assert.AreEqual(1,results.Count(o => o.Status == HttpStatusCode.OK));
+            Assert.AreEqual(1,results.Count(o => o.Status == HttpStatusCode.BadRequest));
+        }
+        #endregion
     }
 }

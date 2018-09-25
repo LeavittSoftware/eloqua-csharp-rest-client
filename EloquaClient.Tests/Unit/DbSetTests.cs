@@ -303,43 +303,6 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
         }
         #endregion
 
-        #region DisableCustomCampaignObjectAsync
-        [TestMethod]
-        public async Task DbSetDisableCustomCampaignObjectAsyncTest()
-        {
-            //Arrange
-            var mockRestResponse = new Mock<IRestResponse>();
-            mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
-            mockRestResponse.SetupSequence(o => o.StatusCode).Returns(HttpStatusCode.OK).Returns(HttpStatusCode.BadRequest);
-
-            var list = new List<CustomCampaignObjectDto>
-            {
-                new CustomCampaignObjectDto
-                {
-                    ActivationId = 42,
-                    InstanceId = 666
-                },
-                new CustomCampaignObjectDto
-                {
-                    ActivationId = 42,
-                    InstanceId = 666
-                }
-            };
-
-            var mockRestClient = new Mock<IRestClient>();
-            mockRestClient.Setup(o => o.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(mockRestResponse.Object);
-
-            var dbSet = new DbSet<MockDbsetWithDataContact>(mockRestClient.Object);
-
-            //Act
-           var results =  await dbSet.DisableCustomCampaignObjectsAsync(list);
-
-            //Assert
-           Assert.AreEqual(results.Count, 2);
-            Assert.AreEqual(1,results.Count(o => o.Status == HttpStatusCode.OK));
-            Assert.AreEqual(1,results.Count(o => o.Status == HttpStatusCode.BadRequest));
-        }
-        #endregion
     }
 
     public class MockDbsetContact : IEloquaDataObject

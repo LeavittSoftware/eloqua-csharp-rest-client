@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Dtos;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
@@ -183,40 +180,6 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             response = EloquaResponseHandler.ErrorCheck(response);
 
             return EloquaJsonSerializer.Deserializer<T>(response.Content);
-        }
-
-        public async Task<List<CustomCampaignObjectDto>> DisableCustomCampaignObjectsAsync(List<CustomCampaignObjectDto> customCampaignObjectDtos)
-        {
-
-            const string restApiPath = "/api/REST/2.0/";
-            const long customObjectschemaId = 121;
-            foreach (var customCampaignObjectDto in customCampaignObjectDtos)
-            {
-
-                var requestUrl = $"{restApiPath}customObjects/{customObjectschemaId}/instance/{customCampaignObjectDto.InstanceId}";
-                var request = new RestRequest(requestUrl, Method.PUT);
-
-                dynamic customObjectData = new ExpandoObject();
-                dynamic fieldValue = new ExpandoObject();
-
-
-                fieldValue.id = customCampaignObjectDto.ActivationId;
-                fieldValue.value = 0;
-
-                customObjectData.fieldValues = new List<object> { fieldValue };
-
-                var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
-                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-
-                request.AddParameter("application/json", serialized, ParameterType.RequestBody);
-                request.RequestFormat = DataFormat.Json;
-
-                var response = await _restClient.ExecuteTaskAsync(request);
-
-                customCampaignObjectDto.Status = response.StatusCode;
-            }
-
-            return customCampaignObjectDtos;
         }
     }
 }

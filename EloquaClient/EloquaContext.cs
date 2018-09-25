@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Email;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Dtos;
+using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
@@ -10,8 +15,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     public class EloquaContext : IEloquaContext
     {
+        private readonly IRestClient _restClient;
+
         public EloquaContext(IRestClient restClient)
         {
+            _restClient = restClient;
             Contacts = new DbSet<Contact>(restClient);
             Bulk = new BulkApi(restClient);
             Campaigns = new DbSet<Campaign>(restClient);
@@ -36,6 +44,38 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             return restClient;
         }
 
-      
+        public async Task<List<CustomCampaignObjectDto>> DisableCustomCampaignObjectsAsync(List<CustomCampaignObjectDto> customCampaignObjectDtos)
+        {
+
+            const string restApiPath = "/api/REST/2.0/data/";
+            const long customObjectschemaId = 121;
+            foreach (var customCampaignObjectDto in customCampaignObjectDtos)
+            {
+
+                var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customCampaignObjectDto.InstanceId}";
+                var request = new RestRequest(requestUrl, Method.PUT);
+
+                dynamic customObjectData = new ExpandoObject();
+                dynamic fieldValue = new ExpandoObject();
+
+
+                fieldValue.id = customCampaignObjectDto.ActivationId;
+                fieldValue.value = 0;
+
+                customObjectData.fieldValues = new List<object> { fieldValue };
+
+                var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
+                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+                request.AddParameter("application/json", serialized, ParameterType.RequestBody);
+                request.RequestFormat = DataFormat.Json;
+
+                var response = await _restClient.ExecuteTaskAsync(request);
+
+                customCampaignObjectDto.Status = response.StatusCode;
+            }
+
+            return customCampaignObjectDtos;
+        }
     }
 }
