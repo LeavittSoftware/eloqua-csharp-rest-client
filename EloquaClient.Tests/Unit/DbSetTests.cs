@@ -299,6 +299,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             Assert.AreEqual(1, contact.Elements.Count);
         }
         #endregion
+
     }
 
     public class MockDbsetContact : IEloquaDataObject

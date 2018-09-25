@@ -57,7 +57,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 
             //Assert
             Assert.IsNotNull(existingContact);
-            Assert.AreEqual(1000,existingContact.Elements.Count);
+            Assert.AreEqual(1000, existingContact.Elements.Count);
             Assert.IsInstanceOfType(existingContact.Elements.First(), typeof(Email));
         }
 
@@ -275,6 +275,20 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 
             //Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task DisableCustomCampaignObjectsAsyncTest()
+        {
+
+            //Arrange
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
+
+            //Act
+            var result = await client.DisableCustomCampaignObjectsAsync(7792181, 2110);
+
+            //Assert
+            Assert.IsFalse(result.HasError);
         }
 
 
