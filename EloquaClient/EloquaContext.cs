@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Email;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Dtos;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;

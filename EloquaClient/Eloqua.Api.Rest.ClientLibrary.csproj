@@ -146,7 +146,6 @@
     <Compile Include="Models\Data\Assets\Email\StructuredHtmlContent.cs" />
     <Compile Include="Models\Data\Contacts\Contact.cs" />
     <Compile Include="DbSet.cs" />
-    <Compile Include="Models\Dtos\CustomCampaignObjectDto.cs" />
     <Compile Include="Models\Element.cs" />
     <Compile Include="Models\IEloquaDataObject.cs" />
     <Compile Include="Models\Data\CustomObjects\CustomObjectData.cs" />

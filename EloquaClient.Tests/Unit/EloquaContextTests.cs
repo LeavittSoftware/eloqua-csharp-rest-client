@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Dtos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using RestSharp;

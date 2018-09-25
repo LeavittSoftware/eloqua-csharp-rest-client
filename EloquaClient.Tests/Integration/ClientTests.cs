@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Exceptions;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Email;
-using LG.Eloqua.Api.Rest.ClientLibrary.Models.Dtos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
