@@ -26,5 +26,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign
         public bool? IsReadOnly { get; set; }
         public bool? IsSyncedWithCrm { get; set; }
         public int? RunAsUserId { get; set; }
+
+        [EloquaCustomProperty(12)]
+        public int? ActivationId { get; set; }
     }
 }
