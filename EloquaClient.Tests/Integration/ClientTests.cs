@@ -287,18 +287,10 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
-            var result = await client.DisableCustomCampaignObjectsAsync(new List<CustomCampaignObjectDto>
-            {
-                new CustomCampaignObjectDto
-                {
-                    ActivationId = 2110,
-                    InstanceId = 7792181
-                }
-            }
-          );
+            var result = await client.DisableCustomCampaignObjectsAsync(7792181, 2110);
 
             //Assert
-            Assert.AreEqual(HttpStatusCode.OK, result.FirstOrDefault()?.Status);
+            Assert.IsFalse(result.HasError);
         }
 
 
