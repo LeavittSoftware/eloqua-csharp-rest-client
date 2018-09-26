@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -42,10 +43,19 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                 {
                     try
                     {
-                        property.SetValue(resultObject,
-                            TypeDescriptor.GetConverter(type).ConvertFromString(fieldValue.Value));
+                        if (type == typeof(Nullable) || type == typeof(int?))
+                        {
+                            Type u = Nullable.GetUnderlyingType(type);
+                            property.SetValue(resultObject,
+                                TypeDescriptor.GetConverter(u).ConvertFromString(Convert.ToInt32(Convert.ToDouble(fieldValue.Value)).ToString()));
+                        }
+                        else
+                        {
+                            property.SetValue(resultObject,
+                                TypeDescriptor.GetConverter(type).ConvertFromString(fieldValue.Value));
+                        }
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         if (type.IsValueType)
                         {
