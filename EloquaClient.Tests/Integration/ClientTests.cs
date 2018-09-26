@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +34,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
         public async Task GetEmailTest()
         {
             //Arrange
-            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.p01.eloqua.com")));
 
             //Act
             var existingContact = await client.Emails.GetAsync(509, Depth.Complete);
@@ -57,8 +57,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 
             //Assert
             Assert.IsNotNull(existingContact);
-            Assert.AreEqual(1000, existingContact.Elements.Count);
-            Assert.IsInstanceOfType(existingContact.Elements.First(), typeof(Email));
+            Assert.AreEqual(1000, existingContact.Count);
+            Assert.IsInstanceOfType(existingContact.First(), typeof(Email));
         }
 
         [TestMethod]
@@ -68,12 +68,12 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.p01.eloqua.com")));
 
             //Act
-            var existingContact = await client.Campaigns.GetListAsync();
+            var existingContact = await client.Campaigns.GetListAsync("", "name='Daniel*'", 1000,1,Depth.Partial);
 
             //Assert
             Assert.IsNotNull(existingContact);
-            Assert.AreEqual(1000, existingContact.Elements.Count);
-            Assert.IsInstanceOfType(existingContact.Elements.First(), typeof(Campaign));
+            Assert.AreEqual(1000, existingContact.Count);
+            Assert.IsInstanceOfType(existingContact.First(), typeof(Campaign));
         }
 
         [TestMethod]
@@ -145,7 +145,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 
 
             //Assert
-            Assert.AreNotEqual(0, result.Elements.Count);
+            Assert.AreNotEqual(0, result.Count);
         }
 
         [TestMethod]
