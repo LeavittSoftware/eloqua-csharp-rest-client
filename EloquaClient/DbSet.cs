@@ -181,6 +181,5 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             return EloquaJsonSerializer.Deserializer<T>(response.Content);
         }
-
     }
 }
