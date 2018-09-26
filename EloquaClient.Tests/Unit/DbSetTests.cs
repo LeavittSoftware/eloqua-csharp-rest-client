@@ -229,7 +229,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var contact = await dbSet.SearchAsync("Bob tester");
 
             //Assert
-            Assert.AreEqual(1, contact.Elements.Count);
+            Assert.AreEqual(1, contact.Count);
         }
 
         #endregion
@@ -296,7 +296,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var contact = await dbSet.GetListAsync("FieldName", "name='shawn-johnson*'");
 
             //Assert
-            Assert.AreEqual(1, contact.Elements.Count);
+            Assert.AreEqual(1, contact.Count);
         }
         #endregion
 

@@ -68,6 +68,58 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             return resultObject;
         }
 
+        public static T Deserializer<T>(EloquaDto dto, T resultObject)
+        {
+            if (dto == null || resultObject == null)
+                return default(T);
+
+            foreach (var property in resultObject.GetType().GetProperties().Where(prop => prop.IsDefined(typeof(EloquaCustomPropertyAttribute), false)))
+            {
+                var attribute = (EloquaCustomPropertyAttribute)property.GetCustomAttributes(true).FirstOrDefault(o => o is EloquaCustomPropertyAttribute);
+
+                var fieldValue = dto.FieldValues.FirstOrDefault(o => o.Id == attribute?.EloquaCustomFieldId);
+                if (fieldValue == null)
+                    continue;
+
+                var type = property.PropertyType;
+
+                int unixTimeValue;
+                if ((type == typeof(DateTime?) || type == typeof(DateTime)) && int.TryParse(fieldValue.Value, out unixTimeValue))
+                {
+                    var epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime();
+                    epoch = epoch.AddSeconds(unixTimeValue);
+                    property.SetValue(resultObject, epoch);
+                }
+                else
+                {
+                    try
+                    {
+                        if (type == typeof(Nullable) || type == typeof(int?))
+                        {
+                            Type u = Nullable.GetUnderlyingType(type);
+                            property.SetValue(resultObject,
+                                TypeDescriptor.GetConverter(u).ConvertFromString(Convert.ToInt32(Convert.ToDouble(fieldValue.Value)).ToString()));
+                        }
+                        else
+                        {
+                            property.SetValue(resultObject,
+                                TypeDescriptor.GetConverter(type).ConvertFromString(fieldValue.Value));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        if (type.IsValueType)
+                        {
+                            property.SetValue(resultObject, Activator.CreateInstance(type));
+                        }
+                        property.SetValue(resultObject, null);
+                    }
+                }
+            }
+            return resultObject;
+        }
+
+
 
         /// <summary>
         /// Converts properties to Eloqua formatted strings
@@ -109,7 +161,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             return eloquaString;
         }
 
-        private class EloquaDto
+        public class EloquaDto
         {
             public IEnumerable<FieldValue> FieldValues { get; } = new List<FieldValue>();
         }

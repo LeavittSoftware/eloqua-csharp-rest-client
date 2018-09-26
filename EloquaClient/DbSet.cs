@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             return EloquaJsonSerializer.Deserializer<T>(response.Content);
         }
 
-        public async Task<Element<T>> GetListAsync(string orderBy = "", string searchTerm = "", int pageSize = 1000, int page = 1, Depth depth = Depth.Minimal)
+        public async Task<List<T>> GetListAsync(string orderBy = "", string searchTerm = "", int pageSize = 1000, int page = 1, Depth depth = Depth.Minimal)
         {
             if (!(Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) is Resource resourceAttribute))
                 throw new DbSetException();
@@ -57,10 +58,22 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             var response = await _restClient.ExecuteTaskAsync(request);
 
             response = EloquaResponseHandler.ErrorCheck(response);
-            return EloquaJsonSerializer.Deserializer<Element<T>>(response.Content);
+
+            var dto = JsonConvert.DeserializeObject<Element<EloquaJsonSerializer.EloquaDto>>(response.Content);
+            var resultObject = JsonConvert.DeserializeObject<Element<T>>(response.Content);
+            var results = new List<T>();
+
+            var index = 0;
+            foreach (var element in resultObject.Elements)
+            {
+                results.Add(EloquaJsonSerializer.Deserializer(dto.Elements[index], element));
+                index++;
+            }
+
+            return results;
         }
 
-        public async Task<Element<T>> SearchAsync(string searchTerm, int pageSize = 1000, int page = 1,
+        public async Task<List<T>> SearchAsync(string searchTerm, int pageSize = 1000, int page = 1,
             Depth depth = Depth.Complete)
         {
             if (!(Attribute.GetCustomAttribute(typeof(T), typeof(Resource)) is Resource resourceAttribute))
@@ -76,7 +89,18 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             response = EloquaResponseHandler.ErrorCheck(response);
 
-            return EloquaJsonSerializer.Deserializer<Element<T>>(response.Content);
+            var dto = JsonConvert.DeserializeObject<Element<EloquaJsonSerializer.EloquaDto>>(response.Content);
+            var resultObject = JsonConvert.DeserializeObject<Element<T>>(response.Content);
+            var results = new List<T>();
+
+            var index = 0;
+            foreach (var element in resultObject.Elements)
+            {
+                results.Add(EloquaJsonSerializer.Deserializer(dto.Elements[index], element));
+                index++;
+            }
+
+            return results;
         }
 
         public async Task<T> PostAsync(T data)
