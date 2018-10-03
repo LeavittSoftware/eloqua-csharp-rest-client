@@ -24,6 +24,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
         public bool? IsBounceBack { get; set; }
         public string SalesPerson { get; set; }
         public string Title { get; set; }
+        [EloquaCustomProperty(100459)]
+        public int? IsLocked { get; set; } 
         public List<FieldValue> FieldValues { get; set; }
     }
 }
