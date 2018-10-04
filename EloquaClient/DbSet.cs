@@ -142,9 +142,16 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             var requestUrl = $"{resourceAttribute.RestApiPath}{resourceAttribute.Uri}{customDataPostUrl}";
             var request = new RestRequest(requestUrl, Method.POST);
 
-            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver()};
-            var serialized = JsonConvert.SerializeObject(requestObject, settings);
-            
+            string json = JsonConvert.SerializeObject(requestObject);
+            var jObject = JsonConvert.DeserializeObject<ExpandoObject>(json);
+
+            var settings = new JsonSerializerSettings()
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+            var serialized = JsonConvert.SerializeObject(jObject, settings);
+
             request.AddParameter("application/json", serialized, ParameterType.RequestBody);
             request.RequestFormat = DataFormat.Json;
             var response = await _restClient.ExecuteTaskAsync(request);
