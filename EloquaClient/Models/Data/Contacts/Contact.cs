@@ -16,6 +16,13 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string Address3 { get; set; }
+
+        [EloquaCustomProperty(100010)]
+        public string State { get; set; }
+
+        [EloquaCustomProperty(100011)]
+        public string Zip { get; set; }
+
         public string BusinessPhone { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
@@ -26,8 +33,10 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
         public bool? IsBounceBack { get; set; }
         public string SalesPerson { get; set; }
         public string Title { get; set; }
+
         [EloquaCustomProperty(100459)]
-        public int? IsLocked { get; set; } 
+        public int? IsLocked { get; set; }
+
         public List<FieldValue> FieldValues { get; set; }
     }
 }
