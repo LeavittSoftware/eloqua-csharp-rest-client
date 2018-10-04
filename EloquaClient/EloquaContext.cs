@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Net;
 using System.Threading.Tasks;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Email;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
+using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
 using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
@@ -93,6 +95,64 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             fieldValue.value = state;
 
             customObjectData.fieldValues = new List<object> { fieldValue };
+
+            var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+            request.AddParameter("application/json", serialized, ParameterType.RequestBody);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await _restClient.ExecuteTaskAsync(request);
+
+
+            return response.StatusCode == HttpStatusCode.OK ? Result.FromSuccess() : Result.FromError(response.ErrorMessage);
+
+        }
+
+        public async Task<List<CustomObjectData>> SearchCustomCampaignObjectsAsync(string searchTerm, long customObjectschemaId = 121)
+        {
+
+            const string restApiPath = "/api/REST/2.0/data/";
+
+
+            var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instances?search={searchTerm}";
+
+            var request = new RestRequest(requestUrl, Method.GET);
+
+            var response = await _restClient.ExecuteTaskAsync(request);
+
+            var resultObject = JsonConvert.DeserializeObject<Element<CustomObjectData>>(response.Content);
+
+            var results = new List<CustomObjectData>();
+
+            foreach (var element in resultObject.Elements)
+            {
+                results.Add(element);
+            }
+
+            return results;
+
+        }
+
+        public async Task<Result> CreateCustomCampaignObjectsAsync( string emailAddress,long eloquaContactId, int state, long activationId, long customObjectschemaId = 121)
+        {
+
+            const string restApiPath = "/api/REST/2.0/data/";
+
+
+            var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance";
+            var request = new RestRequest(requestUrl, Method.POST);
+
+            dynamic customObjectData = new ExpandoObject();
+            dynamic fieldValue = new ExpandoObject();
+
+
+            fieldValue.id = activationId;
+            fieldValue.value = state;
+
+            customObjectData.fieldValues = new List<object> { fieldValue };
+            customObjectData.contactId = eloquaContactId;
+            customObjectData.uniqueCode = emailAddress;
 
             var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
