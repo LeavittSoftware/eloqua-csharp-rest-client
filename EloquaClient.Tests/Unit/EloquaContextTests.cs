@@ -88,45 +88,56 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             //Assert
             Assert.IsTrue(result.HasError);
         }
+        #endregion
 
-        //[TestMethod]
-        //public async Task DbSetDisableCustomCampaignObjectAsyncTest()
-        //{
-        //    //Arrange
-        //    var mockRestResponse = new Mock<IRestResponse>();
-        //    mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
-        //    mockRestResponse.SetupSequence(o => o.StatusCode).Returns(HttpStatusCode.OK).Returns(HttpStatusCode.BadRequest);
+        #region UpdateCustomCampaignObjectAsync
+        [TestMethod]
+        public async Task DbSetUpdateCustomCampaignObjectAsyncPassTest()
+        {
+            //Arrange
+            var mockRestResponse = new Mock<IRestResponse>();
+            mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
+            mockRestResponse.SetupGet(o => o.StatusCode).Returns(HttpStatusCode.OK);
 
-        //    var mockRestClient = new Mock<IRestClient>();
+            var mockRestClient = new Mock<IRestClient>();
 
-        //    //Act
-        //    var eloquaContext = new EloquaContext(mockRestClient.Object);
-
-        //    var list = new List<CustomCampaignObjectDto>
-        //    {
-        //        new CustomCampaignObjectDto
-        //        {
-        //            ActivationId = 42,
-        //            InstanceId = 666
-        //        },
-        //        new CustomCampaignObjectDto
-        //        {
-        //            ActivationId = 42,
-        //            InstanceId = 666
-        //        }
-        //    };
-
-        //    mockRestClient.Setup(o => o.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(mockRestResponse.Object);
+            //Act
+            var eloquaContext = new EloquaContext(mockRestClient.Object);
 
 
-        //    //Act
-        //    var results =  await eloquaContext.DisableCustomCampaignObjectsAsync(list);
+            mockRestClient.Setup(o => o.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(mockRestResponse.Object);
 
-        //    //Assert
-        //    Assert.AreEqual(results.Count, 2);
-        //    Assert.AreEqual(1,results.Count(o => o.Status == HttpStatusCode.OK));
-        //    Assert.AreEqual(1,results.Count(o => o.Status == HttpStatusCode.BadRequest));
-        //}
+
+            //Act
+            var result = await eloquaContext.UpdateCustomCampaignObjectsAsync(0, 666, 420, 212);
+
+            //Assert
+            Assert.IsFalse(result.HasError);
+        }
+
+        [TestMethod]
+        public async Task DbSetUpdateCustomCampaignObjectAsyncFailTest()
+        {
+            //Arrange
+            var mockRestResponse = new Mock<IRestResponse>();
+            mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
+            mockRestResponse.SetupGet(o => o.StatusCode).Returns(HttpStatusCode.BadRequest);
+
+            var mockRestClient = new Mock<IRestClient>();
+
+            //Act
+            var eloquaContext = new EloquaContext(mockRestClient.Object);
+
+
+            mockRestClient.Setup(o => o.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(mockRestResponse.Object);
+
+
+            //Act
+            var result = await eloquaContext.UpdateCustomCampaignObjectsAsync(0, 666, 420, 212);
+
+            //Assert
+            Assert.IsTrue(result.HasError);
+        }
         #endregion
     }
 }

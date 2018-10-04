@@ -291,6 +291,20 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             Assert.IsFalse(result.HasError);
         }
 
+        [TestMethod]
+        public async Task UpdateCustomCampaignObjectsAsyncTest()
+        {
+
+            //Arrange
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
+
+            //Act
+            var result = await client.UpdateCustomCampaignObjectsAsync(0, 7792181, 2110);
+
+            //Assert
+            Assert.IsFalse(result.HasError);
+        }
+
 
     }
 }

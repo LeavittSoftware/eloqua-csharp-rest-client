@@ -76,38 +76,35 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
         }
 
-        //public async Task<List<CustomCampaignObjectDto>> DisableCustomCampaignObjectsAsync(List<CustomCampaignObjectDto> customCampaignObjectDtos)
-        //{
+        public async Task<Result> UpdateCustomCampaignObjectsAsync(int state, long customObjectInstanceId, long activationId, long customObjectschemaId = 121)
+        {
 
-        //    const string restApiPath = "/api/REST/2.0/data/";
-        //    const long customObjectschemaId = 121;
-        //    foreach (var customCampaignObjectDto in customCampaignObjectDtos)
-        //    {
-
-        //        var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customCampaignObjectDto.InstanceId}";
-        //        var request = new RestRequest(requestUrl, Method.PUT);
-
-        //        dynamic customObjectData = new ExpandoObject();
-        //        dynamic fieldValue = new ExpandoObject();
+            const string restApiPath = "/api/REST/2.0/data/";
 
 
-        //        fieldValue.id = customCampaignObjectDto.ActivationId;
-        //        fieldValue.value = 0;
+            var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customObjectInstanceId}";
+            var request = new RestRequest(requestUrl, Method.PUT);
 
-        //        customObjectData.fieldValues = new List<object> { fieldValue };
+            dynamic customObjectData = new ExpandoObject();
+            dynamic fieldValue = new ExpandoObject();
 
-        //        var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
-        //            new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-        //        request.AddParameter("application/json", serialized, ParameterType.RequestBody);
-        //        request.RequestFormat = DataFormat.Json;
+            fieldValue.id = activationId;
+            fieldValue.value = state;
 
-        //        var response = await _restClient.ExecuteTaskAsync(request);
+            customObjectData.fieldValues = new List<object> { fieldValue };
 
-        //        customCampaignObjectDto.Status = response.StatusCode;
-        //    }
+            var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-        //    return customCampaignObjectDtos;
-        //}
+            request.AddParameter("application/json", serialized, ParameterType.RequestBody);
+            request.RequestFormat = DataFormat.Json;
+
+            var response = await _restClient.ExecuteTaskAsync(request);
+
+
+            return response.StatusCode == HttpStatusCode.OK ? Result.FromSuccess() : Result.FromError(response.ErrorMessage);
+
+        }
     }
 }
