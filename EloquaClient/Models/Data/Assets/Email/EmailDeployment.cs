@@ -16,7 +16,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Email
         public string Description { get; set; }
         public string CurrentStatus { get; set; }
         public Email Email { get; set; }
-        public DateTime EndAt { get; set; }
+        public int? EndAt { get; set; }
         public int? FailedSendCount { get; set; }
         public int? FolderId { get; set; }
         public string SentSubject { get; set; }
