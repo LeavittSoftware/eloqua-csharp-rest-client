@@ -52,13 +52,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             const string restApiPath = "/api/REST/2.0/data/";
         
-
             var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customObjectInstanceId}";
             var request = new RestRequest(requestUrl, Method.PUT);
 
             dynamic customObjectData = new ExpandoObject();
             dynamic fieldValue = new ExpandoObject();
-
 
             fieldValue.id = activationId;
             fieldValue.value = 0;
@@ -73,7 +71,6 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             var response = await _restClient.ExecuteTaskAsync(request);
 
-
             return response.StatusCode == HttpStatusCode.OK? Result.FromSuccess(): Result.FromError(response.ErrorMessage);
 
         }
@@ -83,13 +80,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             const string restApiPath = "/api/REST/2.0/data/";
 
-
             var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customObjectInstanceId}";
             var request = new RestRequest(requestUrl, Method.PUT);
 
             dynamic customObjectData = new ExpandoObject();
             dynamic fieldValue = new ExpandoObject();
-
 
             fieldValue.id = activationId;
             fieldValue.value = state;
@@ -104,7 +99,6 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             var response = await _restClient.ExecuteTaskAsync(request);
 
-
             return response.StatusCode == HttpStatusCode.OK ? Result.FromSuccess() : Result.FromError(response.ErrorMessage);
 
         }
@@ -113,7 +107,6 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
         {
 
             const string restApiPath = "/api/REST/2.0/data/";
-
 
             var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instances?search={searchTerm}";
 
@@ -134,23 +127,25 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
         }
 
-        public async Task<Result> CreateCustomCampaignObjectsAsync( string emailAddress,long eloquaContactId, int state, long activationId, long customObjectschemaId = 121)
+        public async Task<IRestResponse> CreateCustomCampaignObjectsAsync( string emailAddress, long eloquaContactId, int state, long activationId, long customObjectschemaId = 121, long customObjectMappingFieldId = 2111)
         {
 
             const string restApiPath = "/api/REST/2.0/data/";
-
 
             var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance";
             var request = new RestRequest(requestUrl, Method.POST);
 
             dynamic customObjectData = new ExpandoObject();
-            dynamic fieldValue = new ExpandoObject();
+            dynamic fieldValueCampaign = new ExpandoObject();
+            dynamic fieldValueMapping = new ExpandoObject();
 
+            fieldValueCampaign.id = activationId;
+            fieldValueCampaign.value = state;
 
-            fieldValue.id = activationId;
-            fieldValue.value = state;
+            fieldValueMapping.id = customObjectMappingFieldId;
+            fieldValueMapping.value = emailAddress;
 
-            customObjectData.fieldValues = new List<object> { fieldValue };
+            customObjectData.fieldValues = new List<object> { fieldValueCampaign, fieldValueMapping };
             customObjectData.contactId = eloquaContactId;
             customObjectData.uniqueCode = emailAddress;
 
@@ -162,8 +157,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             var response = await _restClient.ExecuteTaskAsync(request);
 
-
-            return response.StatusCode == HttpStatusCode.OK ? Result.FromSuccess() : Result.FromError(response.ErrorMessage);
+            return response;
 
         }
     }
