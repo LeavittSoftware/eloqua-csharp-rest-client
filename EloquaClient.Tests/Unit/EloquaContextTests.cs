@@ -207,7 +207,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
         }
         #endregion
 
-        #region SearchCustomCampaignObjectAsync
+        #region CreateCustomCampaignObjectAsync
         [TestMethod]
         public async Task CreateCustomCampaignObjectAsyncPassTest()
         {

@@ -116,14 +116,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
             var resultObject = JsonConvert.DeserializeObject<Element<CustomObjectData>>(response.Content);
 
-            var results = new List<CustomObjectData>();
-
-            foreach (var element in resultObject.Elements)
-            {
-                results.Add(element);
-            }
-
-            return results;
+            return resultObject.Elements;
 
         }
 
