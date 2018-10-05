@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
 {
