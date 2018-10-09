@@ -22,6 +22,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Email
         public string SentSubject { get; set; }
         public string SentContent { get; set; }
         public string SuccessfulSendCount { get; set; }
+        public int? SendFromUserId { get; set; }
         public string Type { get; set; } = "EmailLowVolumeDeployment";
         public int? UpdatedAt { get; set; }
         public int? UpdatedBy { get; set; }
