@@ -49,6 +49,27 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             return restClient;
         }
 
+        public async Task<Result<string>> GetEmailPreviewUrl(int emailId,int contactid, int userId)
+        {
+            try
+            {
+                const string restApiPath = "/api/REST/2.0/assets/";
+
+                var requestUrl = $"{restApiPath}email/{emailId}/preview?contactId={contactid}&userId={userId}";
+
+                var request = new RestRequest(requestUrl, Method.GET);
+
+                var response = await _restClient.ExecuteTaskAsync(request);
+
+                response = EloquaResponseHandler.ErrorCheck(response);
+
+                return Result<string>.FromSuccess(response.Content);
+            }
+            catch (Exception e)
+            {
+                return Result<string>.FromError(e.Message);
+            }
+        }
 
         public async Task<Result> DisableCustomCampaignObjectsAsync(long customObjectInstanceId, long activationId, long customObjectschemaId = 121)
         {
