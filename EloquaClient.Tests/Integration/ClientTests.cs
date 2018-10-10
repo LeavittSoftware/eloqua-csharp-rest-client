@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -75,6 +75,19 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             Assert.IsNotNull(existingContact);
             Assert.AreEqual(1000, existingContact.Count);
             Assert.IsInstanceOfType(existingContact.First(), typeof(Campaign));
+        }
+
+        [TestMethod]
+        public async Task GetEmailPreviewUrlTest()
+        {
+            //Arrange
+            var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.p01.eloqua.com")));
+
+            //Act
+            var result = await client.GetEmailPreviewUrl(510, 39919, 448);
+
+            //Assert
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(result.Value));
         }
 
         [TestMethod]
