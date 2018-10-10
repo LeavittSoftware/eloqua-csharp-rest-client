@@ -20,7 +20,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
         IDbSet<EmailDeployment> EmailDeployments { get; }
         Task<Result> DisableCustomCampaignObjectsAsync(long customObjectInstanceId, long activationId, long customObjectschemaId = 121);
         Task<Result> UpdateCustomCampaignObjectsAsync(int state, long customObjectInstanceId, long activationId, long customObjectschemaId = 121);
-
+        Task<Result<string>> GetEmailPreviewUrl(int emailId, int contactid, int userId);
         Task<List<CustomObjectData>> SearchCustomCampaignObjectsAsync(string searchTerm,
             long customObjectschemaId = 121);
 
