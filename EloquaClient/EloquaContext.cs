@@ -67,7 +67,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             }
             catch (Exception e)
             {
-                return Result<string>.FromError(e.GetAllExceptionMessages());
+                return Result<string>.FromError(e.Message);
             }
         }
 

@@ -42,6 +42,63 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             Assert.IsInstanceOfType(restClient, typeof(IRestClient));
         }
 
+        #region GetEmailPreviewUrl
+        [TestMethod]
+        public async Task GetEmailPreviewUrlPassTest()
+        {
+            //Arrange
+            var mockRestResponse = new Mock<IRestResponse>();
+            mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
+            mockRestResponse.SetupGet(o => o.StatusCode).Returns(HttpStatusCode.OK);
+            mockRestResponse.SetupGet(o => o.Content).Returns("test");
+
+            var mockRestClient = new Mock<IRestClient>();
+
+            //Act
+            var eloquaContext = new EloquaContext(mockRestClient.Object);
+
+
+            mockRestClient.Setup(o => o.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(mockRestResponse.Object);
+
+
+            //Act
+            var result = await eloquaContext.GetEmailPreviewUrl(11,12,13);
+
+            //Assert
+            Assert.IsInstanceOfType(result.Value, typeof(string));
+
+
+            Assert.AreEqual("test", result.Value);
+        }
+
+
+        [TestMethod]
+        public async Task GetEmailPreviewUrlFailureTest()
+        {
+            //Arrange
+            var mockRestResponse = new Mock<IRestResponse>();
+            mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
+            mockRestResponse.SetupGet(o => o.StatusCode).Returns(HttpStatusCode.BadRequest);
+            mockRestResponse.SetupGet(o => o.Content).Returns("{error:'test'}");
+
+            var mockRestClient = new Mock<IRestClient>();
+
+            //Act
+            var eloquaContext = new EloquaContext(mockRestClient.Object);
+
+
+            mockRestClient.Setup(o => o.ExecuteTaskAsync(It.IsAny<IRestRequest>())).ReturnsAsync(mockRestResponse.Object);
+
+
+            //Act
+            var result = await eloquaContext.GetEmailPreviewUrl(11, 12, 13);
+
+            //Assert
+            Assert.IsTrue(result.HasError);
+        }
+
+        #endregion
+
         #region DisableCustomCampaignObjectAsync
         [TestMethod]
         public async Task DbSetDisableCustomCampaignObjectAsyncPassTest()
