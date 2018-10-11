@@ -10,12 +10,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 {
-    //[Ignore]
+    [Ignore]
     [TestClass]
     public class ClientTests
     {
-        private const string Username = "Leavitt.Group";
-        private const string Password = "7q7T8G^mN!3^";
+        private const string Username = "";
+        private const string Password = "";
         [TestMethod]
         public async Task GetTest()
         {
