@@ -57,7 +57,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
                 var requestUrl = $"{restApiPath}email/{emailId}/preview?contactId={contactid}&userId={userId}";
 
-                var request = new RestRequest(requestUrl, Method.GET);
+                var request = new RestRequest(requestUrl);
 
                 var response = await _restClient.ExecuteTaskAsync(request);
 

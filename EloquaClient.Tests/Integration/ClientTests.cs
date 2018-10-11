@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +10,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
 {
-    [Ignore]
+    //[Ignore]
     [TestClass]
     public class ClientTests
     {
-        private const string Username = "";
-        private const string Password = "";
+        private const string Username = "Leavitt.Group";
+        private const string Password = "7q7T8G^mN!3^";
         [TestMethod]
         public async Task GetTest()
         {
@@ -23,7 +23,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
-            var existingContact = await client.Contacts.GetAsync(48620, Depth.Complete);
+            var existingContact = await client.Contacts.GetAsync(39919, Depth.Complete);
 
             //Assert
             Assert.IsNotNull(existingContact);
@@ -54,7 +54,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.p01.eloqua.com")));
 
             //Act
-            var existingContact = await client.Emails.GetListAsync();
+            var existingContact = await client.Emails.GetListAsync("","name='LL Seasonal*'",1,1,Depth.Complete);
 
             //Assert
             Assert.IsNotNull(existingContact);
@@ -120,7 +120,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
                 Email = new Email
                 {
                     Id = 3772,
-                    Name = "Shawn Johnson TEST EMAIL"
+                    Name = "test"
                 },
                 Name = "Test Email deployment"
 
@@ -181,31 +181,40 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
         public async Task PostTest()
         {
 
-            var emailAddress = "aaron-drabeck136@leavitt.com";
+            var emailAddress = "test3343i@leavitt.com";
 
             //Arrange
             var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
 
             //Act
-            var result = await client.LgContacts.PostAsync(new LgContact
+            try
             {
-                EmailAddress = emailAddress,
-                FirstName = "Aaron",
-                LastName = "Drabeck",
-                BusinessPhone = "555-1212",
-                RefUrl = "testLink.com",
-                SmsText = "no",
-                MobilePhone = "555-1515",
-                ResidentialPhone = "55-1616",
-                ZipCode = "84720-555",
-                ContactId = "122",
-                LeadSource = "Google",
-                DateOfBirth = new DateTime(1983, 08, 31),
-                Employee = 1222222.23123123213213213213213123123123123123213213213213213123
-            });
+                var result = await client.LgContacts.PostAsync(new LgContact
+                {
+                    EmailAddress = emailAddress,
+                    FirstName = "Aaron",
+                    LastName = "Drabeck",
+                    BusinessPhone = "555-1212",
+                    RefUrl = "testLink.com",
+                    SmsText = "no",
+                    MobilePhone = "555-1515",
+                    ResidentialPhone = "55-1616",
+                    ZipCode = "84720-555",
+                    ContactId = "122",
+                    LeadSource = "Google",
+                    DateOfBirth = new DateTime(1983, 08, 31),
+                    Employee = 1222222.23123123213213213213213123123123123123213213213213213123
+                });
 
-            //Assert
-            Assert.AreEqual("testLink.com", result.RefUrl);
+
+                //Assert
+                Assert.AreEqual("testLink.com", result.RefUrl);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
         }
 
         [TestMethod]
