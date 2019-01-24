@@ -17,11 +17,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts
         public string Address2 { get; set; }
         public string Address3 { get; set; }
 
-        [EloquaCustomProperty(100010)]
-        public string State { get; set; }
-
-        [EloquaCustomProperty(100011)]
-        public string Zip { get; set; }
+        public string Province { get; set; }
+        public string PostalCode { get; set; }
 
         public string BusinessPhone { get; set; }
         public string City { get; set; }
