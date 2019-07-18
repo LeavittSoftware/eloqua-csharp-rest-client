@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Contacts;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json;
 using RestSharp;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
@@ -257,10 +259,10 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var result = await eloquaContext.SearchCustomCampaignObjectsAsync("test@test.com");
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(List<CustomObjectData>));
+            Assert.IsInstanceOfType(result.Value, typeof(List<CustomObjectData>));
 
             
-            Assert.AreEqual(10, result[0].Id);
+            Assert.AreEqual(10, result.Value.FirstOrDefault()?.Id);
         }
         #endregion
 
@@ -272,8 +274,9 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var mockRestResponse = new Mock<IRestResponse>();
             mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
             mockRestResponse.SetupGet(o => o.StatusCode).Returns(HttpStatusCode.OK);
-            mockRestResponse.SetupGet(o => o.IsSuccessful).Returns(true);
-
+            var serialized = JsonConvert.SerializeObject(new CustomObjectData { Id = 1 }, Formatting.None,
+                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            mockRestResponse.SetupGet(o => o.Content).Returns(serialized);
             var mockRestClient = new Mock<IRestClient>();
 
             //Act
@@ -287,7 +290,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var result = await eloquaContext.CreateCustomCampaignObjectsAsync("test@test.com",1,0,10);
 
             //Assert
-            Assert.IsTrue(result.IsSuccessful);
+            Assert.IsTrue(!result.HasError);
         }
         #endregion
 

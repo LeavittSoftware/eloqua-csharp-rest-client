@@ -21,10 +21,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
         Task<Result> DisableCustomCampaignObjectsAsync(long customObjectInstanceId, long activationId, long customObjectschemaId = 121);
         Task<Result> UpdateCustomCampaignObjectsAsync(int state, long customObjectInstanceId, long activationId, long customObjectschemaId = 121);
         Task<Result<string>> GetEmailPreviewUrl(int emailId, int contactid, int userId);
-        Task<List<CustomObjectData>> SearchCustomCampaignObjectsAsync(string searchTerm,
-            long customObjectschemaId = 121);
+        Task<Result<List<CustomObjectData>>> SearchCustomCampaignObjectsAsync(string searchTerm,
+            long customObjectschemaId = 121L);
 
-        Task<IRestResponse> CreateCustomCampaignObjectsAsync(string emailAddress, long eloquaContactId, int state,
+        Task<Result<CustomObjectData>> CreateCustomCampaignObjectsAsync(string emailAddress, long eloquaContactId,
+            int state,
             long activationId, long customObjectschemaId = 121, long customObjectMappingFieldId = 2111);
     }
 }
