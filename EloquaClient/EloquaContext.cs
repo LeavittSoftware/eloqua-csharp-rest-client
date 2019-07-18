@@ -73,108 +73,135 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
 
         public async Task<Result> DisableCustomCampaignObjectsAsync(long customObjectInstanceId, long activationId, long customObjectschemaId = 121)
         {
+            try
+            {
+                const string restApiPath = "/api/REST/2.0/data/";
 
-            const string restApiPath = "/api/REST/2.0/data/";
+                var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customObjectInstanceId}";
+                var request = new RestRequest(requestUrl, Method.PUT);
 
-            var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customObjectInstanceId}";
-            var request = new RestRequest(requestUrl, Method.PUT);
+                dynamic customObjectData = new ExpandoObject();
+                dynamic fieldValue = new ExpandoObject();
 
-            dynamic customObjectData = new ExpandoObject();
-            dynamic fieldValue = new ExpandoObject();
+                fieldValue.id = activationId;
+                fieldValue.value = 0;
 
-            fieldValue.id = activationId;
-            fieldValue.value = 0;
+                customObjectData.fieldValues = new List<object> { fieldValue };
 
-            customObjectData.fieldValues = new List<object> { fieldValue };
+                var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
+                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-            var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
-                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                request.AddParameter("application/json", serialized, ParameterType.RequestBody);
+                request.RequestFormat = DataFormat.Json;
 
-            request.AddParameter("application/json", serialized, ParameterType.RequestBody);
-            request.RequestFormat = DataFormat.Json;
+                var response = await _restClient.ExecuteTaskAsync(request);
 
-            var response = await _restClient.ExecuteTaskAsync(request);
-
-            return response.StatusCode == HttpStatusCode.OK ? Result.FromSuccess() : Result.FromError(response.ErrorMessage);
-
+                return response.StatusCode == HttpStatusCode.OK ? Result.FromSuccess() : Result.FromError(response.ErrorMessage);
+            }
+            catch (Exception e)
+            {
+                return Result.FromError(e.Message);
+            }
         }
 
         public async Task<Result> UpdateCustomCampaignObjectsAsync(int state, long customObjectInstanceId, long activationId, long customObjectschemaId = 121)
         {
+            try
+            {
+                const string restApiPath = "/api/REST/2.0/data/";
 
-            const string restApiPath = "/api/REST/2.0/data/";
+                var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customObjectInstanceId}";
+                var request = new RestRequest(requestUrl, Method.PUT);
 
-            var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance/{customObjectInstanceId}";
-            var request = new RestRequest(requestUrl, Method.PUT);
+                dynamic customObjectData = new ExpandoObject();
+                dynamic fieldValue = new ExpandoObject();
 
-            dynamic customObjectData = new ExpandoObject();
-            dynamic fieldValue = new ExpandoObject();
+                fieldValue.id = activationId;
+                fieldValue.value = state;
 
-            fieldValue.id = activationId;
-            fieldValue.value = state;
+                customObjectData.fieldValues = new List<object> { fieldValue };
 
-            customObjectData.fieldValues = new List<object> { fieldValue };
+                var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
+                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-            var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
-                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                request.AddParameter("application/json", serialized, ParameterType.RequestBody);
+                request.RequestFormat = DataFormat.Json;
 
-            request.AddParameter("application/json", serialized, ParameterType.RequestBody);
-            request.RequestFormat = DataFormat.Json;
+                var response = await _restClient.ExecuteTaskAsync(request);
 
-            var response = await _restClient.ExecuteTaskAsync(request);
+                return response.StatusCode == HttpStatusCode.OK ? Result.FromSuccess() : Result.FromError(response.ErrorMessage);
+            }
+            catch (Exception e)
+            {
+                return Result.FromError(e.Message);
+            }
+        }
 
-            return response.StatusCode == HttpStatusCode.OK ? Result.FromSuccess() : Result.FromError(response.ErrorMessage);
+        public async Task<Result<List<CustomObjectData>>> SearchCustomCampaignObjectsAsync(string searchTerm, long customObjectschemaId = 121)
+        {
+            try
+            {
+                const string restApiPath = "/api/REST/2.0/data/";
+
+                var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instances?search={searchTerm}";
+
+                var request = new RestRequest(requestUrl, Method.GET);
+
+                var response = await _restClient.ExecuteTaskAsync(request);
+
+                var resultObject = JsonConvert.DeserializeObject<Element<CustomObjectData>>(response.Content);
+
+                return response.StatusCode == HttpStatusCode.OK ? Result<List<CustomObjectData>>.FromSuccess(resultObject.Elements) : Result<List<CustomObjectData>>.FromError(response.ErrorMessage);
+            }
+            catch (Exception e)
+            {
+                return Result<List<CustomObjectData>>.FromError(e.Message);
+            }
+
 
         }
 
-        public async Task<List<CustomObjectData>> SearchCustomCampaignObjectsAsync(string searchTerm, long customObjectschemaId = 121)
+        public async Task<Result<CustomObjectData>> CreateCustomCampaignObjectsAsync(string emailAddress,
+            long eloquaContactId, int state, long activationId, long customObjectschemaId = 121,
+            long customObjectMappingFieldId = 2111)
         {
+            try
+            {
+                const string restApiPath = "/api/REST/2.0/data/";
 
-            const string restApiPath = "/api/REST/2.0/data/";
+                var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance";
+                var request = new RestRequest(requestUrl, Method.POST);
 
-            var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instances?search={searchTerm}";
+                dynamic customObjectData = new ExpandoObject();
+                dynamic fieldValueCampaign = new ExpandoObject();
+                dynamic fieldValueMapping = new ExpandoObject();
 
-            var request = new RestRequest(requestUrl, Method.GET);
+                fieldValueCampaign.id = activationId;
+                fieldValueCampaign.value = state;
 
-            var response = await _restClient.ExecuteTaskAsync(request);
+                fieldValueMapping.id = customObjectMappingFieldId;
+                fieldValueMapping.value = emailAddress;
 
-            var resultObject = JsonConvert.DeserializeObject<Element<CustomObjectData>>(response.Content);
+                customObjectData.fieldValues = new List<object> { fieldValueCampaign, fieldValueMapping };
+                customObjectData.contactId = eloquaContactId;
+                customObjectData.uniqueCode = emailAddress;
 
-            return resultObject.Elements;
+                var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
+                    new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
-        }
+                request.AddParameter("application/json", serialized, ParameterType.RequestBody);
+                request.RequestFormat = DataFormat.Json;
 
-        public async Task<IRestResponse> CreateCustomCampaignObjectsAsync(string emailAddress, long eloquaContactId, int state, long activationId, long customObjectschemaId = 121, long customObjectMappingFieldId = 2111)
-        {
+                var response = await _restClient.ExecuteTaskAsync(request);
+                var resultObject =
+                    JsonConvert.DeserializeObject<CustomObjectData>(response.Content);
+                return response.StatusCode == HttpStatusCode.OK ? Result<CustomObjectData>.FromSuccess(resultObject) : Result<CustomObjectData>.FromError(response.ErrorMessage);
+            }
+            catch (Exception e)
+            {
+                return Result<CustomObjectData>.FromError(e.Message);
+            }
 
-            const string restApiPath = "/api/REST/2.0/data/";
-
-            var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instance";
-            var request = new RestRequest(requestUrl, Method.POST);
-
-            dynamic customObjectData = new ExpandoObject();
-            dynamic fieldValueCampaign = new ExpandoObject();
-            dynamic fieldValueMapping = new ExpandoObject();
-
-            fieldValueCampaign.id = activationId;
-            fieldValueCampaign.value = state;
-
-            fieldValueMapping.id = customObjectMappingFieldId;
-            fieldValueMapping.value = emailAddress;
-
-            customObjectData.fieldValues = new List<object> { fieldValueCampaign, fieldValueMapping };
-            customObjectData.contactId = eloquaContactId;
-            customObjectData.uniqueCode = emailAddress;
-
-            var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None,
-                new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-
-            request.AddParameter("application/json", serialized, ParameterType.RequestBody);
-            request.RequestFormat = DataFormat.Json;
-
-            var response = await _restClient.ExecuteTaskAsync(request);
-
-            return response;
 
         }
     }
