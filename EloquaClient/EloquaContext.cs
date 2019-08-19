@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Authenticators;
 using RestSharp.Deserializers;
+using RestSharp.Serialization.Json;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
@@ -49,7 +50,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             return restClient;
         }
 
-        public async Task<Result<string>> GetEmailPreviewUrl(int emailId,int contactid, int userId)
+        public async Task<Result<string>> GetEmailPreviewUrl(int emailId, int contactid, int userId)
         {
             try
             {

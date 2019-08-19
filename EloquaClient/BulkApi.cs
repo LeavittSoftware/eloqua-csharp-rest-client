@@ -5,13 +5,12 @@ using LG.Eloqua.Api.Rest.ClientLibrary.Models;
 using LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.CustomObjects;
 using Newtonsoft.Json;
 using RestSharp;
-using SimpleJson;
 
 namespace LG.Eloqua.Api.Rest.ClientLibrary
 {
     public class BulkApi : IBulkApi
     {
-        protected IRestClient RestClient { get; } 
+        protected IRestClient RestClient { get; }
         public BulkApi(IRestClient restClient)
         {
             RestClient = restClient;
@@ -29,7 +28,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             var requestUrl = $"{BulkApiPath}customObjects/{resourceAttribute.CustomObjectId}/imports/{importId}/data";
             var request = new RestRequest(requestUrl, Method.POST);
 
-            var serialized =  JsonConvert.SerializeObject(customObjectData, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            var serialized = JsonConvert.SerializeObject(customObjectData, Formatting.None, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             request.AddParameter("application/json", serialized, ParameterType.RequestBody);
             request.RequestFormat = DataFormat.Json;
