@@ -144,10 +144,10 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             {
                 const string restApiPath = "/api/REST/2.0/data/";
 
-                var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instances?search={searchTerm}";
+                var requestUrl = $"{restApiPath}customObject/{customObjectschemaId}/instances";
 
                 var request = new RestRequest(requestUrl, Method.GET);
-
+                request.AddParameter("search", searchTerm);
                 var response = await _restClient.ExecuteTaskAsync(request);
 
                 var resultObject = JsonConvert.DeserializeObject<Element<CustomObjectData>>(response.Content);
