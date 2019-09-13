@@ -56,10 +56,11 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
             {
                 const string restApiPath = "/api/REST/2.0/assets/";
 
-                var requestUrl = $"{restApiPath}email/{emailId}/preview?contactId={contactid}&userId={userId}";
+                var requestUrl = $"{restApiPath}email/{emailId}/preview";
 
                 var request = new RestRequest(requestUrl);
-
+                request.AddParameter("contactId", contactid);
+                request.AddParameter("userId", userId);
                 var response = await _restClient.ExecuteTaskAsync(request);
 
                 response = EloquaResponseHandler.ErrorCheck(response);
