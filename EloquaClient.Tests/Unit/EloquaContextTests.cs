@@ -274,6 +274,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Unit
             var mockRestResponse = new Mock<IRestResponse>();
             mockRestResponse.SetupGet(o => o.ResponseStatus).Returns(ResponseStatus.Completed);
             mockRestResponse.SetupGet(o => o.StatusCode).Returns(HttpStatusCode.OK);
+            mockRestResponse.SetupGet(o => o.IsSuccessful).Returns(true);
             var serialized = JsonConvert.SerializeObject(new CustomObjectData { Id = 1 }, Formatting.None,
                 new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             mockRestResponse.SetupGet(o => o.Content).Returns(serialized);
