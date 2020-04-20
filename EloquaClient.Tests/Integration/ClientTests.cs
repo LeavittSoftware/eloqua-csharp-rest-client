@@ -14,8 +14,8 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
     [TestClass]
     public class ClientTests
     {
-        private const string Username = "";
-        private const string Password = "";
+        private const string Username = "Leavitt.Group";
+        private const string Password = "7q7T8G^mN!3^";
         [TestMethod]
         public async Task GetTest()
         {
@@ -54,7 +54,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             var client = new LgEloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.p01.eloqua.com")));
 
             //Act
-            var existingContact = await client.Emails.GetListAsync("","name='LL Seasonal*'",1,1,Depth.Complete);
+            var existingContact = await client.Emails.GetListAsync("", "name='LL Seasonal*'", 1, 1, Depth.Complete);
 
             //Assert
             Assert.IsNotNull(existingContact);
@@ -287,6 +287,33 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Tests.Integration
             Assert.AreEqual("testLink.com", result.RefUrl);
         }
 
+
+        [TestMethod]
+        public async Task PostCreateCustomCampaignObjectApiTest()
+        {
+
+            //Arrange
+            var client = new EloquaContext(EloquaContext.CreateClient("LeavittGroupAgencyAssociationLLC", Username, Password, new Uri("https://secure.eloqua.com")));
+
+            var application = new LgApplication
+            {
+                ContactId = "48708",
+                ApplicationId = "testsAppId24",
+                CurrentLiabilityLimits = "100/200/50",
+                CurrentPolicyExpirationDate = DateTime.Now,
+                InsuredInLast30 = "Yes",
+                MonthsInsured = "50000",
+                PolicyStartDate = DateTime.Now
+            };
+
+
+
+            //Act
+            var result = await client.CreateCustomCampaignObjectsAsync("testthiswillwork3@thiswillworktest.com", 526906, 1, 2112);
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
 
         [TestMethod]
         public async Task PostCustomObjectBulkApiTest()
