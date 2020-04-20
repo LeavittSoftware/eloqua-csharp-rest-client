@@ -195,10 +195,9 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary
                 request.RequestFormat = DataFormat.Json;
 
                 var response = await _restClient.ExecuteTaskAsync(request);
-               
                 var resultObject =
                     JsonConvert.DeserializeObject<CustomObjectData>(response.Content);
-                return response.IsSuccessful? Result<CustomObjectData>.FromSuccess(resultObject) : Result<CustomObjectData>.FromError(response.ErrorMessage);
+                return response.StatusCode == HttpStatusCode.OK ? Result<CustomObjectData>.FromSuccess(resultObject) : Result<CustomObjectData>.FromError(response.ErrorMessage);
             }
             catch (Exception e)
             {
