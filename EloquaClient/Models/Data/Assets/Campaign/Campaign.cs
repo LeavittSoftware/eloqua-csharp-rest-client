@@ -20,7 +20,7 @@ namespace LG.Eloqua.Api.Rest.ClientLibrary.Models.Data.Assets.Campaign
         public string CampaignType { get; set; }
         public List<CampaignRelatedElement> Elements { get; set; }
         public int? StartAt { get; set; }
-        public int? EndAt { get; set; }
+        public long? EndAt { get; set; }
         public bool? IsIncludedInRoi { get; set; }
         public bool? IsMemberAllowedReEntry { get; set; }
         public bool? IsReadOnly { get; set; }
